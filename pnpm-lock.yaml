@@ -278,7 +278,7 @@ importers:
         specifier: ^4.3.0
         version: 4.3.0(rollup@4.24.0)(typescript@5.7.2)(vite@6.0.2(sass@1.81.0)(terser@5.34.1)(yaml@2.5.1))
 
-  packages/moeum-icons:
+  packages/frieeren-icons:
     dependencies:
       react:
         specifier: ^18
@@ -313,7 +313,7 @@ importers:
         version: 18.3.11
       '@types/react-dom':
         specifier: ^18.2.4
-        version: 18.3.0
+        version: 18.3.1
       rollup:
         specifier: ^4.24.0
         version: 4.24.0
@@ -3241,9 +3241,6 @@ packages:
 
   '@types/prop-types@15.7.13':
     resolution: {integrity: sha512-hCZTSvwbzWGvhqxp/RqVqwU999pBf2vp7hzIjiYOsl8wqOmUxkQ6ddw1cV3l8811+kdUFus/q4d1Y3E3SyEifA==}
-
-  '@types/react-dom@18.3.0':
-    resolution: {integrity: sha512-EhwApuTmMBmXuFOikhQLIBUn6uFg81SwLMOAUgodJF14SOBOCMdU04gDoYi0WOJJHD144TL32z4yDqCW3dnkQg==}
 
   '@types/react-dom@18.3.1':
     resolution: {integrity: sha512-qW1Mfv8taImTthu4KoXgDfLuk4bydU6Q/TkADnDWWHwi4NX4BR+LWfTp2sVmTqRrsHvyDDTelgelxJ+SsejKKQ==}
@@ -10353,10 +10350,6 @@ snapshots:
   '@types/parse-json@4.0.2': {}
 
   '@types/prop-types@15.7.13': {}
-
-  '@types/react-dom@18.3.0':
-    dependencies:
-      '@types/react': 18.3.11
 
   '@types/react-dom@18.3.1':
     dependencies:
