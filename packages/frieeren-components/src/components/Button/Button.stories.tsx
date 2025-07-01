@@ -18,9 +18,6 @@ const meta = {
     size: {
       description: "버튼 사이즈"
     },
-    style: {
-      description: "버튼 스타일"
-    },
     display: {
       description: "버튼 Display"
     },

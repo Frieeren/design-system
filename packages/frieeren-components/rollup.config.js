@@ -2,6 +2,7 @@ import babel from "@rollup/plugin-babel";
 import typescript from "@rollup/plugin-typescript";
 import postcss from "rollup-plugin-postcss";
 import { typescriptPaths } from "rollup-plugin-typescript-paths";
+import svgr from "@svgr/rollup";
 
 export default {
   input: "src/index.ts",
@@ -13,6 +14,7 @@ export default {
     }
   ],
   plugins: [
+    svgr({ icon: true }),
     typescript({
       tsconfig: "./tsconfig.json",
       declarationDir: "./dist"

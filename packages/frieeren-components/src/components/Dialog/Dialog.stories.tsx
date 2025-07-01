@@ -10,7 +10,7 @@ import { DialogRadius, DialogTheme } from "./Dialog.type";
  * **radix docs**
  * https://www.radix-ui.com/primitives/docs/components/dialog
  */
-const meta = {
+const meta: Meta<typeof Dialog> = {
   title: "Components/Dialog",
   component: Dialog,
   parameters: {

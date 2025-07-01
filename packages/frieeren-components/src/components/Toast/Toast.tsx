@@ -4,9 +4,9 @@ import { useIsMounted } from "@/hooks/useIsMounted";
 import { useToastStack } from "./useToastStack";
 import { ToastPosition, ToastProps, ToastType } from "./Toast.type";
 import { Fragment, useEffect, useMemo, useState } from "react";
-import SuccessIcon from "./assets/toast-success.svg?react";
-import WarningIcon from "./assets/toast-warning.svg?react";
-import ErrorIcon from "./assets/toast-error.svg?react";
+import SuccessIcon from "./assets/toast-success.svg";
+import WarningIcon from "./assets/toast-warning.svg";
+import ErrorIcon from "./assets/toast-error.svg";
 
 export const Toaster = ({ toasts }: { toasts: ToastType[] }) => {
   const { getToasterProps, groupedToasts } = useToastStack(toasts);

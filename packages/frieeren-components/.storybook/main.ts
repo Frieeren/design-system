@@ -27,7 +27,7 @@ const config: StorybookConfig = {
   async viteFinal(config) {
     return {
       ...config,
-      plugins: [...(config.plugins || []), svgr({ include: "**/*.svg?react" })],
+      plugins: [...(config.plugins || []), svgr({ include: "**/*.svg" })],
       resolve: {
         ...config.resolve,
         alias: {
