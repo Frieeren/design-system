@@ -1,7 +1,7 @@
 {
-  "name": "@moeum/icons",
+  "name": "@frieeren/icons",
   "version": "1.0.30",
-  "description": "Icons Package for moeum design system",
+  "description": "Icons Package for frieeren design system",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "type": "module",
@@ -14,14 +14,14 @@
     "deploy:version": "pnpm version patch"
   },
   "keywords": [
-    "moeum",
+    "frieeren",
     "figma",
     "plugin",
     "icons",
     "svg"
   ],
   "bugs": {
-    "url": "https://github.com/team-moeum/moeum-design-system/issues"
+    "url": "https://github.com/Frieeren/design-system/issues"
   },
   "contributors": [
     {
