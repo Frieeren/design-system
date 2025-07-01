@@ -8,8 +8,11 @@
     "build:figma-token": "turbo run build --filter=@frieeren/figma-token",
     "build:figma-icon-plugin": "turbo run build --filter=@frieeren/figma-icon-plugin",
     "build:frieeren-icons": "turbo run build --filter=@frieeren/icons",
+    "build:frieeren-components": "turbo run build --filter=@frieeren/components",
     "publish-version:frieeren-icon": "turbo run deploy:version --filter=@frieeren/icons",
-    "publish:frieeren-icons": "turbo run deploy --filter=@frieeren/icons"
+    "publish:frieeren-icons": "turbo run deploy --filter=@frieeren/icons",
+    "publish-version:frieeren-components": "turbo run deploy:version --filter=@frieeren/components",
+    "publish:frieeren-components": "turbo run deploy --filter=@frieeren/components"
   },
   "devDependencies": {
     "turbo": "^2.1.3"
