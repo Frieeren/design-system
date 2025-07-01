@@ -5,11 +5,11 @@
     "dev": "turbo run dev",
     "lint": "turbo run lint",
     "clean": "turbo run clean && rm -rf node_modules",
-    "build:figma-token": "turbo run build --filter=@moeum/figma-token",
-    "build:figma-icon-plugin": "turbo run build --filter=@moeum/figma-icon-plugin",
-    "build:moeum-icons": "turbo run build --filter=@moeum/icons",
-    "publish-version:moeum-icon": "turbo run deploy:version --filter=@moeum/icons",
-    "publish:moeum-icons": "turbo run deploy --filter=@moeum/icons"
+    "build:figma-token": "turbo run build --filter=@frieeren/figma-token",
+    "build:figma-icon-plugin": "turbo run build --filter=@frieeren/figma-icon-plugin",
+    "build:frieeren-icons": "turbo run build --filter=@frieeren/icons",
+    "publish-version:frieeren-icon": "turbo run deploy:version --filter=@frieeren/icons",
+    "publish:frieeren-icons": "turbo run deploy --filter=@frieeren/icons"
   },
   "devDependencies": {
     "turbo": "^2.1.3"
