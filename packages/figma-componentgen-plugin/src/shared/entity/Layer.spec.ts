@@ -1,5 +1,5 @@
 import { Layer } from "./Layer";
-import { LayerException } from "@moeum/shared/exception/LayerException";
+import { LayerException } from "@frieeren/shared/exception/LayerException";
 import { CSSProperties } from "react";
 
 describe("Layer Entity 도메인 규칙", () => {

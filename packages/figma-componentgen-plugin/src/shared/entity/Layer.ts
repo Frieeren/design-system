@@ -1,7 +1,7 @@
 import { CSSProperties } from "react";
 import { LayerNode } from "../type/layer";
 import { LayerException } from "../exception/LayerException";
-import { FigmaProperty } from "@moeum/shared/type/figma";
+import { FigmaProperty } from "@frieeren/shared/type/figma";
 
 export class Layer {
   constructor(

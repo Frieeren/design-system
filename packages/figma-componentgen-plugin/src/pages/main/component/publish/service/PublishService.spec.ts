@@ -1,9 +1,9 @@
 import { PublishService } from "./PublishService";
-import { Component } from "@moeum/shared/entity/Component";
-import { Layer } from "@moeum/shared/entity/Layer";
+import { Component } from "@frieeren/shared/entity/Component";
+import { Layer } from "@frieeren/shared/entity/Layer";
 
-jest.mock("@moeum/shared/entity/Component");
-jest.mock("@moeum/shared/entity/Layer");
+jest.mock("@frieeren/shared/entity/Component");
+jest.mock("@frieeren/shared/entity/Layer");
 
 describe("PublishService 테스트", () => {
   let publishService: PublishService;

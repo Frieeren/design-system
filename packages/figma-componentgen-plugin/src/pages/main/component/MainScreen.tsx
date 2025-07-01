@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Box, Tabs } from "@radix-ui/themes";
 import { PublishTabContainer } from "./publish/PublishTabContainer";
 import { SettingTabContainer } from "./setting/SettingTabContainer";
-import { MappingTableType } from "@moeum/shared/type/component";
+import { MappingTableType } from "@frieeren/shared/type/component";
 
 type TabType = "setting" | "publish";
 

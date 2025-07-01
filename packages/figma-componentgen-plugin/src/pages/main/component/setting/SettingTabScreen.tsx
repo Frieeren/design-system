@@ -7,7 +7,7 @@ import {
   Select,
 } from "@radix-ui/themes";
 import { match } from "ts-pattern";
-import { MappingTableType } from "@moeum/shared/type/component";
+import { MappingTableType } from "@frieeren/shared/type/component";
 
 interface SettingTabScreenProps {
   keyValuePairs: MappingTableType;

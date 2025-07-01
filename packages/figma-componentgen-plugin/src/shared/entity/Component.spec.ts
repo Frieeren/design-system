@@ -1,5 +1,5 @@
 import { Component } from "./Component";
-import { ComponentException } from "@moeum/shared/exception/ComponentException";
+import { ComponentException } from "@frieeren/shared/exception/ComponentException";
 import { CSSProperties } from "react";
 
 describe("Component Entity 도메인 규칙", () => {

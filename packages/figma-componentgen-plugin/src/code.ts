@@ -1,4 +1,4 @@
-import { defaultKeyValues } from "@moeum/shared/constants";
+import { defaultKeyValues } from "@frieeren/shared/constants";
 
 figma.showUI(__html__, { width: 400, height: 500 });
 
