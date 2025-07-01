@@ -64,7 +64,7 @@ export const Toast = ({ ...toast }: ToastProps) => {
 
   return (
     <div
-      data-mouem-component="Toast"
+      data-frieeren-component="Toast"
       className={cx("toast--content", positionClass, {
         visible: visible,
         hidden: !visible
