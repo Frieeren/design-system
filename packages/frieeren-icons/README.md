@@ -1,13 +1,13 @@
-# @frieeren/icons
+# @team-frieeren/icons
 
 Figma의 아이콘을 [`SVGR`](https://react-svgr.com/)을 활용하여 컴포넌트로 자동 변환
 
 ## 설치
 
 ```bash
-$ npm install @frieeren/icons
-$ yarn add @frieeren/icons
-$ pnpm add @frieeren/icons
+$ npm install @team-frieeren/icons
+$ yarn add @team-frieeren/icons
+$ pnpm add @team-frieeren/icons
 ```
 
 ## Figma Plugin 가이드

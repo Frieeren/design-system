@@ -5,14 +5,14 @@
     "dev": "turbo run dev",
     "lint": "turbo run lint",
     "clean": "turbo run clean && rm -rf node_modules",
-    "build:figma-token": "turbo run build --filter=@frieeren/figma-token",
-    "build:figma-icon-plugin": "turbo run build --filter=@frieeren/figma-icon-plugin",
-    "build:frieeren-icons": "turbo run build --filter=@frieeren/icons",
-    "build:frieeren-components": "turbo run build --filter=@frieeren/components",
-    "publish-version:frieeren-icon": "turbo run deploy:version --filter=@frieeren/icons",
-    "publish:frieeren-icons": "turbo run deploy --filter=@frieeren/icons",
-    "publish-version:frieeren-components": "turbo run deploy:version --filter=@frieeren/components",
-    "publish:frieeren-components": "turbo run deploy --filter=@frieeren/components"
+    "build:figma-token": "turbo run build --filter=@team-frieeren/figma-token",
+    "build:figma-icon-plugin": "turbo run build --filter=@team-frieeren/figma-icon-plugin",
+    "build:frieeren-icons": "turbo run build --filter=@team-frieeren/icons",
+    "build:frieeren-components": "turbo run build --filter=@team-frieeren/components",
+    "publish-version:frieeren-icon": "turbo run deploy:version --filter=@team-frieeren/icons",
+    "publish:frieeren-icons": "turbo run deploy --filter=@team-frieeren/icons",
+    "publish-version:frieeren-components": "turbo run deploy:version --filter=@team-frieeren/components",
+    "publish:frieeren-components": "turbo run deploy --filter=@team-frieeren/components"
   },
   "devDependencies": {
     "turbo": "^2.1.3"

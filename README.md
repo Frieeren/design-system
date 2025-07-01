@@ -40,10 +40,10 @@
 
 ```ts
 // Icon 사용
-import { ArrowIcon } from "@frieeren/icons";
+import { ArrowIcon } from "@team-frieeren/icons";
 
 // 컴포넌트 사용
-import { Button, Input } from "@frieeren/components";
+import { Button, Input } from "@team-frieeren/components";
 ```
 
 <br />
