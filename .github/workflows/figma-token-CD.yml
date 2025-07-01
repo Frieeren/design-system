@@ -28,7 +28,7 @@ jobs:
       - name: ⚙️ Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20.x
+          node-version: 22.x
           cache: "pnpm"
 
       - name: 💾 Get pnpm store directory
@@ -47,34 +47,34 @@ jobs:
             ${{ runner.os }}-pnpm-store-
 
       - name: 📦 Install dependencies
-        run: pnpm install --filter "@moeum/figma-token" --no-frozen-lockfile
+        run: pnpm install --filter "@frieeren/figma-token" --no-frozen-lockfile
 
       - name: 🛠️ Build token files
         run: pnpm run build:figma-token
 
       - name: 📂 Create Token Directory
-        run: mkdir -p packages/moeum-components/src/style/design-token
+        run: mkdir -p packages/frieeren-components/src/style/design-token
 
       - name: 📋 Copy CSS files
         run: |
-          cp packages/figma-token/build/css/*.css packages/moeum-components/src/style/design-token/
+          cp packages/figma-token/build/css/*.css packages/frieeren-components/src/style/design-token/
 
       - name: 🚀 Generate Token Index
         run: |
           # 파일 초기화
-          > packages/moeum-components/src/style/design-token/index.scss
+          > packages/frieeren-components/src/style/design-token/index.scss
 
           # design-token 폴더의 모든 CSS 파일을 찾아서 @use 구문 생성
-          for file in packages/moeum-components/src/style/design-token/*.css; do
+          for file in packages/frieeren-components/src/style/design-token/*.css; do
             filename=$(basename "$file")
-            echo "@use \"./${filename}\";" >> packages/moeum-components/src/style/design-token/index.scss
+            echo "@use \"./${filename}\";" >> packages/frieeren-components/src/style/design-token/index.scss
           done
 
       - name: 🚀 Commit and push changes
         run: |
-          git config --local user.email "moeum[bot]@users.noreply.github.com"
-          git config --local user.name "moeum[bot]"
+          git config --local user.email "frieeren[bot]@users.noreply.github.com"
+          git config --local user.name "frieeren[bot]"
 
-          git add packages/moeum-components/src/style/design-token/
+          git add packages/frieeren-components/src/style/design-token/
           git commit -m "🎨 chore: Update design token files" || echo "No changes to commit"
           git push origin ${{ github.head_ref }}
