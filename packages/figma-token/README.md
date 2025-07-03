@@ -1,4 +1,4 @@
-# @moeum/figma-token
+# @team-frieeren/figma-token
 
 Figma Variables을 [`style-dictionary`](https://amzn.github.io/style-dictionary/#/quick_start?id=node)를 활용한 디자인 토큰 코드로 변환
 

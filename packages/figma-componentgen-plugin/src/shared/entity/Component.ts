@@ -2,7 +2,7 @@ import { CSSProperties } from "react";
 import { LayerNode } from "../type/layer";
 import { ComponentNode, MappingTableType } from "../type/component";
 import { ComponentException } from "../exception/ComponentException";
-import { FigmaProperty } from "@moeum/shared/type/figma";
+import { FigmaProperty } from "@frieeren/shared/type/figma";
 
 export class Component {
   constructor(

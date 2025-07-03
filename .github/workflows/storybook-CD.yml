@@ -11,7 +11,7 @@ on:
     branches:
       - main
     paths:
-      - packages/moeum-components/**
+      - packages/frieeren-components/**
 
 jobs:
   deploy:
@@ -28,12 +28,12 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20.x
+          node-version: 22.x
           cache: "pnpm"
 
       - name: Build and Deploy Storybook
         uses: bitovi/github-actions-storybook-to-github-pages@v1.0.3
         with:
-          install_command: pnpm install --filter "./packages/moeum-components" --no-frozen-lockfile
-          build_command: cd packages/moeum-components && pnpm run build-storybook
-          path: packages/moeum-components/storybook-static
+          install_command: pnpm install --filter "./packages/frieeren-components" --no-frozen-lockfile
+          build_command: cd packages/frieeren-components && pnpm run build-storybook
+          path: packages/frieeren-components/storybook-static

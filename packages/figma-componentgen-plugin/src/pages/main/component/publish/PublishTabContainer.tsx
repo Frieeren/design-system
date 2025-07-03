@@ -1,8 +1,8 @@
-import { MappingTableType } from "@moeum/shared/type/component";
+import { MappingTableType } from "@frieeren/shared/type/component";
 import { useMemo } from "react";
 import { PublishService } from "./service/PublishService";
 import { PublishTabScreen } from "./PublishTabScreen";
-import { FigmaService } from "@moeum/shared/service/FigmaService";
+import { FigmaService } from "@frieeren/shared/service/FigmaService";
 import { PublishException } from "./exception/PublishException";
 
 export const PublishTabContainer = ({

@@ -1,4 +1,4 @@
-import { MappingTableType } from "@moeum/shared/type/component";
+import { MappingTableType } from "@frieeren/shared/type/component";
 
 export const defaultKeyValues: MappingTableType = [
   { key: "DEFAULT", value: "div" },

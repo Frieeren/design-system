@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { MappingTableType } from "@moeum/shared/type/component";
-import { defaultKeyValues } from "@moeum/shared/constants";
+import { MappingTableType } from "@frieeren/shared/type/component";
+import { defaultKeyValues } from "@frieeren/shared/constants";
 import { MainScreen } from "./component/MainScreen";
 
 export const MainContainer = () => {

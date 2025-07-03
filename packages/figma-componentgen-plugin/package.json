@@ -1,5 +1,5 @@
 {
-  "name": "@moeum/figma-componentgen-plugin",
+  "name": "@team-frieeren/figma-componentgen-plugin",
   "version": "1.0.0",
   "description": "",
   "main": "code.js",
@@ -50,7 +50,7 @@
       "**/*.spec.ts"
     ],
     "moduleNameMapper": {
-      "^@moeum/(.*)$": "<rootDir>/src/$1"
+      "^@frieeren/(.*)$": "<rootDir>/src/$1"
     },
     "moduleFileExtensions": [
       "ts",

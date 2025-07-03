@@ -1,4 +1,4 @@
-import { BaseException } from "@moeum/shared/exception/BaseException";
+import { BaseException } from "@frieeren/shared/exception/BaseException";
 
 export class SettingException extends BaseException {
   constructor(message: string) {

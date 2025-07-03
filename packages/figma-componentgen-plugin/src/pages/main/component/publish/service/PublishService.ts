@@ -1,6 +1,6 @@
-import { Component } from "@moeum/shared/entity/Component";
-import { Layer } from "@moeum/shared/entity/Layer";
-import { MappingTableType } from "@moeum/shared/type/component";
+import { Component } from "@frieeren/shared/entity/Component";
+import { Layer } from "@frieeren/shared/entity/Layer";
+import { MappingTableType } from "@frieeren/shared/type/component";
 import { PublishException } from "../exception/PublishException";
 
 export class PublishService {

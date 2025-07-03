@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { MappingTableType } from "@moeum/shared/type/component";
+import { MappingTableType } from "@frieeren/shared/type/component";
 import { SettingTabScreen, ObjectValueList } from "./SettingTabScreen";
-import { FigmaService } from "@moeum/shared/service/FigmaService";
+import { FigmaService } from "@frieeren/shared/service/FigmaService";
 import { MappingTableService } from "./service/MappingTableService";
 import { SettingException } from "./exception/SettingException";
 

@@ -12,12 +12,12 @@
     "style-dictionary": "^4",
     "@tokens-studio/sd-transforms": "^1.2.5"
   },
-  "name": "@moeum/figma-token",
+  "name": "@team-frieeren/figma-token",
   "version": "1.1.0",
   "description": "",
   "main": "index.js",
   "keywords": [
-    "moeum",
+    "frieeren",
     "design-system",
     "design-token",
     "foundation"
