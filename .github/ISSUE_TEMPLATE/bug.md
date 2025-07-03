@@ -1,7 +1,7 @@
 ---
 name: Bug
 about: 버그 발생 이슈입니다.
-title: "\U0001F41E [Bug]"
+title: "🐞 [Bug]"
 labels: bug
 assignees: ''
 
@@ -30,8 +30,6 @@ assignees: ''
 ## ✅ TODO
 
 <!-- 이슈 할 일 기재 -->
-
-- [ ] 할 일1
 
 ## 📚 ETC
 

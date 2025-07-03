@@ -1,7 +1,7 @@
 ---
 name: Feature
 about: 기능 추가 이슈입니다.
-title: ''
+title: '✨ [Feature]'
 labels: enhancement
 assignees: ''
 
@@ -14,8 +14,6 @@ assignees: ''
 ## ✅ TODO
 
 <!-- 이슈 할 일 기재 -->
-
-- [ ] 할 일1
 
 ## 📚 ETC
 

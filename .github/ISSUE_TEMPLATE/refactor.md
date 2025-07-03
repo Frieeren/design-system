@@ -1,7 +1,7 @@
 ---
 name: Refactor
 about: 리팩토링 이슈입니다.
-title: ''
+title: '♻️ [Refactor]'
 labels: enhancement
 assignees: ''
 
@@ -14,8 +14,6 @@ assignees: ''
 ## ✅ TODO
 
 <!-- 이슈 할 일 기재 -->
-
-- [ ] 할 일1
 
 ## 📚 ETC
 

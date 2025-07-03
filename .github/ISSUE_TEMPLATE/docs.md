@@ -1,7 +1,7 @@
 ---
 name: Docs
 about: 문서 작성 이슈입니다.
-title: "\U0001F4CB [Docs]"
+title: "📝 [Docs]"
 labels: documentation
 assignees: ''
 
@@ -15,7 +15,8 @@ assignees: ''
 
 <!-- 이슈 할 일 기재 -->
 
-- [ ] 할 일1
+## 🔗 문서 위치
+
 
 ## 📚 ETC
 
