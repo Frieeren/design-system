@@ -42,6 +42,9 @@ export default [
         format: "es"
       }
     ],
-    plugins: commonPlugins
+    plugins: [
+      ...commonPlugins,
+      postcss({ inject: false }) // CSS는 index에서 한 번만 추출해서 사용
+    ]
   }
 ];
