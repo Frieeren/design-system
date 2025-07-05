@@ -30,7 +30,11 @@ export default [
     ],
     plugins: [
       ...commonPlugins,
-      postcss({ extract: true, minifycss: true }) // CSS는 index에서 한 번만 추출해서 사용
+      postcss({
+        inject: true,
+        extract: false,
+        minimize: true
+      })
     ]
   },
   {
@@ -44,7 +48,11 @@ export default [
     ],
     plugins: [
       ...commonPlugins,
-      postcss({ inject: false }) // CSS는 index에서 한 번만 추출해서 사용
+      postcss({
+        inject: true,
+        extract: false,
+        minimize: true
+      })
     ]
   }
 ];
