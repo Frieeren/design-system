@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Google from "./assets/google.svg?react";
-import Apple from "./assets/apple.svg?react";
-import Kakao from "./assets/kakao.svg?react";
+import Google from "./assets/google.svg";
+import Apple from "./assets/apple.svg";
+import Kakao from "./assets/kakao.svg";
 
 import { Button } from ".";
 import { Text } from "../Text";
