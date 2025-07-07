@@ -1,7 +1,6 @@
 import { forwardRef, useState } from "react";
 import cx from "classnames";
 import { InputProps } from "./input.type";
-import "./Input.scss";
 import CloseIcon from "./assets/close.svg";
 import LinkIcon from "./assets/link.svg";
 
