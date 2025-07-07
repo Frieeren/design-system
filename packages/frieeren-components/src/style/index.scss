@@ -13,3 +13,8 @@
 @use "../components/Toggle/Toggle.scss";
 @use "../components/Input/Input.scss";
 @use "../components//Tabs/Tabs.scss";
+
+// client components
+@use "../components/BottomSheet/BottomSheet.scss";
+@use "../components/Toast/Toast.scss";
+@use "../components/Popup/Popup.scss";

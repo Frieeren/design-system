@@ -2,7 +2,6 @@ import { forwardRef } from "react";
 import { Switch } from "radix-ui";
 import cx from "classnames";
 import { ToggleProps } from "./Toggle.type";
-import "./Toggle.scss";
 
 export const Toggle = forwardRef<HTMLButtonElement, ToggleProps>(
   ({ className, states = "active", onChange }, ref) => {

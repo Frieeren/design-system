@@ -1,4 +1,4 @@
-import "./style/client.scss";
+import "./style/index.scss";
 
 export { useFunnel } from "./components/Funnel";
 export { safeLocalStorage, safeSessionStorage } from "./shared/storage";
