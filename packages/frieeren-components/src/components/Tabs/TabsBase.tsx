@@ -1,5 +1,4 @@
 import * as TabsBase from "@radix-ui/react-tabs";
-import "./Tabs.scss";
 
 const Root = ({ ...props }: TabsBase.TabsProps) => {
   return <TabsBase.Root data-frieeren-component="Tabs" className="tabs" {...props} />;

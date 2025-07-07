@@ -1,7 +1,6 @@
 import { Dialog } from "radix-ui";
 import cx from "classnames";
 import { PopupProps } from "./Popup.type";
-import "./Popup.scss";
 
 export const Popup: React.FC<PopupProps> = props => {
   const { className, children, buttonLayoutType, container, title, description, onClose, ...rest } =
