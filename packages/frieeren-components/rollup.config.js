@@ -31,8 +31,8 @@ export default [
     plugins: [
       ...commonPlugins,
       postcss({
-        inject: true,
-        extract: false,
+        inject: false,
+        extract: "index.css",
         minimize: true
       })
     ]
@@ -49,8 +49,8 @@ export default [
     plugins: [
       ...commonPlugins,
       postcss({
-        inject: true,
-        extract: false,
+        inject: false,
+        extract: "index.css",
         minimize: true
       })
     ]
