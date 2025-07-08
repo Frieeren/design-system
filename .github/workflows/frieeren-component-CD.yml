@@ -1,4 +1,4 @@
-name: Icon CD
+name: Component CD
 env:
   NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 on:
@@ -7,7 +7,7 @@ on:
     branches:
       - main
     paths:
-      - packages/frieeren-icons/**
+      - packages/frieeren-components/**
 permissions:
   contents: write
 jobs:
@@ -43,18 +43,18 @@ jobs:
             ${{ runner.os }}-pnpm-store-
 
       - name: Install dependencies
-        run: pnpm install --no-frozen-lockfile
+        run: pnpm install --frozen-lockfile
 
-      - name: Install dependencies
-        run: pnpm run build:frieeren-icons
+      - name: Build Components
+        run: pnpm run build:frieeren-components
 
       - name: Increment version
         run: |
           git config --local user.email "frieeren[bot]@users.noreply.github.com"
           git config --local user.name "frieeren[bot]"
-          pnpm run publish-version:frieeren-icon
+          pnpm run publish-version:frieeren-components
           git add .
-          git commit -m "update version"
+          git commit -m "chore(frieeren-components): update version"
 
       - name: Push changes
         uses: ad-m/github-push-action@master
@@ -64,7 +64,7 @@ jobs:
 
       - name: Configure npm
         run: |
-          cat << EOF > "packages/frieeren-icons/.npmrc"
+          cat << EOF > "packages/frieeren-components/.npmrc"
             email=frieeren2@gmail.com
             //registry.npmjs.org/:_authToken=$NPM_TOKEN 
           EOF
@@ -72,6 +72,6 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Deploy
-        run: pnpm run publish:frieeren-icons
+        run: pnpm run publish:frieeren-components
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
