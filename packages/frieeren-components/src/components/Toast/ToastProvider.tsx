@@ -1,7 +1,7 @@
 import { Toaster } from "./Toast";
 import { createPortal } from "react-dom";
 import { useIsMounted } from "@/hooks/useIsMounted";
-import { createContext, ReactNode, useState, useCallback, useMemo } from "react";
+import { createContext, ReactNode, useState, useCallback, useMemo, useEffect } from "react";
 import { ToastContextValue, ToastOptions, ToastProviderProps, ToastType } from "./Toast.type";
 
 const defaultToastValue: ToastOptions = {
@@ -22,10 +22,23 @@ export const ToastContext = createContext<ToastContextValue>({
 
 const ToastPortal = ({ children }: { children: ReactNode }) => {
   const isMounted = useIsMounted();
-  const node = document.getElementById("toast-portal") as Element;
+  const [portalNode, setPortalNode] = useState<Element | null>(null);
 
-  if (!isMounted) return null;
-  return createPortal(children, node);
+  useEffect(() => {
+    let node = document.getElementById("toast-portal");
+
+    if (!node) {
+      node = document.createElement("div");
+      node.id = "toast-portal";
+      document.body.appendChild(node);
+    }
+
+    setPortalNode(node);
+  }, []);
+
+  if (!isMounted || !portalNode) return null;
+
+  return createPortal(children, portalNode);
 };
 
 export const ToastProvider = ({ options, children }: ToastProviderProps) => {
