@@ -65,7 +65,7 @@ jobs:
       - name: Configure npm
         run: |
           cat << EOF > "packages/frieeren-icons/.npmrc"
-            email=minseok121512@gmail.com
+            email=frieeren2@gmail.com
             //registry.npmjs.org/:_authToken=$NPM_TOKEN 
           EOF
         env:
