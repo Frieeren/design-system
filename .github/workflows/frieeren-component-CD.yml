@@ -45,7 +45,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Install dependencies
+      - name: Build Components
         run: pnpm run build:frieeren-components
 
       - name: Increment version
