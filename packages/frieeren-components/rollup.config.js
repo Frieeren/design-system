@@ -10,16 +10,12 @@ import svgr from "@svgr/rollup";
 function preserveUseClient() {
   return {
     name: "preserve-use-client",
-    generateBundle(options, bundle) {
-      Object.keys(bundle).forEach(fileName => {
-        const chunk = bundle[fileName];
+    renderChunk(code, chunk) {
+      if (chunk.isEntry && !code.startsWith('"use client"')) {
+        return '"use client";\n' + code;
+      }
 
-        if (chunk.type === "chunk" && chunk.isEntry) {
-          if (!chunk.code.startsWith('"use client"')) {
-            chunk.code = '"use client";\n' + chunk.code;
-          }
-        }
-      });
+      return null;
     }
   };
 }
