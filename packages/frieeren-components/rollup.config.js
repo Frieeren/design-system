@@ -4,6 +4,22 @@ import postcss from "rollup-plugin-postcss";
 import { typescriptPaths } from "rollup-plugin-typescript-paths";
 import svgr from "@svgr/rollup";
 
+/**
+ * @type {import('rollup').PluginImpl}
+ */
+function preserveUseClient() {
+  return {
+    name: "preserve-use-client",
+    renderChunk(code, chunk) {
+      if (chunk.isEntry && !code.startsWith('"use client"')) {
+        return '"use client";\n' + code;
+      }
+
+      return null;
+    }
+  };
+}
+
 const commonPlugins = [
   svgr({ icon: true }),
   typescript({
@@ -48,6 +64,7 @@ export default [
     ],
     plugins: [
       ...commonPlugins,
+      preserveUseClient(),
       postcss({
         inject: false,
         extract: "index.css",
