@@ -90,6 +90,6 @@
       "import": "./dist/client.js",
       "types": "./dist/client.d.ts"
     },
-    "./styles": "./dist/index.css"
+    "./styles.css": "./dist/index.css"
   }
 }
