@@ -1,6 +1,10 @@
 # frieeren-design-system
 
-디자인 토큰부터 컴포넌트 생성까지, Figma에서 코드까지 자동화된 완전한 디자인 시스템 파이프라인
+[moeum-design-system](https://github.com/team-moeum/moeum-design-system) 템플릿을 기반으로 구축된 디자인 토큰부터 컴포넌트 생성까지, Figma에서 코드까지 자동화된 완전한 디자인 시스템 파이프라인
+
+
+## Projects
+- frieeren-design-system
 
 <br />
 
