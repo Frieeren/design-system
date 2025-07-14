@@ -30,11 +30,8 @@
 <br />
 
 ## Guide
-### 디자인 시스템 overview
-- https://github.com/Frieeren/design-system/wiki/%EB%94%94%EC%9E%90%EC%9D%B8-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EA%B5%AC%EC%83%81
-
-### plugin 폴더 구조
-- https://github.com/Frieeren/design-system/wiki/plugin-%ED%8F%B4%EB%8D%94-%EA%B5%AC%EC%A1%B0
+- [디자인 시스템 overview](https://github.com/Frieeren/design-system/wiki/%EB%94%94%EC%9E%90%EC%9D%B8-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EA%B5%AC%EC%83%81)
+- [plugin 폴더 구조](https://github.com/Frieeren/design-system/wiki/plugin-%ED%8F%B4%EB%8D%94-%EA%B5%AC%EC%A1%B0)
 
 <br />
 
