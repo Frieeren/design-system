@@ -64,6 +64,7 @@ jobs:
         run: pnpm run build:frieeren-components
 
       - name: Increment version
+        working-directory: ${{ env.PROJECT_PATH }}
         run: |
           if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
             VERSION_TYPE="${{ inputs.version-type }}"
@@ -73,15 +74,15 @@ jobs:
 
           git config --local user.email "${{ env.BOT_GITHUB_EMAIL }}"
           git config --local user.name "${{ env.BOT_GITHUB_ACTOR }}"
-          pnpm version $VERSION_TYPE --filter ${{ env.PROJECT_PATH }}
-          git add .
-          git commit -m "chore(frieeren-components): update version to $VERSION_TYPE"
+          
+          pnpm version $VERSION_TYPE
 
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
           branch: ${{ github.ref }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          tags: true
 
       - name: Configure npm
         run: |
