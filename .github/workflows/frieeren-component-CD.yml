@@ -23,6 +23,7 @@ env:
   PROJECT_PATH: packages/frieeren-components
   BOT_GITHUB_ACTOR: frieeren[bot]
   BOT_GITHUB_EMAIL: frieeren2@gmail.com
+  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
 jobs:
   Deploy:
@@ -88,10 +89,8 @@ jobs:
         run: |
           cat << EOF > "${{ env.PROJECT_PATH }}/.npmrc"
             email="${{ env.BOT_GITHUB_EMAIL }}"
-            //registry.npmjs.org/:_authToken=$NPM_TOKEN 
+            //registry.npmjs.org/:_authToken=${{ env.NPM_TOKEN }}"
           EOF
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Deploy
         run: pnpm run publish:frieeren-components
