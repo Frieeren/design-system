@@ -94,5 +94,3 @@ jobs:
 
       - name: Deploy
         run: pnpm run publish:frieeren-components
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
