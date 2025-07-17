@@ -1,6 +1,4 @@
 name: Component CD
-env:
-  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 on:
   workflow_dispatch:
     inputs:
