@@ -1,8 +1,15 @@
 name: Component CD
-env:
-  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 on:
   workflow_dispatch:
+    inputs:
+      version-type:
+        description: 'Version update type'
+        required: true
+        type: choice
+        options:
+          - patch # 0.0.1 -> 0.0.2
+          - minor # 0.0.1 -> 0.1.0
+          - major # 0.0.1 -> 1.0.0
   push:
     branches:
       - main
@@ -10,9 +17,16 @@ on:
       - packages/frieeren-components/**
 permissions:
   contents: write
+env:
+  PROJECT_PATH: packages/frieeren-components
+  BOT_GITHUB_ACTOR: frieeren[bot]
+  BOT_GITHUB_EMAIL: frieeren2@gmail.com
+  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
 jobs:
   Deploy:
     runs-on: ubuntu-latest
+    if: "!(github.event_name == 'push' && github.actor == 'frieeren[bot]')"
     steps:
       - uses: actions/checkout@v2
 
@@ -49,29 +63,32 @@ jobs:
         run: pnpm run build:frieeren-components
 
       - name: Increment version
+        working-directory: ${{ env.PROJECT_PATH }}
         run: |
-          git config --local user.email "frieeren[bot]@users.noreply.github.com"
-          git config --local user.name "frieeren[bot]"
-          pnpm run publish-version:frieeren-components
-          git add .
-          git commit -m "chore(frieeren-components): update version"
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            VERSION_TYPE="${{ inputs.version-type }}"
+          else
+            VERSION_TYPE="patch"
+          fi
+
+          git config --local user.email "${{ env.BOT_GITHUB_EMAIL }}"
+          git config --local user.name "${{ env.BOT_GITHUB_ACTOR }}"
+          
+          pnpm version $VERSION_TYPE
 
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
           branch: ${{ github.ref }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          tags: true
 
       - name: Configure npm
         run: |
-          cat << EOF > "packages/frieeren-components/.npmrc"
-            email=frieeren2@gmail.com
-            //registry.npmjs.org/:_authToken=$NPM_TOKEN 
+          cat << EOF > "${{ env.PROJECT_PATH }}/.npmrc"
+            email="${{ env.BOT_GITHUB_EMAIL }}"
+            //registry.npmjs.org/:_authToken=${{ env.NPM_TOKEN }}"
           EOF
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Deploy
         run: pnpm run publish:frieeren-components
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
