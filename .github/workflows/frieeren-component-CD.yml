@@ -10,6 +10,7 @@ on:
           - patch # 0.0.1 -> 0.0.2
           - minor # 0.0.1 -> 0.1.0
           - major # 0.0.1 -> 1.0.0
+          - prerelease # 0.0.1 -> 0.0.2-alpha.1234567890
   push:
     branches:
       - main
@@ -34,6 +35,9 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 22.x
+          registry-url: 'https://registry.npmjs.org'
+        env:
+          NODE_AUTH_TOKEN: ${{ env.NPM_TOKEN }}
 
       - name: Install pnpm
         uses: pnpm/action-setup@v2
@@ -73,22 +77,22 @@ jobs:
 
           git config --local user.email "${{ env.BOT_GITHUB_EMAIL }}"
           git config --local user.name "${{ env.BOT_GITHUB_ACTOR }}"
-          
-          pnpm version $VERSION_TYPE
+
+          COMMIT_SHORT=$(git rev-parse --short HEAD)
+          if [ "$VERSION_TYPE" == "prerelease" ]; then
+            pnpm version prerelease --preid="alpha.${COMMIT_SHORT}" --no-git-tag-version
+          else
+            pnpm version "$VERSION_TYPE"
+          fi
 
       - name: Push changes
+        if: inputs.version-type != 'prerelease'
         uses: ad-m/github-push-action@master
         with:
           branch: ${{ github.ref }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
           tags: true
 
-      - name: Configure npm
-        run: |
-          cat << EOF > "${{ env.PROJECT_PATH }}/.npmrc"
-            email="${{ env.BOT_GITHUB_EMAIL }}"
-            //registry.npmjs.org/:_authToken=${{ env.NPM_TOKEN }}"
-          EOF
-
       - name: Deploy
-        run: pnpm run publish:frieeren-components
+        working-directory: ${{ env.PROJECT_PATH }}
+        run: pnpm run deploy
