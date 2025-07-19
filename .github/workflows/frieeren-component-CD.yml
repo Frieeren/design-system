@@ -82,7 +82,7 @@ jobs:
           if [ "$VERSION_TYPE" == "prerelease" ]; then
             pnpm version prerelease --preid="alpha.${COMMIT_SHORT}" --no-git-tag-version
           else
-            pnpm version "$VERSION_TYPE" --no-git-tag-version
+            pnpm version "$VERSION_TYPE"
           fi
 
       - name: Push changes
