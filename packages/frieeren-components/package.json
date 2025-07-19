@@ -86,9 +86,53 @@
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
     },
-    "./client": {
-      "import": "./dist/client.js",
-      "types": "./dist/client.d.ts"
+    "./layout": {
+      "import": "./dist/Layout.js",
+      "types": "./dist/components/Layout/index.d.ts"
+    },
+    "./toast": {
+      "import": "./dist/Toast.js",
+      "types": "./dist/components/Toast/index.d.ts"
+    },
+    "./popup": {
+      "import": "./dist/Popup.js",
+      "types": "./dist/components/Popup/index.d.ts"
+    },
+    "./bottomSheet": {
+      "import": "./dist/BottomSheet.js",
+      "types": "./dist/components/BottomSheet/index.d.ts"
+    },
+    "./button": {
+      "import": "./dist/Button.js",
+      "types": "./dist/components/Button/index.d.ts"
+    },
+    "./text": {
+      "import": "./dist/Text.js",
+      "types": "./dist/components/Text/index.d.ts"
+    },
+    "./radioGroup": {
+      "import": "./dist/RadioGroup.js",
+      "types": "./dist/components/RadioGroup/index.d.ts"
+    },
+    "./checkbox": {
+      "import": "./dist/Checkbox.js",
+      "types": "./dist/components/Checkbox/index.d.ts"
+    },
+    "./toggle": {
+      "import": "./dist/Toggle.js",
+      "types": "./dist/components/Toggle/index.d.ts"
+    },
+    "./select": {
+      "import": "./dist/Select.js",
+      "types": "./dist/components/Select/index.d.ts"
+    },
+    "./input": {
+      "import": "./dist/Input.js",
+      "types": "./dist/components/Input/index.d.ts"
+    },
+    "./tabs": {
+      "import": "./dist/Tabs.js",
+      "types": "./dist/components/Tabs/index.d.ts"
     },
     "./styles.css": "./dist/index.css"
   }

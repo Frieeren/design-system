@@ -3,6 +3,7 @@ import typescript from "@rollup/plugin-typescript";
 import postcss from "rollup-plugin-postcss";
 import { typescriptPaths } from "rollup-plugin-typescript-paths";
 import svgr from "@svgr/rollup";
+import PackageJSON from "./package.json" with { type: "json" };
 
 /**
  * @type {import('rollup').PluginImpl}
@@ -11,8 +12,12 @@ function preserveUseClient() {
   return {
     name: "preserve-use-client",
     renderChunk(code, chunk) {
-      if (chunk.isEntry && !code.startsWith('"use client"')) {
-        return '"use client";\n' + code;
+      const hasUseClient = Object.keys(chunk.modules).some(module => {
+        const moduleInfo = this.getModuleInfo(module);
+        return moduleInfo?.code?.includes("use client");
+      });
+      if (hasUseClient) {
+        return '"use client";\n\n' + code;
       }
 
       return null;
@@ -21,11 +26,11 @@ function preserveUseClient() {
 }
 
 const commonPlugins = [
-  svgr({ icon: true }),
   typescript({
     tsconfig: "./tsconfig.json",
     declarationDir: "./dist"
   }),
+  svgr({ icon: true }),
   babel({
     babelHelpers: "bundled",
     extensions: [".js", ".jsx", ".ts", ".tsx"],
@@ -34,10 +39,26 @@ const commonPlugins = [
   typescriptPaths()
 ];
 
+const external = [
+  ...Object.keys(PackageJSON.dependencies),
+  ...Object.keys(PackageJSON.peerDependencies),
+  "react/jsx-runtime"
+];
+
+const components = Object.keys(PackageJSON.exports)
+  .filter(key => key !== "." && key !== "./styles.css")
+  .map(key => {
+    const componentName = key.replace("./", "");
+    if (componentName.length === 0) {
+      return null;
+    }
+    return `${componentName[0].toUpperCase()}${componentName.substring(1)}`;
+  });
+
 export default [
   {
     input: "src/index.ts",
-    external: ["@radix-ui/react-popover"],
+    external,
     output: [
       {
         file: "dist/index.js",
@@ -53,23 +74,17 @@ export default [
       })
     ]
   },
-  {
-    input: "src/client.ts",
-    external: ["@radix-ui/react-popover"],
-    output: [
-      {
-        file: "dist/client.js",
-        format: "es"
-      }
-    ],
-    plugins: [
-      ...commonPlugins,
-      preserveUseClient(),
-      postcss({
-        inject: false,
-        extract: "index.css",
-        minimize: true
-      })
-    ]
-  }
+  ...components.map(componentName => {
+    return {
+      input: `src/components/${componentName}/index.ts`,
+      external,
+      output: [
+        {
+          file: `dist/${componentName}.js`,
+          format: "es"
+        }
+      ],
+      plugins: [...commonPlugins, preserveUseClient()]
+    };
+  })
 ];

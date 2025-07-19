@@ -7,5 +7,5 @@ export interface FlexProps extends BoxProps {
   flex?: CSSProperties["flex"];
   direction?: CSSProperties["flexDirection"];
   wrap?: CSSProperties["flexWrap"];
-  gap?: number;
+  gap?: CSSProperties["gap"];
 }

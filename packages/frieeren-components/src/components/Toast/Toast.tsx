@@ -1,3 +1,5 @@
+"use client";
+
 import cx from "classnames";
 import { SwitchCase } from "@/shared/components/SwitchCase";
 import { useIsMounted } from "@/hooks/useIsMounted";

@@ -3,9 +3,9 @@ import { BoxProps } from "../Box";
 
 export interface GridProps extends BoxProps {
   columns?: number | string;
-  gap?: number;
-  rowGap?: number;
-  columnGap?: number;
+  gap?: CSSProperties["gap"];
+  rowGap?: CSSProperties["rowGap"];
+  columnGap?: CSSProperties["columnGap"];
   autoFlow?: CSSProperties["gridAutoFlow"];
   areas?: CSSProperties["gridTemplateAreas"];
 }
