@@ -83,6 +83,8 @@ jobs:
             pnpm version prerelease --preid="alpha.${COMMIT_SHORT}" --no-git-tag-version
           else
             pnpm version "$VERSION_TYPE"
+            git add .
+            git commit -m "chore(components): bump version to $VERSION_TYPE"
           fi
 
       - name: Push changes
