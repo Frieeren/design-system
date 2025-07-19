@@ -3,7 +3,7 @@ import { Dialog } from "./Dialog";
 import { useOverlay } from "../../hooks/useOverlay/useOverlay";
 import { Button } from "../Button";
 import { OverlayProvider } from "../../hooks/useOverlay/OverlayProvider";
-import { Flex } from "../layout/Flex";
+import { Flex } from "../Layout/Flex";
 import { DialogRadius, DialogTheme } from "./Dialog.type";
 
 /**
