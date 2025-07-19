@@ -1,10 +1,7 @@
 import "./style/index.scss";
 
 /** Layout */
-export { Box } from "./components/Layout/Box";
-export { Container } from "./components/Layout/Container";
-export { Flex } from "./components/Layout/Flex";
-export { Grid } from "./components/Layout/Grid";
+export { Box, Container, Flex, Grid } from "./components/Layout";
 
 /** Client Side Components */
 export { useToast, ToastProvider } from "./components/Toast";
