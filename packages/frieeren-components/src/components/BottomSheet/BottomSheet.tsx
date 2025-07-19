@@ -1,3 +1,5 @@
+"use client";
+
 import cx from "classnames";
 import { Drawer } from "vaul";
 import { BottomSheetProps } from "./BottomSheet.type";

@@ -12,8 +12,12 @@ function preserveUseClient() {
   return {
     name: "preserve-use-client",
     renderChunk(code, chunk) {
-      if (chunk.isEntry && !code.startsWith('"use client"')) {
-        return '"use client";\n' + code;
+      const hasUseClient = Object.keys(chunk.modules).some(module => {
+        const moduleInfo = this.getModuleInfo(module);
+        return moduleInfo?.code?.includes("use client");
+      });
+      if (hasUseClient) {
+        return '"use client";\n\n' + code;
       }
 
       return null;
@@ -80,7 +84,7 @@ export default [
           format: "es"
         }
       ],
-      plugins: [...commonPlugins]
+      plugins: [...commonPlugins, preserveUseClient()]
     };
   })
 ];
