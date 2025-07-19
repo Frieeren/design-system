@@ -1,8 +1,10 @@
+"use client";
+
 import cx from "classnames";
 import { Drawer } from "vaul";
 import { BottomSheetProps } from "./BottomSheet.type";
 import { SwitchCase } from "../../shared/components/SwitchCase";
-import { Flex } from "../layout/Flex";
+import { Flex } from "../Layout/Flex";
 
 export const BottomSheet = ({
   open,

@@ -1,3 +1,5 @@
+"use client";
+
 import { Dialog } from "radix-ui";
 import cx from "classnames";
 import { PopupProps } from "./Popup.type";

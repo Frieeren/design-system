@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Grid } from "../layout/Grid";
+import { Grid } from "../Layout/Grid";
 import { Toast } from "./Toast";
 import { Button } from "../Button";
 import { useToast } from "./useToast";

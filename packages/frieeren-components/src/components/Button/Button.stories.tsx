@@ -5,7 +5,7 @@ import Kakao from "./assets/kakao.svg";
 
 import { Button } from ".";
 import { Text } from "../Text";
-import { Flex } from "../layout/Flex";
+import { Flex } from "../Layout/Flex";
 
 const meta = {
   title: "Button",
