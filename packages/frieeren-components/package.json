@@ -88,7 +88,7 @@
     },
     "./layout": {
       "import": "./dist/Layout.js",
-      "types": "./dist/components/layout/index.d.ts"
+      "types": "./dist/components/Layout/index.d.ts"
     },
     "./toast": {
       "import": "./dist/Toast.js",
