@@ -79,13 +79,14 @@ jobs:
           git config --local user.name "${{ env.BOT_GITHUB_ACTOR }}"
 
           COMMIT_SHORT=$(git rev-parse --short HEAD)
-          if [ "${{ VERSION_TYPE }}" == "prerelease" ]; then
+          if [ "$VERSION_TYPE" == "prerelease" ]; then
             pnpm version prerelease --preid="alpha.${COMMIT_SHORT}" --no-git-tag-version
           else
-            pnpm version "${{ VERSION_TYPE }}" --no-git-tag-version
+            pnpm version "$VERSION_TYPE" --no-git-tag-version
           fi
 
       - name: Push changes
+        if: inputs.version-type != 'prerelease'
         uses: ad-m/github-push-action@master
         with:
           branch: ${{ github.ref }}
