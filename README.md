@@ -20,7 +20,7 @@
 ### 공통 컴포넌트 패키지
 
 - Design Token과 Icon을 활용한 재사용 가능한 컴포넌트 제공
-- [컴포넌트 패키지 체크리스트](https://github.com/Frieeren/design-system/wiki/@team%E2%80%90frieeren-components-%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC-%EC%B2%B4%ED%81%AC%EB%A6%AC%EC%8A%A4%ED%8A%B8)
+- [컴포넌트 패키지 체크리스트](https://github.com/Frieeren/design-system/wiki/%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8-%ED%8C%A8%ED%82%A4%EC%A7%80-%EC%B2%B4%ED%81%AC%EB%A6%AC%EC%8A%A4%ED%8A%B8)
 - [공통 컴포넌트 가이드](https://Frieeren.github.io/design-system/)
 
 ### Figma Code 변환 패키지
