@@ -52,24 +52,5 @@ export default [
         minimize: true
       })
     ]
-  },
-  {
-    input: "src/client.ts",
-    external: ["@radix-ui/react-popover"],
-    output: [
-      {
-        file: "dist/client.js",
-        format: "es"
-      }
-    ],
-    plugins: [
-      ...commonPlugins,
-      preserveUseClient(),
-      postcss({
-        inject: false,
-        extract: "index.css",
-        minimize: true
-      })
-    ]
   }
 ];
