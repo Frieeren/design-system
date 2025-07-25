@@ -1,6 +1,8 @@
 import React, { forwardRef } from "react";
 import cx from "classnames";
-import { ButtonDisplay, ButtonProps, ButtonSizes, ButtonTypes } from "./Button.type";
+import { ButtonProps, LogButtonProps } from "./Button.type";
+import { useLog } from "../Log/LogProvider";
+import { createLogId } from "../Log/createLogId";
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
@@ -53,3 +55,28 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 );
 
 Button.displayName = "Button";
+
+const LogButton = forwardRef<HTMLButtonElement, LogButtonProps>(
+  ({ onClick, children, logParams, ...props }, ref) => {
+    const { logClient, logParams: initialLogParams } = useLog();
+
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+      const logId = createLogId({ logType: "event", eventType: "click" });
+      logClient?.log("event", {
+        logId,
+        params: {
+          button: children as string,
+          ...initialLogParams,
+          ...logParams
+        }
+      });
+      onClick?.(event);
+    };
+
+    return <Button ref={ref} {...props} onClick={handleClick} />;
+  }
+);
+
+LogButton.displayName = "LogButton";
+
+export { LogButton };
