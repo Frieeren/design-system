@@ -1,3 +1,5 @@
+"use client";
+
 import React, { forwardRef } from "react";
 import cx from "classnames";
 import { ButtonProps, LogButtonProps } from "./Button.type";
@@ -58,22 +60,27 @@ Button.displayName = "Button";
 
 const LogButton = forwardRef<HTMLButtonElement, LogButtonProps>(
   ({ onClick, children, logParams, ...props }, ref) => {
-    const { logClient, logParams: initialLogParams } = useLog();
+    const context = useLog();
 
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
       const logId = createLogId({ logType: "event", eventType: "click" });
-      logClient?.log("event", {
+      context.logClient?.log("event", {
         logId,
         params: {
           button: children as string,
-          ...initialLogParams,
+          ...context.logParams,
           ...logParams
         }
       });
+
       onClick?.(event);
     };
 
-    return <Button ref={ref} {...props} onClick={handleClick} />;
+    return (
+      <Button ref={ref} {...props} onClick={handleClick}>
+        {children}
+      </Button>
+    );
   }
 );
 

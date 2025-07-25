@@ -7,21 +7,21 @@ type LogScreenProps = PropsWithChildren<{
 }>;
 
 export function LogScreen({ children, logParams }: LogScreenProps) {
-  const { logClient, setLogParams } = useLog();
+  const context = useLog();
 
   useEffect(() => {
-    setLogParams?.(logParams);
-  }, [logParams, setLogParams]);
+    context.setLogParams?.(logParams);
+  }, [logParams, context]);
 
   useEffect(() => {
     const logId = createLogId({ logType: "screen" });
-    logClient.log("screen", {
+    context.logClient?.log("screen", {
       logId,
       params: {
         ...logParams
       }
     });
-  }, [logClient, logParams]);
+  }, [context, logParams]);
 
   return children;
 }

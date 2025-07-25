@@ -2,6 +2,7 @@
 
 import { createContext, PropsWithChildren, useCallback, useContext, useState } from "react";
 import { LogType } from "./Log.type";
+import { useIsMounted } from "@/hooks/useIsMounted";
 
 type LogClient = {
   log: (event: LogType, data?: { logId: string; params?: Record<string, string> }) => void;
@@ -26,7 +27,11 @@ export function LogProvider({ children, logClient, logParams }: LogProviderProps
 
   return (
     <LogContext.Provider
-      value={{ logClient, logParams: { ...logParams, ...params }, setLogParams }}
+      value={{
+        logClient,
+        logParams: { ...logParams, ...params },
+        setLogParams
+      }}
     >
       {children}
     </LogContext.Provider>
@@ -35,8 +40,10 @@ export function LogProvider({ children, logClient, logParams }: LogProviderProps
 
 export function useLog() {
   const context = useContext(LogContext);
+
   if (!context) {
     throw new Error("LogProvider 내부에서 사용할 수 있습니다");
   }
+
   return context;
 }
