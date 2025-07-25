@@ -134,6 +134,10 @@
       "import": "./dist/Tabs.js",
       "types": "./dist/components/Tabs/index.d.ts"
     },
+    "./log": {
+      "import": "./dist/Log.js",
+      "types": "./dist/components/Log/index.d.ts"
+    },
     "./styles.css": "./dist/index.css"
   }
 }

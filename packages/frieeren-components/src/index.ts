@@ -17,3 +17,4 @@ export { Toggle } from "./components/Toggle";
 export { Select } from "./components/Select";
 export { Input } from "./components/Input";
 export { Tabs } from "./components/Tabs";
+export { LogProvider, LogScreen } from "./components/Log";
