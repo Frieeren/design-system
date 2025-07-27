@@ -50,7 +50,18 @@ export function useLog() {
   const context = useContext(LogContext);
 
   if (!context) {
-    throw new Error("LogProvider 내부에서 사용할 수 있습니다");
+    if (process.env.NODE_ENV === "development") {
+      console.warn("LogProvider 내부에서 사용할 수 있습니다");
+    }
+    return {
+      logClient: {
+        screen: () => {},
+        click: () => {},
+        popup: () => {}
+      },
+      setLogParams: () => {},
+      logParams: {}
+    };
   }
 
   return context;

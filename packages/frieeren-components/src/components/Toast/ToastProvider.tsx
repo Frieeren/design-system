@@ -3,6 +3,8 @@ import { createPortal } from "react-dom";
 import { useIsMounted } from "@/hooks/useIsMounted";
 import { createContext, ReactNode, useState, useCallback, useMemo, useEffect } from "react";
 import { ToastContextValue, ToastOptions, ToastProviderProps, ToastType } from "./Toast.type";
+import { useLog } from "../Log/LogProvider";
+import { createLogId } from "../Log/createLogId";
 
 const defaultToastValue: ToastOptions = {
   type: "default",
@@ -43,6 +45,7 @@ const ToastPortal = ({ children }: { children: ReactNode }) => {
 
 export const ToastProvider = ({ options, children }: ToastProviderProps) => {
   const [toasts, setToasts] = useState<ToastType[]>([]);
+  const context = useLog();
 
   const add = useCallback(
     (toast: Partial<ToastOptions>) => {
@@ -57,8 +60,19 @@ export const ToastProvider = ({ options, children }: ToastProviderProps) => {
         radius: toast.radius ?? options?.radius ?? defaultToastValue.radius,
         message: toast.message ?? options?.message ?? defaultToastValue.message,
         duration: toast.duration ?? options?.duration ?? defaultToastValue.duration,
-        position: toast.position ?? options?.position ?? defaultToastValue.position
+        position: toast.position ?? options?.position ?? defaultToastValue.position,
+        logParams: toast.logParams ?? options?.logParams
       };
+
+      context.logClient?.popup({
+        logId: createLogId({ logType: "event", eventType: "popup" }),
+        params: {
+          type: "toast",
+          message: newToast.message,
+          ...context.logParams,
+          ...newToast.logParams
+        }
+      });
 
       setToasts(prev => [newToast, ...prev]);
 

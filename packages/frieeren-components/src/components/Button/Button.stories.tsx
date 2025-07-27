@@ -3,7 +3,7 @@ import Google from "./assets/google.svg";
 import Apple from "./assets/apple.svg";
 import Kakao from "./assets/kakao.svg";
 
-import { Button } from "./Button";
+import { Button } from ".";
 import { Text } from "../Text";
 import { Flex } from "../Layout/Flex";
 

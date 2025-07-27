@@ -21,6 +21,8 @@ export interface ToastOptions {
   style?: React.CSSProperties;
   buttonText?: string;
   onAction?: () => void;
+  /** 로깅 */
+  logParams?: Record<string, string>;
 }
 
 export interface ToastType extends ToastOptions {
