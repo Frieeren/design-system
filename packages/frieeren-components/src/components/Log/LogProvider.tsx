@@ -4,7 +4,7 @@ import { createContext, PropsWithChildren, useCallback, useContext, useState } f
 import { LogClickParams, LogPopupParams, LogScreenParams } from "./Log.type";
 import { createLogId } from "./createLogId";
 
-type LogClient = {
+export type LogClient = {
   screen({
     logId,
     params
