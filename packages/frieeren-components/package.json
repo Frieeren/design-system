@@ -41,6 +41,7 @@
     "@storybook/react-vite": "^8.3.6",
     "@storybook/test": "^8.3.6",
     "@svgr/rollup": "^8.1.0",
+    "@types/node": "^16.7.1",
     "@types/react": "^18.3.11",
     "@types/react-dom": "^18.3.1",
     "@typescript-eslint/eslint-plugin": "^8.0.1",
