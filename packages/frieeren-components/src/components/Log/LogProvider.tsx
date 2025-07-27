@@ -1,11 +1,19 @@
 "use client";
 
 import { createContext, PropsWithChildren, useCallback, useContext, useState } from "react";
-import { LogType } from "./Log.type";
-import { useIsMounted } from "@/hooks/useIsMounted";
+import { LogClickParams, LogPopupParams, LogScreenParams } from "./Log.type";
+import { createLogId } from "./createLogId";
 
 type LogClient = {
-  log: (event: LogType, data?: { logId: string; params?: Record<string, string> }) => void;
+  screen({
+    logId,
+    params
+  }: {
+    logId: ReturnType<typeof createLogId>;
+    params: LogScreenParams;
+  }): void;
+  click({ logId, params }: { logId: ReturnType<typeof createLogId>; params: LogClickParams }): void;
+  popup({ logId, params }: { logId: ReturnType<typeof createLogId>; params: LogPopupParams }): void;
 };
 
 type LogProviderContext = {

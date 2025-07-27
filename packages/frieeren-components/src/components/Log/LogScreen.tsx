@@ -15,9 +15,10 @@ export function LogScreen({ children, logParams }: LogScreenProps) {
 
   useEffect(() => {
     const logId = createLogId({ logType: "screen" });
-    context.logClient?.log("screen", {
+    context.logClient?.screen({
       logId,
       params: {
+        title: logParams["title"] ?? "",
         ...logParams
       }
     });

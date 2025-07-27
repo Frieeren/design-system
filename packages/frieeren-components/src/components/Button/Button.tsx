@@ -64,10 +64,10 @@ const LogButton = forwardRef<HTMLButtonElement, LogButtonProps>(
 
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
       const logId = createLogId({ logType: "event", eventType: "click" });
-      context.logClient?.log("event", {
+      context.logClient?.click({
         logId,
         params: {
-          button: children as string,
+          button: children?.toString() ?? "",
           ...context.logParams,
           ...logParams
         }

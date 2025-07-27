@@ -1,2 +1,15 @@
-export type LogType = "event" | "screen";
-export type EventType = "click" | "popup" | "toast" | "custom";
+export type LogScreenParams = {
+  title: string;
+  [key: string]: string | number | boolean;
+};
+
+export type LogClickParams = {
+  button: string;
+  [key: string]: string | number | boolean;
+};
+
+export type LogPopupParams = {
+  type: "toast" | "popup";
+  message: string;
+  [key: string]: string | number | boolean;
+};
