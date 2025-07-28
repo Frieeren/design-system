@@ -22,7 +22,7 @@ export const Popup = (props: PopupProps) => {
 
   return (
     <Dialog.Root {...rest} open={open}>
-      <Dialog.Portal container={container || document.body}>
+      <Dialog.Portal container={container}>
         <Dialog.Overlay className="popup--overlay" onClick={onClose} />
         <Dialog.Content
           data-frieeren-component="Popup"
