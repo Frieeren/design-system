@@ -22,3 +22,7 @@ interface TypeBPopupProps extends BasePopupProps {
 }
 
 export type PopupProps = TypeAPopupProps | TypeBPopupProps;
+
+export type LogPopupProps = PopupProps & {
+  logParams?: Record<string, string>;
+};

@@ -28,3 +28,7 @@ export type ButtonProps = PropsWithChildren<{
   backgroundColor?: string;
   borderColor?: string;
 }>;
+
+export type LogButtonProps = ButtonProps & {
+  logParams?: Record<string, string>;
+};

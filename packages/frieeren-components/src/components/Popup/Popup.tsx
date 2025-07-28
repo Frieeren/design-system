@@ -2,15 +2,27 @@
 
 import { Dialog } from "radix-ui";
 import cx from "classnames";
-import { PopupProps } from "./Popup.type";
+import { LogPopupProps, PopupProps } from "./Popup.type";
+import { useLog } from "../Log/LogProvider";
+import { createLogId } from "../Log/createLogId";
+import { useEffect } from "react";
 
-export const Popup: React.FC<PopupProps> = props => {
-  const { className, children, buttonLayoutType, container, title, description, onClose, ...rest } =
-    props;
+export const Popup = (props: PopupProps) => {
+  const {
+    className,
+    children,
+    buttonLayoutType,
+    container,
+    title,
+    description,
+    onClose,
+    open = true,
+    ...rest
+  } = props;
 
   return (
-    <Dialog.Root {...rest} defaultOpen>
-      <Dialog.Portal container={container || document.body}>
+    <Dialog.Root {...rest} open={open}>
+      <Dialog.Portal container={container}>
         <Dialog.Overlay className="popup--overlay" onClick={onClose} />
         <Dialog.Content
           data-frieeren-component="Popup"
@@ -42,4 +54,28 @@ export const Popup: React.FC<PopupProps> = props => {
   );
 };
 
-export default Popup;
+Popup.displayName = "Popup";
+
+const LogPopup = ({ children, logParams, title, open, ...props }: LogPopupProps) => {
+  const context = useLog();
+
+  useEffect(() => {
+    if (open) {
+      const logId = createLogId({ logType: "event", eventType: "popup" });
+      context.logClient?.popup({
+        logId,
+        params: {
+          type: "popup",
+          message: title ?? "",
+          ...logParams
+        }
+      });
+    }
+  }, [context, logParams, title, open]);
+
+  return <Popup title={title} open={open} {...props} />;
+};
+
+LogPopup.displayName = "LogPopup";
+
+export { LogPopup };

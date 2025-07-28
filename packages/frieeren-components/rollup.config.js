@@ -36,7 +36,8 @@ const commonPlugins = [
     extensions: [".js", ".jsx", ".ts", ".tsx"],
     presets: ["@babel/preset-env", "@babel/preset-react", "@babel/preset-typescript"]
   }),
-  typescriptPaths()
+  typescriptPaths(),
+  preserveUseClient()
 ];
 
 const external = [
@@ -84,7 +85,7 @@ export default [
           format: "es"
         }
       ],
-      plugins: [...commonPlugins, preserveUseClient()]
+      plugins: [...commonPlugins]
     };
   })
 ];
