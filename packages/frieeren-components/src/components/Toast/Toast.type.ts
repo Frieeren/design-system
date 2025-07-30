@@ -35,7 +35,6 @@ export interface ToastProviderProps {
 }
 
 export interface ToastContextValue {
-  toasts: ToastType[];
   add: (toast: Partial<ToastOptions>) => string;
   remove: (id: string) => void;
 }

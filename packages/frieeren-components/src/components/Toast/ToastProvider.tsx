@@ -16,11 +16,7 @@ const defaultToastValue: ToastOptions = {
   position: "top-right"
 };
 
-export const ToastContext = createContext<ToastContextValue>({
-  toasts: [],
-  add: () => "",
-  remove: () => {}
-});
+export const ToastContext = createContext<ToastContextValue | null>(null);
 
 const ToastPortal = ({ children }: { children: ReactNode }) => {
   const isMounted = useIsMounted();
@@ -91,11 +87,10 @@ export const ToastProvider = ({ options, children }: ToastProviderProps) => {
 
   const value = useMemo(
     () => ({
-      toasts,
       add,
       remove
     }),
-    [toasts, add, remove]
+    [add, remove]
   );
 
   return (
