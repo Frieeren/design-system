@@ -445,6 +445,68 @@
           "value": "{seed.palette color.yellow.300}",
           "type": "color"
         }
+      },
+      "color": {
+        "brand": {
+          "primary": {
+            "value": "#3a8dff",
+            "type": "color"
+          },
+          "secondary": {
+            "value": "#893aff",
+            "type": "color"
+          },
+          "caution": {
+            "value": "#f3b132",
+            "type": "color"
+          },
+          "error": {
+            "value": "#ea4244",
+            "type": "color"
+          }
+        },
+        "neatural": {
+          "gray50": {
+            "value": "#f8fafc",
+            "type": "color"
+          },
+          "gray100": {
+            "value": "#f1f5f9",
+            "type": "color"
+          },
+          "gray200": {
+            "value": "#e2e8f0",
+            "type": "color"
+          },
+          "gray300": {
+            "value": "#cbd5e1",
+            "type": "color"
+          },
+          "gray400": {
+            "value": "#94a3b8",
+            "type": "color"
+          },
+          "gray500": {
+            "value": "#64748b",
+            "type": "color"
+          },
+          "gray600": {
+            "value": "#475569",
+            "type": "color"
+          },
+          "gray700": {
+            "value": "#334155",
+            "type": "color"
+          },
+          "gray800": {
+            "value": "#1e293b",
+            "type": "color"
+          },
+          "gray900": {
+            "value": "#0f172a",
+            "type": "color"
+          }
+        }
       }
     }
   },
@@ -892,6 +954,68 @@
         "point4": {
           "value": "{seed.palette color.yellow.300}",
           "type": "color"
+        }
+      },
+      "color": {
+        "brand": {
+          "primary": {
+            "value": "#3a8dff",
+            "type": "color"
+          },
+          "secondary": {
+            "value": "#893aff",
+            "type": "color"
+          },
+          "caution": {
+            "value": "#f3b132",
+            "type": "color"
+          },
+          "error": {
+            "value": "#ea4244",
+            "type": "color"
+          }
+        },
+        "neatural": {
+          "gray50": {
+            "value": "#f8fafc",
+            "type": "color"
+          },
+          "gray100": {
+            "value": "#f1f5f9",
+            "type": "color"
+          },
+          "gray200": {
+            "value": "#e2e8f0",
+            "type": "color"
+          },
+          "gray300": {
+            "value": "#cbd5e1",
+            "type": "color"
+          },
+          "gray400": {
+            "value": "#94a3b8",
+            "type": "color"
+          },
+          "gray500": {
+            "value": "#64748b",
+            "type": "color"
+          },
+          "gray600": {
+            "value": "#475569",
+            "type": "color"
+          },
+          "gray700": {
+            "value": "#334155",
+            "type": "color"
+          },
+          "gray800": {
+            "value": "#1e293b",
+            "type": "color"
+          },
+          "gray900": {
+            "value": "#0f172a",
+            "type": "color"
+          }
         }
       }
     }
@@ -1372,6 +1496,130 @@
       }
     }
   },
+  "font/mobile": {
+    "seed": {
+      "font": {
+        "weight": {
+          "title1": {
+            "value": "700",
+            "type": "text"
+          },
+          "subtitle1": {
+            "value": "700",
+            "type": "text"
+          },
+          "body1": {
+            "value": "700",
+            "type": "text"
+          }
+        },
+        "lineHeight": {
+          "title1": {
+            "value": "140%",
+            "type": "text"
+          },
+          "subtitle1": {
+            "value": "140%",
+            "type": "text"
+          },
+          "body1": {
+            "value": "140%",
+            "type": "text"
+          }
+        },
+        "letterSpacing": {
+          "title1": {
+            "value": "-2%",
+            "type": "text"
+          },
+          "subtitle1": {
+            "value": "-2%",
+            "type": "text"
+          },
+          "body1": {
+            "value": "-2%",
+            "type": "text"
+          }
+        },
+        "size": {
+          "title1": {
+            "value": "24px",
+            "type": "text"
+          },
+          "subtitle1": {
+            "value": "20px",
+            "type": "text"
+          },
+          "body1": {
+            "value": "16px",
+            "type": "text"
+          }
+        }
+      }
+    }
+  },
+  "font/pc": {
+    "seed": {
+      "font": {
+        "weight": {
+          "title1": {
+            "value": "700",
+            "type": "text"
+          },
+          "subtitle1": {
+            "value": "700",
+            "type": "text"
+          },
+          "body1": {
+            "value": "700",
+            "type": "text"
+          }
+        },
+        "lineHeight": {
+          "title1": {
+            "value": "140%",
+            "type": "text"
+          },
+          "subtitle1": {
+            "value": "140%",
+            "type": "text"
+          },
+          "body1": {
+            "value": "140%",
+            "type": "text"
+          }
+        },
+        "letterSpacing": {
+          "title1": {
+            "value": "-2%",
+            "type": "text"
+          },
+          "subtitle1": {
+            "value": "-2%",
+            "type": "text"
+          },
+          "body1": {
+            "value": "-2%",
+            "type": "text"
+          }
+        },
+        "size": {
+          "title1": {
+            "value": "24px",
+            "type": "text"
+          },
+          "subtitle1": {
+            "value": "20px",
+            "type": "text"
+          },
+          "body1": {
+            "value": "16px",
+            "type": "text"
+          }
+        }
+      }
+    }
+  },
   "$themes": [],
   "$metadata": {
     "tokenSetOrder": [
@@ -1379,7 +1627,9 @@
       "color/light",
       "color/dark",
       "other/mobile",
-      "other/pc"
+      "other/pc",
+      "font/mobile",
+      "font/pc"
     ]
   }
 }
