@@ -193,12 +193,75 @@
       }
     }
   },
+  "font/pc": {
+    "seed": {
+      "font": {
+        "weight": {
+          "title1": {
+            "$type": "text",
+            "$value": "700"
+          },
+          "subtitle1": {
+            "$type": "text",
+            "$value": "700"
+          },
+          "body1": {
+            "$type": "text",
+            "$value": "700"
+          }
+        },
+        "lineHeight": {
+          "title1": {
+            "$type": "text",
+            "$value": "140%"
+          },
+          "subtitle1": {
+            "$type": "text",
+            "$value": "140%"
+          },
+          "body1": {
+            "$type": "text",
+            "$value": "140%"
+          }
+        },
+        "letterSpacing": {
+          "title1": {
+            "$type": "text",
+            "$value": "-2%"
+          },
+          "subtitle1": {
+            "$type": "text",
+            "$value": "-2%"
+          },
+          "body1": {
+            "$type": "text",
+            "$value": "-2%"
+          }
+        },
+        "size": {
+          "title1": {
+            "$type": "text",
+            "$value": "24px"
+          },
+          "subtitle1": {
+            "$type": "text",
+            "$value": "20px"
+          },
+          "body1": {
+            "$type": "text",
+            "$value": "16px"
+          }
+        }
+      }
+    }
+  },
   "$themes": [],
   "$metadata": {
     "tokenSetOrder": [
       "color/light",
       "color/dark",
-      "font/mobile"
+      "font/mobile",
+      "font/pc"
     ]
   }
 }
