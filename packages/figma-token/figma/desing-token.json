@@ -1,11 +1,15 @@
 {
-  "Collection 1/Mode 1": {
-    "Color": {
-      "$type": "color",
-      "$value": "#ef2424"
+  "color/light": {
+    "seed": {
+      "color": {
+        "primary": {
+          "$type": "color",
+          "$value": "#3a8dff"
+        }
+      }
     }
   },
-  "Color Styles/Mode 1": {
+  "color/dark": {
     "seed": {
       "color": {
         "primary": {
@@ -18,8 +22,8 @@
   "$themes": [],
   "$metadata": {
     "tokenSetOrder": [
-      "Collection 1/Mode 1",
-      "Color Styles/Mode 1"
+      "color/light",
+      "color/dark"
     ]
   }
 }
