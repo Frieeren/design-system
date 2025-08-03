@@ -1,0 +1,191 @@
+:root {
+  --calendar-background: white;
+
+  --header-font-size: 14px;
+  --header-font-color: #1a1e23;
+  --header-font-weight: 600;
+
+  --tile-size: 36px;
+  --tile-font-size: 12px;
+  --tile-day-color: #333;
+  --tile-week-number-color: #333;
+  --tile-day-background: transparent;
+}
+
+.calendar {
+  display: flex;
+  flex-direction: column;
+  width: 320px;
+  background: var(--calendar-background);
+  overflow: hidden;
+  user-select: none;
+
+  * {
+    box-sizing: border-box;
+  }
+
+  // 전환 컨테이너
+  &--transition-container {
+    position: relative;
+    overflow: hidden;
+    min-height: 240px;
+  }
+
+  &--slide-content {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+
+  &--header {
+    margin-bottom: 8px;
+    padding-left: 24px;
+    padding-right: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &-title {
+      opacity: 0;
+      font-size: var(--header-font-size);
+      color: var(--header-font-color);
+      font-weight: var(--header-font-weight);
+      animation: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    &-buttons {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      color: #1a1e23;
+    }
+  }
+
+  &--week-numbers {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &--days-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 240px;
+  }
+
+  &--week-line {
+    margin: 2px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &--tile {
+    position: relative;
+    margin: 0 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    border-radius: 50%;
+    border: none;
+    background: transparent;
+    font-size: var(--tile-font-size);
+    color: var(--tile-day-color);
+
+    &--week-number {
+      color: var(--tile-week-number-color);
+      font-weight: 400;
+    }
+
+    // 날짜 타일 스타일
+    &--day {
+      background-color: var(--tile-day-background);
+
+      &:hover {
+        transition: all 0.2s ease;
+        background-color: #f5f5f5;
+      }
+    }
+
+    &--disabled {
+      cursor: not-allowed;
+      color: #ccc;
+    }
+
+    &--today {
+      border: 1px solid #333;
+    }
+
+    &--selected {
+      background-color: #1976d2;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 20px;
+        height: 20px;
+        background-color: rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        opacity: 0;
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      &:hover {
+        background-color: #1565c0;
+      }
+    }
+
+    &--selected.calendar--tile--today {
+      background-color: #1976d2;
+      color: #fff;
+      border: 2px solid #fff;
+      box-shadow: 0 0 0 1px #1976d2;
+    }
+
+    &--other-month {
+      visibility: hidden;
+    }
+  }
+}
+
+@keyframes opacity {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-left {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes slide-right {
+  0% {
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
