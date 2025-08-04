@@ -4,15 +4,27 @@
   left: 0;
   right: 0;
   bottom: 0;
-  pointer-events: none;
+  pointer-events: auto;
   overflow: hidden;
   border-radius: inherit;
+  will-change: transform;
 }
 
 .ripple-circle {
-  position: absolute;
-  border-radius: 50%;
-  pointer-events: none;
   transform: scale(0);
-  opacity: 0.1;
+  border-radius: 100%;
+  position: absolute;
+  opacity: 0.75;
+  pointer-events: none;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  animation-name: ripple;
+}
+
+@keyframes ripple {
+  to {
+    opacity: 0;
+    transform: scale(2);
+  }
 }

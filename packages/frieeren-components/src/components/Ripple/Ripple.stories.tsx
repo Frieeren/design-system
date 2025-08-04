@@ -51,9 +51,9 @@ export const Default: Story = {
         cursor: "pointer",
         userSelect: "none"
       }}
-      onClick={() => console.log("clicked")}
+      // onClick={() => console.log("")}
     >
-      클릭해보세요
+      Ripple Effect
       <Ripple />
     </button>
   )

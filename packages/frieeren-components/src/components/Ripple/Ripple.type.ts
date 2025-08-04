@@ -16,8 +16,6 @@ export interface RippleProps {
 }
 
 export interface RippleState {
-  /** 리플 요소의 고유 ID */
-  id: number;
   /** 클릭한 X 좌표 */
   x: number;
   /** 클릭한 Y 좌표 */
@@ -26,8 +24,11 @@ export interface RippleState {
   size: number;
 }
 
-export type RippleColor = "primary" | "secondary" | "success" | "error" | "warning" | "default";
-
-export type RippleSize = "small" | "medium" | "large";
-
-export type RippleSpeed = "fast" | "normal" | "slow";
+export interface DebounceRippleProps {
+  /** 리플 효과 배열 개수 */
+  rippleCount: number;
+  /** 리플 효과 지속 시간 */
+  duration: number;
+  /** 리플 효과 정리 함수 */
+  cleanUpFunction: () => void;
+}
