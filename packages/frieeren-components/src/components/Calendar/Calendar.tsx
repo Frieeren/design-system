@@ -1,7 +1,7 @@
 import { format, isToday, isSameDay, addMonths, subMonths } from "date-fns";
 
 import "./Calendar.scss";
-import { memo, useEffect, useState } from "react";
+import { memo, useState, useMemo } from "react";
 import { motion, AnimatePresence } from "motion/react";
 
 import cx from "classnames";
@@ -17,7 +17,6 @@ const WEEK_NUMBERS: WeekNumbers = {
   en: ["S", "M", "T", "W", "T", "F", "S"]
 };
 
-// 슬라이드 전환 컴포넌트
 const CalendarSlideTransition = ({
   children,
   transitionKey,
@@ -198,62 +197,49 @@ export const Calendar = ({
   onlyViewMonthDays?: boolean;
   weekNumbersCountry?: WeekNumbersCountry;
 }) => {
+  const [currentMonth, setCurrentMonth] = useState<Date>(initDate || new Date());
   const [selectedDate, setSelectedDate] = useState<Date>(initDate || new Date());
-  const [daysState, setDaysState] = useState<DayState[][]>([]);
   const [slideDirection, setSlideDirection] = useState<SlideDirection>("left");
-  const [isAnimating, setIsAnimating] = useState(false);
 
-  // 전환 키 생성 (년-월 조합)
-  const transitionKey = format(selectedDate, "yyyy-MM");
-
-  useEffect(() => {
-    const days = currentMonthDays(selectedDate);
-
+  const days = useMemo(() => currentMonthDays(currentMonth), [currentMonth]);
+  const transitionKey = useMemo(() => format(currentMonth, "yyyy-MM"), [currentMonth]);
+  const daysState = useMemo(() => {
     const state = days.map(day => ({
       date: day,
       conditions: {
         isToday: isToday(day),
         isDisabled: false,
-        isOtherMonth: onlyViewMonthDays ? !isCurrentMonth(day, selectedDate) : false,
+        isOtherMonth: onlyViewMonthDays ? !isCurrentMonth(day, currentMonth) : false,
         isSelected: selectedDate ? isSameDay(day, selectedDate) : false
       }
     }));
 
-    const chunkedDays = chunk(state, 7);
-
-    setDaysState(chunkedDays);
-  }, [selectedDate, onlyViewMonthDays]);
+    return chunk(state, 7);
+  }, [
+    days,
+    currentMonth,
+    selectedDate,
+    onlyViewMonthDays
+  ]);
 
   const handleDayClick = (date: Date) => {
-    if (!isAnimating) {
       setSelectedDate(date);
-    }
   };
 
   const handlePrevMonth = () => {
-    if (!isAnimating) {
       setSlideDirection("right");
-      setIsAnimating(true);
-      setSelectedDate(subMonths(selectedDate, 1));
-    }
+      setCurrentMonth(prev => subMonths(prev, 1));
   };
 
   const handleNextMonth = () => {
-    if (!isAnimating) {
       setSlideDirection("left");
-      setIsAnimating(true);
-      setSelectedDate(addMonths(selectedDate, 1));
-    }
-  };
-
-  const handleTransitionEnd = () => {
-    setIsAnimating(false);
+      setCurrentMonth(prev => addMonths(prev, 1));
   };
 
   return (
     <div className="calendar">
       <Header
-        selectedDate={selectedDate}
+        selectedDate={currentMonth}
         onPrevMonth={handlePrevMonth}
         onNextMonth={handleNextMonth}
       />
@@ -264,7 +250,6 @@ export const Calendar = ({
         transitionKey={transitionKey}
         slideDirection={slideDirection}
         activeTransition={activeTransition}
-        onTransitionEnd={handleTransitionEnd}
       >
         <Days days={daysState} onDayClick={handleDayClick} />
       </CalendarSlideTransition>
