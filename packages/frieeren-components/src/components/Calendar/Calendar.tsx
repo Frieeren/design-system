@@ -1,16 +1,19 @@
-import { format, isToday, isSameDay, addMonths, subMonths } from "date-fns";
-
-import "./Calendar.scss";
+import cx from "classnames";
 import { memo, useState, useMemo } from "react";
 import { motion, AnimatePresence } from "motion/react";
-
-import cx from "classnames";
+import { format, isToday, isSameDay, addMonths, subMonths } from "date-fns";
 import { chunk, getDate, isCurrentMonth, getFormattedDate, currentMonthDays } from "./utils";
+import type { 
+  WeekNumbers,
+  CalendarProps,
+  SlideDirection,
+  CalendarTileProps,
+  CalendarDaysProps,
+  CalendarHeaderProps,
+  CalendarWeekNumbersProps,
+  CalendarSlideTransitionProps
+ } from "./Calendar.type";
 import Ripple from "../Ripple/Ripple";
-
-type WeekNumbersCountry = "kr" | "en";
-type WeekNumbers = Record<WeekNumbersCountry, string[]>;
-type SlideDirection = "left" | "right";
 
 const WEEK_NUMBERS: WeekNumbers = {
   kr: ["일", "월", "화", "수", "목", "금", "토"],
@@ -22,14 +25,7 @@ const CalendarSlideTransition = ({
   transitionKey,
   slideDirection,
   activeTransition,
-  onTransitionEnd
-}: {
-  children: React.ReactElement;
-  transitionKey: string;
-  slideDirection: SlideDirection;
-  activeTransition: boolean;
-  onTransitionEnd?: () => void;
-}) => {
+}: CalendarSlideTransitionProps) => {
   if (!activeTransition) {
     return <div className="calendar--transition-container">{children}</div>;
   }
@@ -51,7 +47,7 @@ const CalendarSlideTransition = ({
 
   return (
     <div className="calendar--transition-container">
-      <AnimatePresence onExitComplete={onTransitionEnd} custom={slideDirection}>
+      <AnimatePresence custom={slideDirection}>
         <motion.div
           key={transitionKey}
           custom={slideDirection}
@@ -84,17 +80,7 @@ const Tile = ({
   conditions,
   onClick,
   children
-}: {
-  type: "day" | "week-number";
-  conditions?: {
-    isToday: boolean;
-    isDisabled: boolean;
-    isSelected: boolean;
-    isOtherMonth: boolean;
-  };
-  onClick?: () => void;
-  children: React.ReactNode;
-}) => {
+}: CalendarTileProps) => {
   return (
     <button
       className={cx("calendar--tile", {
@@ -113,7 +99,7 @@ const Tile = ({
   );
 };
 
-const Days = ({ days, onDayClick }: { days: DayState[][]; onDayClick: (date: Date) => void }) => {
+const Days = ({ days, onDayClick }: CalendarDaysProps) => {
   return (
     <div className="calendar--days-container">
       {days.map(week => (
@@ -138,7 +124,7 @@ const Days = ({ days, onDayClick }: { days: DayState[][]; onDayClick: (date: Dat
   );
 };
 
-const WeakNumbers = memo(({ weekNumbersCountry }: { weekNumbersCountry: WeekNumbersCountry }) => {
+const WeakNumbers = memo(({ weekNumbersCountry }: CalendarWeekNumbersProps) => {
   return (
     <div className="calendar--week-numbers">
       {WEEK_NUMBERS[weekNumbersCountry].map((number, index) => (
@@ -156,11 +142,7 @@ const Header = ({
   selectedDate,
   onPrevMonth,
   onNextMonth
-}: {
-  selectedDate: Date;
-  onPrevMonth: () => void;
-  onNextMonth: () => void;
-}) => {
+}: CalendarHeaderProps) => {
   return (
     <div className="calendar--header">
       <div className="calendar--header-title">{format(selectedDate, "MMMM yyyy")}</div>
@@ -172,16 +154,6 @@ const Header = ({
   );
 };
 
-type DayState = {
-  date: Date;
-  conditions: {
-    isToday: boolean;
-    isDisabled: boolean;
-    isSelected: boolean;
-    isOtherMonth: boolean;
-  };
-};
-
 export const Calendar = ({
   minDate,
   maxDate,
@@ -189,20 +161,12 @@ export const Calendar = ({
   activeTransition = true,
   weekNumbersCountry = "en",
   onlyViewMonthDays = true
-}: {
-  minDate?: Date;
-  maxDate?: Date;
-  initDate?: Date;
-  activeTransition?: boolean;
-  onlyViewMonthDays?: boolean;
-  weekNumbersCountry?: WeekNumbersCountry;
-}) => {
+}: CalendarProps) => {
   const [currentMonth, setCurrentMonth] = useState<Date>(initDate || new Date());
   const [selectedDate, setSelectedDate] = useState<Date>(initDate || new Date());
   const [slideDirection, setSlideDirection] = useState<SlideDirection>("left");
 
   const days = useMemo(() => currentMonthDays(currentMonth), [currentMonth]);
-  const transitionKey = useMemo(() => format(currentMonth, "yyyy-MM"), [currentMonth]);
   const daysState = useMemo(() => {
     const state = days.map(day => ({
       date: day,
@@ -213,7 +177,6 @@ export const Calendar = ({
         isSelected: selectedDate ? isSameDay(day, selectedDate) : false
       }
     }));
-
     return chunk(state, 7);
   }, [
     days,
@@ -221,6 +184,7 @@ export const Calendar = ({
     selectedDate,
     onlyViewMonthDays
   ]);
+  const transitionKey = useMemo(() => format(currentMonth, "yyyy-MM"), [currentMonth]);
 
   const handleDayClick = (date: Date) => {
       setSelectedDate(date);
