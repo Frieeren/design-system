@@ -28,10 +28,6 @@
   gap: var(--seed-spacing-300);
   font-size: 16px;
   height: 52px;
-
-  & > .button--content span {
-    height: 20px;
-  }
 }
 
 .button--size-md {
@@ -39,10 +35,6 @@
   gap: var(--seed-spacing-300);
   font-size: 14px;
   height: 48px;
-
-  & > .button--content span {
-    height: 20px;
-  }
 }
 
 // Type Variants - Solid
