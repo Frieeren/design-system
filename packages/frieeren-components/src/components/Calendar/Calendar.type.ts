@@ -15,6 +15,8 @@ type DayState = {
 type CalendarProps = {
   minDate?: Date;
   maxDate?: Date;
+  minMonth?: Date;
+  maxMonth?: Date;
   initDate?: Date;
   activeTransition?: boolean;
   onlyViewMonthDays?: boolean;
@@ -25,6 +27,8 @@ type CalendarHeaderProps = {
   selectedDate: Date;
   onPrevMonth: () => void;
   onNextMonth: () => void;
+  disabledPrevMonth?: boolean;
+  disabledNextMonth?: boolean;
 }
 
 type CalendarTileProps = {

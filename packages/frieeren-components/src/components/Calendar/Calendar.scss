@@ -71,6 +71,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    pointer-events: none;
   }
 
   &--days-container {
@@ -117,7 +118,7 @@
     }
 
     &--disabled {
-      cursor: not-allowed;
+      pointer-events: none;
       color: #ccc;
     }
 
