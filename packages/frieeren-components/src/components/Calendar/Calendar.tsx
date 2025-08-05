@@ -2,8 +2,8 @@ import cx from "classnames";
 import { memo, useState, useMemo } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { format, isToday, isSameDay, addMonths, subMonths } from "date-fns";
-import { chunk, getDate, isCurrentMonth, getFormattedDate, currentMonthDays } from "./utils";
-import type { 
+import { chunk, getDate, isCurrentMonth, getFormattedDate, currentMonthDays, isDisabledDay, isAfterMonth, isBeforeMonth } from "./utils";
+import type {
   WeekNumbers,
   CalendarProps,
   SlideDirection,
@@ -12,7 +12,7 @@ import type {
   CalendarHeaderProps,
   CalendarWeekNumbersProps,
   CalendarSlideTransitionProps
- } from "./Calendar.type";
+} from "./Calendar.type";
 import Ripple from "../Ripple/Ripple";
 
 const WEEK_NUMBERS: WeekNumbers = {
@@ -92,6 +92,7 @@ const Tile = ({
         "calendar--tile--other-month": conditions?.isOtherMonth
       })}
       onClick={onClick}
+    // disabled={conditions?.isDisabled}
     >
       {children}
       <Ripple center />
@@ -141,14 +142,16 @@ WeakNumbers.displayName = "WeakNumbers";
 const Header = ({
   selectedDate,
   onPrevMonth,
-  onNextMonth
+  onNextMonth,
+  disabledPrevMonth,
+  disabledNextMonth
 }: CalendarHeaderProps) => {
   return (
     <div className="calendar--header">
       <div className="calendar--header-title">{format(selectedDate, "MMMM yyyy")}</div>
       <div className="calendar--header-buttons">
-        <button onClick={onPrevMonth}>{"<"}</button>
-        <button onClick={onNextMonth}>{">"}</button>
+        <button onClick={onPrevMonth} disabled={disabledPrevMonth}>{"<"}</button>
+        <button onClick={onNextMonth} disabled={disabledNextMonth}>{">"}</button>
       </div>
     </div>
   );
@@ -157,6 +160,8 @@ const Header = ({
 export const Calendar = ({
   minDate,
   maxDate,
+  minMonth,
+  maxMonth,
   initDate,
   activeTransition = true,
   weekNumbersCountry = "en",
@@ -172,7 +177,7 @@ export const Calendar = ({
       date: day,
       conditions: {
         isToday: isToday(day),
-        isDisabled: false,
+        isDisabled: isDisabledDay(day, minDate, maxDate),
         isOtherMonth: onlyViewMonthDays ? !isCurrentMonth(day, currentMonth) : false,
         isSelected: selectedDate ? isSameDay(day, selectedDate) : false
       }
@@ -180,24 +185,28 @@ export const Calendar = ({
     return chunk(state, 7);
   }, [
     days,
+    minDate,
+    maxDate,
     currentMonth,
     selectedDate,
     onlyViewMonthDays
   ]);
   const transitionKey = useMemo(() => format(currentMonth, "yyyy-MM"), [currentMonth]);
+  const isDisabledPrevMonth = useMemo(() => minMonth && isBeforeMonth(currentMonth, minMonth), [minMonth, currentMonth]);
+  const isDisabledNextMonth = useMemo(() => maxMonth && isAfterMonth(currentMonth, maxMonth), [maxMonth, currentMonth]);
 
   const handleDayClick = (date: Date) => {
-      setSelectedDate(date);
+    setSelectedDate(date);
   };
 
   const handlePrevMonth = () => {
-      setSlideDirection("right");
-      setCurrentMonth(prev => subMonths(prev, 1));
+    setSlideDirection("right");
+    setCurrentMonth(prev => subMonths(prev, 1));
   };
 
   const handleNextMonth = () => {
-      setSlideDirection("left");
-      setCurrentMonth(prev => addMonths(prev, 1));
+    setSlideDirection("left");
+    setCurrentMonth(prev => addMonths(prev, 1));
   };
 
   return (
@@ -206,6 +215,8 @@ export const Calendar = ({
         selectedDate={currentMonth}
         onPrevMonth={handlePrevMonth}
         onNextMonth={handleNextMonth}
+        disabledPrevMonth={isDisabledPrevMonth}
+        disabledNextMonth={isDisabledNextMonth}
       />
 
       <WeakNumbers weekNumbersCountry={weekNumbersCountry} />

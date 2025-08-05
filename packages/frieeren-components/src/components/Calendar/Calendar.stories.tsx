@@ -17,7 +17,13 @@ export const Default: Story = {
   render: () => {
     return (
       <div style={{ display: "flex", flexDirection: "column", gap: "16px", alignItems: "center" }}>
-        <Calendar minDate={new Date()} maxDate={new Date()} activeTransition={true} />
+        <Calendar
+          minDate={new Date()}
+          maxDate={new Date()}
+          activeTransition={true}
+          minMonth={new Date()}
+          maxMonth={new Date()}
+        />
       </div>
     );
   }

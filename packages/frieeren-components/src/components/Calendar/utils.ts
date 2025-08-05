@@ -6,7 +6,9 @@ import {
   getDay,
   getDaysInMonth,
   startOfMonth,
-  addDays
+  addDays,
+  isAfter,
+  isBefore
 } from "date-fns";
 
 const chunk = <T>(array: T[], size: number): T[][] => {
@@ -60,4 +62,35 @@ const currentMonthDays = (date: Date): Date[] => {
   return days;
 };
 
-export { chunk, getDate, isCurrentMonth, getFormattedDate, currentMonthDays };
+const isDisabledDay = (date: Date, minDate?: Date, maxDate?: Date) => {
+  if (minDate && maxDate) return isBefore(date, minDate) || isAfter(date, maxDate);
+  if (minDate) return isBefore(date, minDate);
+  if (maxDate) return isAfter(date, maxDate);
+
+  return false;
+};
+
+const isBeforeMonth = (date: Date, minDate: Date) => {
+  const minMonth = startOfMonth(minDate);
+  const currentMonth = startOfMonth(date);
+
+  return isBefore(currentMonth, minMonth);
+};
+
+const isAfterMonth = (date: Date, maxDate: Date) => {
+  const currentMonth = startOfMonth(date);
+  const maxMonth = startOfMonth(maxDate);
+
+  return isAfter(currentMonth, maxMonth);
+};
+
+export {
+  chunk,
+  getDate,
+  isCurrentMonth,
+  getFormattedDate,
+  currentMonthDays,
+  isDisabledDay,
+  isBeforeMonth,
+  isAfterMonth,
+};
