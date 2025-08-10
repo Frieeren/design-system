@@ -5,6 +5,7 @@ import cx from "classnames";
 import { ButtonProps, LogButtonProps } from "./Button.type";
 import { useLog } from "../Log/LogProvider";
 import { createLogId } from "../Log/createLogId";
+import { Ripple } from "../Ripple";
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
@@ -19,6 +20,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       color,
       backgroundColor,
       borderColor,
+      rippleColor,
+      disableRipple = false,
       ...rest
     },
     ref
@@ -43,6 +46,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       >
         <span className={cx("button--content", { "button--content--hidden": loading })}>
           {children}
+          <Ripple color={rippleColor} disabled={disabled || loading || disableRipple} />
         </span>
         {loading && (
           <span className="button--loading">

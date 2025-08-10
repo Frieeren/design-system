@@ -27,6 +27,8 @@ export type ButtonProps = PropsWithChildren<{
   color?: string;
   backgroundColor?: string;
   borderColor?: string;
+  rippleColor?: string;
+  disableRipple?: boolean;
 }>;
 
 export type LogButtonProps = ButtonProps & {

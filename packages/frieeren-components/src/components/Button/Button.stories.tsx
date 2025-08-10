@@ -16,25 +16,70 @@ const meta = {
   tags: ["autodocs"],
   argTypes: {
     size: {
-      description: "버튼 사이즈"
+      description: "버튼 사이즈",
+      options: ["lg", "md"],
+      control: {
+        type: "radio"
+      }
     },
     display: {
-      description: "버튼 Display"
+      description: "버튼 Display",
+      options: ["inline", "full", "block"],
+      control: {
+        type: "radio"
+      }
     },
     type: {
-      description: "버튼 타입"
+      description: "버튼 타입",
+      options: [
+        "solid-green",
+        "solid-red",
+        "outline-green",
+        "outline-red",
+        "outline-gray",
+        "text-none",
+        "base"
+      ],
+      control: {
+        type: "radio"
+      }
     },
     loading: {
-      description: "로딩 상태"
+      description: "로딩 상태",
+      control: {
+        type: "boolean"
+      }
     },
     disabled: {
-      description: "비활성화 상태"
+      description: "비활성화 상태",
+      control: {
+        type: "boolean"
+      }
+    },
+    rippleColor: {
+      description: "ripple 효과 색상",
+      control: {
+        type: "color"
+      }
+    },
+    disableRipple: {
+      description: "ripple 효과 비활성화 상태",
+      control: {
+        type: "boolean"
+      }
     }
   }
 } satisfies Meta<typeof Button>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+  args: {
+    children: "버튼",
+    size: "lg"
+  }
+};
 
 export const ButtonSNS: Story = {
   args: {},
