@@ -2,7 +2,8 @@ name: Design Token CD
 
 on:
   workflow_dispatch:
-  push:
+  pull_request:
+    types: [opened, synchronize]
     branches:
       - main
     paths:
