@@ -4,17 +4,17 @@
 
  :root {
   --seed-color-brand-primary: #3a8dff;
-  --seed-color-brand-secondary: #893aff;
+  --seed-color-brand-secondary: #637a99;
   --seed-color-brand-caution: #f3b132;
-  --seed-color-brand-error: #ea4244;
-  --seed-color-neatural-gray50: #f8fafc;
-  --seed-color-neatural-gray100: #f1f5f9;
-  --seed-color-neatural-gray200: #e2e8f0;
-  --seed-color-neatural-gray300: #cbd5e1;
-  --seed-color-neatural-gray400: #94a3b8;
-  --seed-color-neatural-gray500: #64748b;
-  --seed-color-neatural-gray600: #475569;
-  --seed-color-neatural-gray700: #334155;
-  --seed-color-neatural-gray800: #1e293b;
-  --seed-color-neatural-gray900: #0f172a;
+  --seed-color-brand-error: #ff6b6b;
+  --seed-color-brand-success: #00c896;
+  --seed-color-brand-warning: #ffb03a;
+  --seed-color-neatural-neutral100: #f7f9fc;
+  --seed-color-neatural-neutral200: #e3e8ef;
+  --seed-color-neatural-neutral300: #cdd5df;
+  --seed-color-neatural-neutral400: #a8b2bf;
+  --seed-color-neatural-neutral500: #7c8899;
+  --seed-color-neatural-neutral600: #5a6777;
+  --seed-color-neatural-neutral700: #414c59;
+  --seed-color-neatural-neutral800: #2a3038;
 }

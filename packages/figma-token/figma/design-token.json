@@ -8,7 +8,7 @@
             "type": "color"
           },
           "secondary": {
-            "value": "#893aff",
+            "value": "#637a99",
             "type": "color"
           },
           "caution": {
@@ -16,49 +16,49 @@
             "type": "color"
           },
           "error": {
-            "value": "#ea4244",
+            "value": "#ff6b6b",
+            "type": "color"
+          },
+          "success": {
+            "value": "#00c896",
+            "type": "color"
+          },
+          "warning": {
+            "value": "#ffb03a",
             "type": "color"
           }
         },
         "neatural": {
-          "gray50": {
-            "value": "#f8fafc",
+          "neutral100": {
+            "value": "#f7f9fc",
             "type": "color"
           },
-          "gray100": {
-            "value": "#f1f5f9",
+          "neutral200": {
+            "value": "#e3e8ef",
             "type": "color"
           },
-          "gray200": {
-            "value": "#e2e8f0",
+          "neutral300": {
+            "value": "#cdd5df",
             "type": "color"
           },
-          "gray300": {
-            "value": "#cbd5e1",
+          "neutral400": {
+            "value": "#a8b2bf",
             "type": "color"
           },
-          "gray400": {
-            "value": "#94a3b8",
+          "neutral500": {
+            "value": "#7c8899",
             "type": "color"
           },
-          "gray500": {
-            "value": "#64748b",
+          "neutral600": {
+            "value": "#5a6777",
             "type": "color"
           },
-          "gray600": {
-            "value": "#475569",
+          "neutral700": {
+            "value": "#414c59",
             "type": "color"
           },
-          "gray700": {
-            "value": "#334155",
-            "type": "color"
-          },
-          "gray800": {
-            "value": "#1e293b",
-            "type": "color"
-          },
-          "gray900": {
-            "value": "#0f172a",
+          "neutral800": {
+            "value": "#2a3038",
             "type": "color"
           }
         }
@@ -74,7 +74,7 @@
             "type": "color"
           },
           "secondary": {
-            "value": "#893aff",
+            "value": "#637a99",
             "type": "color"
           },
           "caution": {
@@ -82,49 +82,49 @@
             "type": "color"
           },
           "error": {
-            "value": "#ea4244",
+            "value": "#ff6b6b",
+            "type": "color"
+          },
+          "success": {
+            "value": "#00c896",
+            "type": "color"
+          },
+          "warning": {
+            "value": "#ffb03a",
             "type": "color"
           }
         },
         "neatural": {
-          "gray50": {
-            "value": "#f8fafc",
+          "neutral100": {
+            "value": "#f7f9fc",
             "type": "color"
           },
-          "gray100": {
-            "value": "#f1f5f9",
+          "neutral200": {
+            "value": "#e3e8ef",
             "type": "color"
           },
-          "gray200": {
-            "value": "#e2e8f0",
+          "neutral300": {
+            "value": "#cdd5df",
             "type": "color"
           },
-          "gray300": {
-            "value": "#cbd5e1",
+          "neutral400": {
+            "value": "#a8b2bf",
             "type": "color"
           },
-          "gray400": {
-            "value": "#94a3b8",
+          "neutral500": {
+            "value": "#7c8899",
             "type": "color"
           },
-          "gray500": {
-            "value": "#64748b",
+          "neutral600": {
+            "value": "#5a6777",
             "type": "color"
           },
-          "gray600": {
-            "value": "#475569",
+          "neutral700": {
+            "value": "#414c59",
             "type": "color"
           },
-          "gray700": {
-            "value": "#334155",
-            "type": "color"
-          },
-          "gray800": {
-            "value": "#1e293b",
-            "type": "color"
-          },
-          "gray900": {
-            "value": "#0f172a",
+          "neutral800": {
+            "value": "#2a3038",
             "type": "color"
           }
         }
