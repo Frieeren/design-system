@@ -68,16 +68,16 @@ export const Base: Story = {
   args: {
     size: "large",
     children: <AddIcon />,
-    type: "base",
+    type: "solid-green",
     position: "absolute",
     bottom: 0
   }
 };
 
-export const Page: Story = {
+export const CreateButton: Story = {
   args: {
     size: "large",
-    children: <AddIcon color="#ffffff" />,
+    children: <AddIcon />,
     type: "solid-green",
     position: "absolute"
   },
