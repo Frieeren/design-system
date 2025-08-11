@@ -1,4 +1,7 @@
 @use "./normalize.css";
+// v1 디자인 토큰
+@use "./design-token/v1/index.scss" as v1;
+// v2 디자인 토큰
 @use "./design-token/index.scss";
 
 @use "../components/Layout/Box/Box.scss";
