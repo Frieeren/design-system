@@ -35,5 +35,5 @@ jobs:
         uses: bitovi/github-actions-storybook-to-github-pages@v1.0.3
         with:
           install_command: pnpm install --no-frozen-lockfile
-          build_command: cd packages/frieeren-components && pnpm run build-storybook
+          build_command: pnpm --filter "@team-frieeren/icons" build && cd packages/frieeren-components && pnpm run build-storybook
           path: packages/frieeren-components/storybook-static
