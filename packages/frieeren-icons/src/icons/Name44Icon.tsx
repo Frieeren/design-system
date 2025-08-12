@@ -1,15 +1,26 @@
 import * as React from "react";
 import type { SVGProps } from "react";
-const SvgName44Icon = (props: SVGProps<SVGSVGElement>) => (
+import { Ref, forwardRef } from "react";
+const SvgName44Icon = (
+  {
+    size = 24,
+    ...props
+  }: SVGProps<SVGSVGElement> & {
+    size?: number | string,
+  },
+  ref: Ref<SVGSVGElement>
+) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width={24}
-    height={24}
     fill="none"
+    viewBox="0 0 24 24"
+    width={size}
+    height={size}
+    ref={ref}
     {...props}
   >
     <path
-      stroke="#191B1C"
+      stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={1.5}
@@ -17,4 +28,5 @@ const SvgName44Icon = (props: SVGProps<SVGSVGElement>) => (
     />
   </svg>
 );
-export default SvgName44Icon;
+const ForwardRef = forwardRef(SvgName44Icon);
+export default ForwardRef;
