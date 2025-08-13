@@ -29,6 +29,9 @@ const meta = {
     },
     disabled: {
       description: "비활성화 상태"
+    },
+    borderRadius: {
+      description: "버튼 모서리 둥글기"
     }
   }
 } satisfies Meta<typeof Button>;

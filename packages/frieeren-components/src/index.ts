@@ -18,3 +18,4 @@ export { Select } from "./components/Select";
 export { Input } from "./components/Input";
 export { Tabs } from "./components/Tabs";
 export { LogProvider, LogScreen } from "./components/Log";
+export { FloatingActionButton } from "./components/FloatingActionButton";
