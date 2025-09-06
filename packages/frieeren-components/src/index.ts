@@ -7,6 +7,7 @@ export { Box, Container, Flex, Grid } from "./components/Layout";
 export { useToast, ToastProvider } from "./components/Toast";
 export { Popup } from "./components/Popup";
 export { BottomSheet } from "./components/BottomSheet";
+export { Dropdown } from "./components/Dropdown";
 
 /** Components */
 export { Button } from "./components/Button";

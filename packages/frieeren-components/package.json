@@ -144,6 +144,10 @@
       "import": "./dist/FloatingActionButton.js",
       "types": "./dist/components/FloatingActionButton/index.d.ts"
     },
+    "./dropdown": {
+      "import": "./dist/Dropdown.js",
+      "types": "./dist/components/Dropdown/index.d.ts"
+    },
     "./styles.css": "./dist/index.css"
   }
 }
