@@ -23,19 +23,9 @@ const meta = {
       control: "boolean",
       description: "floating action button의 로딩 상태를 지정"
     },
-    type: {
-      control: "select",
-      options: [
-        "base",
-        "solid-green",
-        "solid-red",
-        "solid-gray",
-        "outline-green",
-        "outline-red",
-        "outline-gray",
-        "text-none"
-      ],
-      description: "floating action button의 타입을 지정"
+    backgroundColor: {
+      control: "color",
+      description: "floating action button의 배경색을 지정"
     },
     position: {
       control: "select",
@@ -67,18 +57,17 @@ type Story = StoryObj<typeof meta>;
 export const Base: Story = {
   args: {
     size: "large",
-    children: <AddIcon />,
-    type: "solid-green",
+    children: <AddIcon color="#fff" />,
     position: "absolute",
     bottom: 0
-  }
+  },
+  render: args => <FloatingActionButton {...args} backgroundColor="#3A8DFF" />
 };
 
 export const CreateButton: Story = {
   args: {
     size: "large",
-    children: <AddIcon />,
-    type: "solid-green",
+    children: <AddIcon color="#fff" />,
     position: "absolute"
   },
   render: args => (
@@ -92,7 +81,7 @@ export const CreateButton: Story = {
         background: "#f0f0f0"
       }}
     >
-      <FloatingActionButton {...args} />
+      <FloatingActionButton {...args} backgroundColor="#3A8DFF" />
     </div>
   )
 };

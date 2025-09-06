@@ -8,26 +8,26 @@ type FloatingActionButtonProps = {
   className?: string;
   loading?: boolean;
   disabled?: boolean;
-  type?: ButtonTypes;
   position?: "fixed" | "absolute";
   top?: React.CSSProperties["top"];
   left?: React.CSSProperties["left"];
   bottom?: React.CSSProperties["bottom"];
   right?: React.CSSProperties["right"];
+  backgroundColor?: React.CSSProperties["backgroundColor"];
 };
 
 export function FloatingActionButton({
   loading = false,
   disabled = false,
   size = "large",
-  type,
   children,
   className,
   position = "fixed",
   top,
   left,
   bottom = 16,
-  right = 16
+  right = 16,
+  backgroundColor
 }: FloatingActionButtonProps) {
   const style: React.CSSProperties = { position };
   if (top !== undefined) style.top = top;
@@ -47,7 +47,13 @@ export function FloatingActionButton({
       data-frieeren-component="floating-action-button"
       style={style}
     >
-      <Button borderRadius="50%" loading={loading} disabled={disabled} type={type}>
+      <Button
+        borderRadius="50%"
+        loading={loading}
+        disabled={disabled}
+        type="base"
+        backgroundColor={backgroundColor}
+      >
         {children}
       </Button>
     </div>
