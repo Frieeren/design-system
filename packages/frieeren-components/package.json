@@ -112,9 +112,9 @@
       "import": "./dist/Text.js",
       "types": "./dist/components/Text/index.d.ts"
     },
-    "./radioGroup": {
-      "import": "./dist/RadioGroup.js",
-      "types": "./dist/components/RadioGroup/index.d.ts"
+    "./radio": {
+      "import": "./dist/Radio.js",
+      "types": "./dist/components/Radio/index.d.ts"
     },
     "./checkbox": {
       "import": "./dist/Checkbox.js",
