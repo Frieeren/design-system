@@ -14,17 +14,30 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  render: () => {
-    return (
-      <div style={{ display: "flex", flexDirection: "column", gap: "16px", alignItems: "center" }}>
-        <Calendar
-          minDate={new Date()}
-          maxDate={new Date()}
-          activeTransition={true}
-          minMonth={new Date()}
-          maxMonth={new Date()}
-        />
-      </div>
-    );
+  args: {
+    activeTransition: true,
+    showWeekNumbers: false,
+    onDateChange: date => {
+      console.log("Date changed:", date);
+    }
+  }
+};
+
+export const WithRange: Story = {
+  args: {
+    enableRange: true,
+    activeTransition: true,
+    showWeekNumbers: false,
+    onRangeChange: range => {
+      console.log("Range changed:", range);
+    }
+  }
+};
+
+export const EnglishVersion: Story = {
+  args: {
+    weekNumbersCountry: "en",
+    activeTransition: true,
+    showWeekNumbers: true
   }
 };

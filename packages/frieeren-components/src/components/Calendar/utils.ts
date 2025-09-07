@@ -8,8 +8,11 @@ import {
   startOfMonth,
   addDays,
   isAfter,
-  isBefore
+  isBefore,
+  isSameDay,
+  isWithinInterval
 } from "date-fns";
+import type { DateRange } from "./Calendar.type";
 
 const chunk = <T>(array: T[], size: number): T[][] => {
   return Array.from({ length: Math.ceil(array.length / size) }, (_, i) =>
@@ -84,6 +87,44 @@ const isAfterMonth = (date: Date, maxDate: Date) => {
   return isAfter(currentMonth, maxMonth);
 };
 
+const isRangeStart = (date: Date, range: DateRange) => {
+  return range.start ? isSameDay(date, range.start) : false;
+};
+
+const isRangeEnd = (date: Date, range: DateRange) => {
+  return range.end ? isSameDay(date, range.end) : false;
+};
+
+const isInRange = (date: Date, range: DateRange) => {
+  if (!range.start || !range.end) return false;
+
+  return isWithinInterval(date, {
+    start: range.start,
+    end: range.end
+  });
+};
+
+const isDateInRange = (date: Date, range: DateRange) => {
+  if (range.start && !range.end)
+    return {
+      isSelected: isSameDay(date, range.start),
+      isRangeStart: false,
+      isRangeEnd: false,
+      isInRange: false
+    };
+
+  const isStart = isRangeStart(date, range);
+  const isEnd = isRangeEnd(date, range);
+  const inRange = isInRange(date, range);
+
+  return {
+    isSelected: false,
+    isRangeStart: isStart,
+    isRangeEnd: isEnd,
+    isInRange: inRange
+  };
+};
+
 export {
   chunk,
   getDate,
@@ -93,4 +134,8 @@ export {
   isDisabledDay,
   isBeforeMonth,
   isAfterMonth,
+  isRangeStart,
+  isRangeEnd,
+  isInRange,
+  isDateInRange
 };

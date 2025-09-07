@@ -1,30 +1,49 @@
 import cx from "classnames";
-import { memo, useState, useMemo } from "react";
+import { memo, useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { format, isToday, isSameDay, addMonths, subMonths } from "date-fns";
-import { chunk, getDate, isCurrentMonth, getFormattedDate, currentMonthDays, isDisabledDay, isAfterMonth, isBeforeMonth } from "./utils";
+import { format, isToday, isSameDay, addMonths, subMonths, isWeekend, isAfter } from "date-fns";
+import {
+  chunk,
+  getDate,
+  isCurrentMonth,
+  getFormattedDate,
+  currentMonthDays,
+  isDisabledDay,
+  isAfterMonth,
+  isBeforeMonth,
+  isDateInRange
+} from "./utils";
 import type {
   WeekNumbers,
+  HeaderTitle,
   CalendarProps,
   SlideDirection,
   CalendarTileProps,
   CalendarDaysProps,
   CalendarHeaderProps,
   CalendarWeekNumbersProps,
-  CalendarSlideTransitionProps
+  CalendarSlideTransitionProps,
+  DateRange
 } from "./Calendar.type";
 import Ripple from "../Ripple/Ripple";
+import LeftArrowIcon from "./assets/left-arrow.svg";
+import RightArrowIcon from "./assets/right-arrow.svg";
 
 const WEEK_NUMBERS: WeekNumbers = {
   kr: ["일", "월", "화", "수", "목", "금", "토"],
   en: ["S", "M", "T", "W", "T", "F", "S"]
 };
 
+const HEADER_TITLE: HeaderTitle = {
+  kr: "yyyy년 MM월",
+  en: "MMMM yyyy"
+};
+
 const CalendarSlideTransition = ({
   children,
   transitionKey,
   slideDirection,
-  activeTransition,
+  activeTransition
 }: CalendarSlideTransitionProps) => {
   if (!activeTransition) {
     return <div className="calendar--transition-container">{children}</div>;
@@ -75,32 +94,33 @@ const CalendarSlideTransition = ({
   );
 };
 
-const Tile = ({
-  type,
-  conditions,
-  onClick,
-  children
-}: CalendarTileProps) => {
+const Tile = memo(({ type, conditions, onClick, children }: CalendarTileProps) => {
   return (
     <button
       className={cx("calendar--tile", {
         "calendar--tile--day": type === "day",
+        "calendar--tile--weekend": conditions?.isWeekend,
         "calendar--tile--week-number": type === "week-number",
         "calendar--tile--disabled": conditions?.isDisabled,
         "calendar--tile--today": conditions?.isToday,
         "calendar--tile--selected": conditions?.isSelected,
-        "calendar--tile--other-month": conditions?.isOtherMonth
+        "calendar--tile--other-month": conditions?.isOtherMonth,
+        "calendar--tile--range-start": conditions?.isRangeStart,
+        "calendar--tile--range-end": conditions?.isRangeEnd,
+        "calendar--tile--in-range": conditions?.isInRange
       })}
       onClick={onClick}
-    // disabled={conditions?.isDisabled}
     >
       {children}
+      <span className="calendar--tile-day-background" />
       <Ripple center />
     </button>
   );
-};
+});
 
-const Days = ({ days, onDayClick }: CalendarDaysProps) => {
+Tile.displayName = "Tile";
+
+const Days = memo(({ days, onDayClick }: CalendarDaysProps) => {
   return (
     <div className="calendar--days-container">
       {days.map(week => (
@@ -123,7 +143,9 @@ const Days = ({ days, onDayClick }: CalendarDaysProps) => {
       ))}
     </div>
   );
-};
+});
+
+Days.displayName = "Days";
 
 const WeakNumbers = memo(({ weekNumbersCountry }: CalendarWeekNumbersProps) => {
   return (
@@ -139,22 +161,79 @@ const WeakNumbers = memo(({ weekNumbersCountry }: CalendarWeekNumbersProps) => {
 
 WeakNumbers.displayName = "WeakNumbers";
 
-const Header = ({
-  selectedDate,
-  onPrevMonth,
-  onNextMonth,
-  disabledPrevMonth,
-  disabledNextMonth
-}: CalendarHeaderProps) => {
-  return (
-    <div className="calendar--header">
-      <div className="calendar--header-title">{format(selectedDate, "MMMM yyyy")}</div>
-      <div className="calendar--header-buttons">
-        <button onClick={onPrevMonth} disabled={disabledPrevMonth}>{"<"}</button>
-        <button onClick={onNextMonth} disabled={disabledNextMonth}>{">"}</button>
+const Header = memo(
+  ({
+    selectedDate,
+    onPrevMonth,
+    onNextMonth,
+    disabledPrevMonth,
+    disabledNextMonth,
+    weekNumbersCountry
+  }: CalendarHeaderProps) => {
+    return (
+      <div className="calendar--header">
+        <button
+          className="calendar--header-button"
+          onClick={onPrevMonth}
+          disabled={disabledPrevMonth}
+        >
+          <LeftArrowIcon />
+        </button>
+        <div className="calendar--header-title">
+          {format(selectedDate, HEADER_TITLE[weekNumbersCountry])}
+        </div>
+        <button
+          className="calendar--header-button"
+          onClick={onNextMonth}
+          disabled={disabledNextMonth}
+        >
+          <RightArrowIcon />
+        </button>
       </div>
-    </div>
-  );
+    );
+  }
+);
+
+Header.displayName = "Header";
+
+const createDateState = (
+  date: Date,
+  currentMonth: Date,
+  selectedDate: Date,
+  selectedRange: DateRange,
+  enableRange: boolean,
+  minDate?: Date,
+  maxDate?: Date,
+  onlyViewMonthDays?: boolean
+) => {
+  const baseConditions = {
+    isToday: isToday(date),
+    isWeekend: isWeekend(date),
+    isDisabled: isDisabledDay(date, minDate, maxDate),
+    isOtherMonth: onlyViewMonthDays ? !isCurrentMonth(date, currentMonth) : false
+  };
+
+  if (enableRange) {
+    const rangeConditions = isDateInRange(date, selectedRange);
+    return {
+      date,
+      conditions: {
+        ...baseConditions,
+        ...rangeConditions
+      }
+    };
+  } else {
+    return {
+      date,
+      conditions: {
+        ...baseConditions,
+        isSelected: selectedDate ? isSameDay(date, selectedDate) : false,
+        isRangeStart: false,
+        isRangeEnd: false,
+        isInRange: false
+      }
+    };
+  }
 };
 
 export const Calendar = ({
@@ -163,25 +242,34 @@ export const Calendar = ({
   minMonth,
   maxMonth,
   initDate,
+  enableRange = false,
+  onDateChange,
+  onRangeChange,
   activeTransition = true,
-  weekNumbersCountry = "en",
+  showWeekNumbers = true,
+  weekNumbersCountry = "kr",
   onlyViewMonthDays = true
 }: CalendarProps) => {
   const [currentMonth, setCurrentMonth] = useState<Date>(initDate || new Date());
   const [selectedDate, setSelectedDate] = useState<Date>(initDate || new Date());
+  const [selectedRange, setSelectedRange] = useState<DateRange>({ start: null, end: null });
   const [slideDirection, setSlideDirection] = useState<SlideDirection>("left");
 
   const days = useMemo(() => currentMonthDays(currentMonth), [currentMonth]);
+
   const daysState = useMemo(() => {
-    const state = days.map(day => ({
-      date: day,
-      conditions: {
-        isToday: isToday(day),
-        isDisabled: isDisabledDay(day, minDate, maxDate),
-        isOtherMonth: onlyViewMonthDays ? !isCurrentMonth(day, currentMonth) : false,
-        isSelected: selectedDate ? isSameDay(day, selectedDate) : false
-      }
-    }));
+    const state = days.map(day =>
+      createDateState(
+        day,
+        currentMonth,
+        selectedDate,
+        selectedRange,
+        enableRange,
+        minDate,
+        maxDate,
+        onlyViewMonthDays
+      )
+    );
     return chunk(state, 7);
   }, [
     days,
@@ -189,25 +277,66 @@ export const Calendar = ({
     maxDate,
     currentMonth,
     selectedDate,
-    onlyViewMonthDays
+    selectedRange,
+    onlyViewMonthDays,
+    enableRange
   ]);
+
   const transitionKey = useMemo(() => format(currentMonth, "yyyy-MM"), [currentMonth]);
-  const isDisabledPrevMonth = useMemo(() => minMonth && isBeforeMonth(currentMonth, minMonth), [minMonth, currentMonth]);
-  const isDisabledNextMonth = useMemo(() => maxMonth && isAfterMonth(currentMonth, maxMonth), [maxMonth, currentMonth]);
+  const isDisabledPrevMonth = useMemo(
+    () => minMonth && isBeforeMonth(currentMonth, minMonth),
+    [minMonth, currentMonth]
+  );
+  const isDisabledNextMonth = useMemo(
+    () => maxMonth && isAfterMonth(currentMonth, maxMonth),
+    [maxMonth, currentMonth]
+  );
 
-  const handleDayClick = (date: Date) => {
-    setSelectedDate(date);
-  };
+  const handleRangeSelection = useCallback(
+    (date: Date) => {
+      const { start, end } = selectedRange;
 
-  const handlePrevMonth = () => {
+      if (!start || (start && end)) {
+        const newRange = { start: date, end: null };
+        setSelectedRange(newRange);
+        onRangeChange?.(newRange);
+        return;
+      }
+
+      if (start && !end) {
+        const newRange =
+          isAfter(date, start) || isSameDay(date, start)
+            ? { start, end: date }
+            : { start: date, end: null };
+
+        setSelectedRange(newRange);
+        onRangeChange?.(newRange);
+      }
+    },
+    [selectedRange, onRangeChange]
+  );
+
+  const handleDayClick = useCallback(
+    (date: Date) => {
+      if (enableRange) {
+        handleRangeSelection(date);
+      } else {
+        setSelectedDate(date);
+        onDateChange?.(date);
+      }
+    },
+    [enableRange, handleRangeSelection, onDateChange]
+  );
+
+  const handlePrevMonth = useCallback(() => {
     setSlideDirection("right");
     setCurrentMonth(prev => subMonths(prev, 1));
-  };
+  }, []);
 
-  const handleNextMonth = () => {
+  const handleNextMonth = useCallback(() => {
     setSlideDirection("left");
     setCurrentMonth(prev => addMonths(prev, 1));
-  };
+  }, []);
 
   return (
     <div className="calendar">
@@ -217,9 +346,10 @@ export const Calendar = ({
         onNextMonth={handleNextMonth}
         disabledPrevMonth={isDisabledPrevMonth}
         disabledNextMonth={isDisabledNextMonth}
+        weekNumbersCountry={weekNumbersCountry}
       />
 
-      <WeakNumbers weekNumbersCountry={weekNumbersCountry} />
+      {showWeekNumbers && <WeakNumbers weekNumbersCountry={weekNumbersCountry} />}
 
       <CalendarSlideTransition
         transitionKey={transitionKey}
