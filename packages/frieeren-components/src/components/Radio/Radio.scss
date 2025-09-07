@@ -1,0 +1,78 @@
+.RadioContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.RadioWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.RadioItem {
+  margin: 11px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid #b7c2d0;
+  cursor: pointer;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.RadioItem:hover:not([data-disabled]) {
+  border-color: #3a8dff;
+}
+
+.RadioItem[data-state="checked"] {
+  border-color: #3a8dff;
+}
+
+.RadioItem[data-state="checked"]:hover {
+  border-color: #3a8dff;
+}
+
+.RadioItem[data-disabled] {
+  border-color: #b7c2d0;
+  cursor: not-allowed;
+}
+
+.RadioIndicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.RadioItem[data-state="checked"] .RadioIndicator {
+  background-color: #3a8dff;
+}
+
+.RadioItem[data-disabled] .RadioIndicator {
+  background-color: #b7c2d0;
+}
+
+.RadioLabel {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.RadioLabel:hover .RadioItem:not([data-disabled]) {
+  border-color: #3a8dff;
+}
+
+.RadioLabelText {
+  flex: 1;
+}
+
+.RadioLabel[aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

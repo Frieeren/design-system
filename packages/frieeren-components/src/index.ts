@@ -11,7 +11,7 @@ export { BottomSheet } from "./components/BottomSheet";
 /** Components */
 export { Button } from "./components/Button";
 export { Text } from "./components/Text";
-export { RadioGroup } from "./components/RadioGroup";
+export { Radio } from "./components/Radio";
 export { Checkbox } from "./components/Checkbox";
 export { Toggle } from "./components/Toggle";
 export { Select } from "./components/Select";
