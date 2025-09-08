@@ -10,7 +10,8 @@ import {
   isAfter,
   isBefore,
   isSameDay,
-  isWithinInterval
+  isWithinInterval,
+  startOfWeek
 } from "date-fns";
 import type { DateRange } from "./Calendar.type";
 
@@ -32,6 +33,11 @@ const getFormattedDate = (date: Date) => {
   return format(date, "yyyy-MM-dd");
 };
 
+const currentWeekDays = (date: Date): Date[] => {
+  const startDate = startOfWeek(date, { weekStartsOn: 1 });
+  return Array.from({ length: 7 }, (_, i) => addDays(startDate, i));
+};
+
 const currentMonthDays = (date: Date): Date[] => {
   const startDate = startOfMonth(date);
   const endDate = endOfMonth(date);
@@ -40,21 +46,19 @@ const currentMonthDays = (date: Date): Date[] => {
 
   const days: Date[] = [];
 
-  // 이전 달의 남은 일수
+  // prev month remain days
   const prevRemainCnt = firstDayOfWeek;
   const prevMonthRemainDays = Array.from({ length: prevRemainCnt }, (_, i) =>
     subDays(startDate, prevRemainCnt - i)
   );
 
-  // 현재 달의 일수
+  // current month days
   const currentMonthDays = Array.from({ length: daysInMonth }, (_, i) => addDays(startDate, i));
 
-  // 실제 해당 월의 주 수 계산
+  // next month remain days
   const totalDaysInCalendar = prevRemainCnt + daysInMonth;
   const weeksInMonth = Math.ceil(totalDaysInCalendar / 7);
   const totalCells = weeksInMonth * 7;
-
-  // 다음 달의 남은 일수 (실제 주 수에 맞춰서)
   const nextRemainCnt = totalCells - prevRemainCnt - daysInMonth;
   const nextMonthRemainDays = Array.from({ length: nextRemainCnt }, (_, i) =>
     addDays(endDate, i + 1)
@@ -71,6 +75,20 @@ const isDisabledDay = (date: Date, minDate?: Date, maxDate?: Date) => {
   if (maxDate) return isAfter(date, maxDate);
 
   return false;
+};
+
+const isBeforeWeek = (date: Date, minDate: Date) => {
+  const minWeek = startOfWeek(minDate, { weekStartsOn: 1 });
+  const currentWeek = startOfWeek(date, { weekStartsOn: 1 });
+
+  return isBefore(currentWeek, minWeek);
+};
+
+const isAfterWeek = (date: Date, maxDate: Date) => {
+  const currentWeek = startOfWeek(date, { weekStartsOn: 1 });
+  const maxWeek = startOfWeek(maxDate, { weekStartsOn: 1 });
+
+  return isAfter(currentWeek, maxWeek);
 };
 
 const isBeforeMonth = (date: Date, minDate: Date) => {
@@ -129,9 +147,12 @@ export {
   chunk,
   getDate,
   isCurrentMonth,
+  currentWeekDays,
   getFormattedDate,
   currentMonthDays,
   isDisabledDay,
+  isBeforeWeek,
+  isAfterWeek,
   isBeforeMonth,
   isAfterMonth,
   isRangeStart,

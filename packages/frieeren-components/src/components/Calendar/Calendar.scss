@@ -9,13 +9,15 @@
   --tile-font-size: 12px;
   --tile-day-color: #000;
   --tile-day-background: #fff;
-  --tile-week-number-color: #333;
-  --tile-week-number-background: #fff;
   --tile-day-hover-background: #f5f5f5;
   --tile-day-selected-background: #3a8dff;
   --tile-day-selected-color: #fff;
   --tile-day-selected-hover-background: #3a8dff;
   --tile-day-weekend-color: #ff383c;
+
+  --tile-week-number-size: 20px;
+  --tile-week-number-color: #333;
+  --tile-week-number-background: #fff;
 
   // Range colors
   --tile-range-background: #ebf4ff;
@@ -112,6 +114,8 @@
     color: var(--tile-day-color);
 
     &--week-number {
+      width: var(--tile-week-number-size);
+      height: var(--tile-week-number-size);
       color: var(--tile-week-number-color);
       background-color: var(--tile-week-number-background);
       font-weight: 400;
