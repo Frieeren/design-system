@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Calendar } from "./Calendar";
+import { WeekCalendar } from "./WeekCalendar";
 
 const meta = {
   title: "Calendar",
@@ -40,4 +41,13 @@ export const EnglishVersion: Story = {
     activeTransition: true,
     showWeekNumbers: true
   }
+};
+
+export const WeekCalendarStory: Story = {
+  args: {
+    weekNumbersCountry: "en",
+    activeTransition: true,
+    showWeekNumbers: true
+  },
+  render: args => <WeekCalendar {...args} />
 };
