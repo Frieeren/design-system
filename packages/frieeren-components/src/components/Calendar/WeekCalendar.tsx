@@ -22,7 +22,8 @@ import type {
   CalendarHeaderProps,
   CalendarWeekNumbersProps,
   CalendarSlideTransitionProps,
-  DateRange
+  DateRange,
+  TileSlotProps
 } from "./Calendar.type";
 import Ripple from "../Ripple/Ripple";
 import LeftArrowIcon from "./assets/left-arrow.svg";
@@ -93,7 +94,14 @@ const CalendarSlideTransition = ({
   );
 };
 
-const Tile = memo(({ type, conditions, onClick, children }: CalendarTileProps) => {
+const Tile = memo(({ type, conditions, onClick, children, date, tileSlot }: CalendarTileProps) => {
+  const slotContent = tileSlot?.({
+    date,
+    type,
+    conditions,
+    defaultContent: children
+  });
+
   return (
     <button
       className={cx("calendar--tile", {
@@ -110,7 +118,7 @@ const Tile = memo(({ type, conditions, onClick, children }: CalendarTileProps) =
       })}
       onClick={onClick}
     >
-      {children}
+      {slotContent || children}
       <span className="calendar--tile-day-background" />
       <Ripple center />
     </button>
@@ -119,7 +127,7 @@ const Tile = memo(({ type, conditions, onClick, children }: CalendarTileProps) =
 
 Tile.displayName = "Tile";
 
-const Days = memo(({ days, onDayClick }: CalendarDaysProps) => {
+const Days = memo(({ days, onDayClick, tileSlot }: CalendarDaysProps) => {
   return (
     <div className="calendar--days-container">
       {days.map(week => (
@@ -133,6 +141,8 @@ const Days = memo(({ days, onDayClick }: CalendarDaysProps) => {
                 type="day"
                 onClick={() => onDayClick(date)}
                 conditions={conditions}
+                date={date}
+                tileSlot={tileSlot}
               >
                 {getDate(date)}
               </Tile>
@@ -247,7 +257,8 @@ export const WeekCalendar = ({
   activeTransition = true,
   showWeekNumbers = true,
   weekNumbersCountry = "kr",
-  onlyViewMonthDays = true
+  onlyViewMonthDays = true,
+  tileSlot
 }: CalendarProps) => {
   const [currentWeek, setCurrentWeek] = useState<Date>(initDate || new Date());
   const [selectedDate, setSelectedDate] = useState<Date>(initDate || new Date());
@@ -355,7 +366,7 @@ export const WeekCalendar = ({
         slideDirection={slideDirection}
         activeTransition={activeTransition}
       >
-        <Days days={daysState} onDayClick={handleDayClick} />
+        <Days days={daysState} onDayClick={handleDayClick} tileSlot={tileSlot} />
       </CalendarSlideTransition>
     </div>
   );
