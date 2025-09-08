@@ -34,6 +34,7 @@ type BaseCalendarProps = {
   showWeekNumbers?: boolean;
   onlyViewMonthDays?: boolean;
   weekNumbersCountry?: WeekNumbersCountry;
+  tileSlot?: (props: TileSlotProps) => React.ReactNode;
 };
 
 type RangeCalendarProps = BaseCalendarProps & {
@@ -59,16 +60,26 @@ type CalendarHeaderProps = {
   weekNumbersCountry: WeekNumbersCountry;
 };
 
+type TileSlotProps = {
+  date?: Date;
+  type: "day" | "week-number";
+  conditions?: DateConditions;
+  defaultContent: React.ReactNode;
+};
+
 type CalendarTileProps = {
   type: "day" | "week-number";
   conditions?: DateConditions;
   onClick?: () => void;
   children: React.ReactNode;
+  date?: Date;
+  tileSlot?: (props: TileSlotProps) => React.ReactNode;
 };
 
 type CalendarDaysProps = {
   days: DayState[][];
   onDayClick: (date: Date) => void;
+  tileSlot?: (props: TileSlotProps) => React.ReactNode;
 };
 
 type CalendarWeekNumbersProps = {
@@ -95,5 +106,6 @@ export type {
   CalendarWeekNumbersProps,
   CalendarDaysProps,
   CalendarTileProps,
-  CalendarSlideTransitionProps
+  CalendarSlideTransitionProps,
+  TileSlotProps
 };
