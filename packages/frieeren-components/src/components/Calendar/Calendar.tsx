@@ -35,8 +35,8 @@ const WEEK_NUMBERS: WeekNumbers = {
 };
 
 const HEADER_TITLE: HeaderTitle = {
-  kr: "yyyy년 MM월",
-  en: "MMMM yyyy"
+  kr: "yyyy. MM",
+  en: "yyyy. MM"
 };
 
 const CalendarSlideTransition = ({
@@ -105,6 +105,7 @@ const Tile = memo(({ type, conditions, onClick, children }: CalendarTileProps) =
         "calendar--tile--today": conditions?.isToday,
         "calendar--tile--selected": conditions?.isSelected,
         "calendar--tile--other-month": conditions?.isOtherMonth,
+        "calendar--tile--only-view-month-days": conditions?.isOnlyViewMonthDays,
         "calendar--tile--range-start": conditions?.isRangeStart,
         "calendar--tile--range-end": conditions?.isRangeEnd,
         "calendar--tile--in-range": conditions?.isInRange
@@ -196,21 +197,31 @@ const Header = memo(
 
 Header.displayName = "Header";
 
-const createDateState = (
-  date: Date,
-  currentMonth: Date,
-  selectedDate: Date,
-  selectedRange: DateRange,
-  enableRange: boolean,
-  minDate?: Date,
-  maxDate?: Date,
-  onlyViewMonthDays?: boolean
-) => {
+const createDateState = ({
+  date,
+  currentMonth,
+  selectedDate,
+  selectedRange,
+  enableRange,
+  minDate,
+  maxDate,
+  onlyViewMonthDays
+}: {
+  date: Date;
+  currentMonth: Date;
+  selectedDate: Date;
+  selectedRange: DateRange;
+  enableRange: boolean;
+  minDate?: Date;
+  maxDate?: Date;
+  onlyViewMonthDays: boolean;
+}) => {
   const baseConditions = {
     isToday: isToday(date),
     isWeekend: isWeekend(date),
     isDisabled: isDisabledDay(date, minDate, maxDate),
-    isOtherMonth: onlyViewMonthDays ? !isCurrentMonth(date, currentMonth) : false
+    isOtherMonth: !isCurrentMonth(date, currentMonth),
+    isOnlyViewMonthDays: onlyViewMonthDays
   };
 
   if (enableRange) {
@@ -248,7 +259,7 @@ export const Calendar = ({
   activeTransition = true,
   showWeekNumbers = true,
   weekNumbersCountry = "kr",
-  onlyViewMonthDays = true
+  onlyViewMonthDays = false
 }: CalendarProps) => {
   const [currentMonth, setCurrentMonth] = useState<Date>(initDate || new Date());
   const [selectedDate, setSelectedDate] = useState<Date>(initDate || new Date());
@@ -259,8 +270,8 @@ export const Calendar = ({
 
   const daysState = useMemo(() => {
     const state = days.map(day =>
-      createDateState(
-        day,
+      createDateState({
+        date: day,
         currentMonth,
         selectedDate,
         selectedRange,
@@ -268,7 +279,7 @@ export const Calendar = ({
         minDate,
         maxDate,
         onlyViewMonthDays
-      )
+      })
     );
     return chunk(state, 7);
   }, [

@@ -17,7 +17,6 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     activeTransition: true,
-    showWeekNumbers: false,
     onDateChange: date => {
       console.log("Date changed:", date);
     }

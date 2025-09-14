@@ -17,6 +17,7 @@ type DateConditions = {
   isRangeStart: boolean;
   isRangeEnd: boolean;
   isInRange: boolean;
+  isOnlyViewMonthDays: boolean;
 };
 
 type DayState = {

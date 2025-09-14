@@ -35,8 +35,8 @@ const WEEK_NUMBERS: WeekNumbers = {
 };
 
 const HEADER_TITLE: HeaderTitle = {
-  kr: "yyyy년 MM월",
-  en: "yyyy.MM"
+  kr: "yyyy. MM",
+  en: "yyyy. MM"
 };
 
 const CalendarSlideTransition = ({
