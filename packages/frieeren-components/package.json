@@ -120,9 +120,9 @@
       "import": "./dist/Checkbox.js",
       "types": "./dist/components/Checkbox/index.d.ts"
     },
-    "./toggle": {
-      "import": "./dist/Toggle.js",
-      "types": "./dist/components/Toggle/index.d.ts"
+    "./switch": {
+      "import": "./dist/Switch.js",
+      "types": "./dist/components/Switch/index.d.ts"
     },
     "./select": {
       "import": "./dist/Select.js",
