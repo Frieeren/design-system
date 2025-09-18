@@ -18,7 +18,8 @@ export function Radio({ options, defaultValue, onChange, disabled = false }: Rad
             value={option.value}
             id={`radio-${option.value}`}
           >
-            <RadioGroupBase.Indicator className="RadioIndicator" />
+            <div className="RadioIndicator" />
+            <RadioGroupBase.Indicator />
           </RadioGroupBase.Item>
           <label className="RadioLabel" aria-disabled={disabled} htmlFor={`radio-${option.value}`}>
             <div className="RadioLabelText">{option.label}</div>
