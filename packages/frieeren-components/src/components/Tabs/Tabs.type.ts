@@ -10,7 +10,7 @@ export interface UseTabsIndicatorProps {
   listRef: RefObject<HTMLDivElement>;
 }
 
-export interface TabsProps extends Omit<TabsBase.TabsProps, "children"> {
+export interface TabsProps extends Omit<TabsBase.TabsProps, "children" | "dir"> {
   width?: string;
   tabItems: TabItem[];
 }

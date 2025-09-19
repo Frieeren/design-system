@@ -26,11 +26,6 @@ const meta = {
       ],
       description: "tab의 아이템 리스트"
     },
-    dir: {
-      control: "select",
-      options: ["ltr", "rtl"],
-      description: "tab의 읽기 방향을 지정"
-    },
     defaultValue: {
       control: "select",
       options: ["Check list", "Meeting"],
@@ -49,8 +44,7 @@ export const Base: Story = {
       { value: "Check list", label: "Check list" },
       { value: "Meeting", label: "Meeting" }
     ],
-    defaultValue: "Check list",
-    dir: "ltr"
+    defaultValue: "Check list"
   },
-  render: args => <Tabs {...args} key={`tabs_${args.dir}_${args.defaultValue}`} />
+  render: args => <Tabs {...args} key={`tabs_${args.defaultValue}`} />
 };
