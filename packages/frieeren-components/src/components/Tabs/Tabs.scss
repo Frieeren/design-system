@@ -32,10 +32,20 @@ $tabs-transition: all 0.2s ease-in-out;
   z-index: 1;
   padding: 8px;
 
+  div {
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%;
+    letter-spacing: -0.28px;
+  }
+
   &[data-state="inactive"] {
+    color: #b7c2d0;
   }
 
   &[data-state="active"] {
+    color: #3a8dff;
   }
 }
 
