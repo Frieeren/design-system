@@ -3,22 +3,26 @@
 
 /** Default Style */
 .floating-action-button {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.floating-action-button--size-small {
-  width: 40px;
-  height: 40px;
-}
-
-.floating-action-button--size-medium {
-  width: 48px;
-  height: 48px;
-}
-
-.floating-action-button--size-large {
+.floating-action-button--button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
   width: 56px;
   height: 56px;
+  cursor: pointer;
+}
+
+.floating-action-button--action-button {
+  &:hover {
+    background-color: #ebf4ff;
+    transition: background-color 0.2s ease-in-out;
+  }
+  box-shadow: 0 0 5.6px 0 rgba(0, 0, 0, 0.04);
 }
