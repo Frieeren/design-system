@@ -144,6 +144,9 @@ importers:
       '@radix-ui/react-toggle':
         specifier: ^1.1.0
         version: 1.1.2(@types/react-dom@18.3.1)(@types/react@18.3.11)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@team-frieeren/icons':
+        specifier: workspace:*
+        version: link:../frieeren-icons
       classnames:
         specifier: ^2.5.1
         version: 2.5.1

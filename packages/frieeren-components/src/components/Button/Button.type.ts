@@ -27,6 +27,7 @@ export type ButtonProps = PropsWithChildren<{
   color?: string;
   backgroundColor?: string;
   borderColor?: string;
+  borderRadius?: React.CSSProperties["borderRadius"];
 }>;
 
 export type LogButtonProps = ButtonProps & {

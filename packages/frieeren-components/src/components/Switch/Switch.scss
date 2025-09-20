@@ -1,0 +1,37 @@
+:root {
+  --switch-width: 52px;
+  --switch-height: 32px;
+  --switch-thumb-width: 28px;
+  --switch-thumb-height: 28px;
+
+  --switch-background-color: #b7c2d0;
+  --switch-checked-background-color: #3a8dff;
+  --switch-thumb-background-color: #ffffff;
+}
+
+.switch {
+  width: var(--switch-width);
+  height: var(--switch-height);
+  background-color: var(--switch-background-color);
+  border-radius: 16px;
+  position: relative;
+
+  &[data-state="checked"] {
+    background-color: var(--switch-checked-background-color);
+  }
+}
+
+.switch-thumb {
+  display: block;
+  width: var(--switch-thumb-width);
+  height: var(--switch-thumb-height);
+  background-color: var(--switch-thumb-background-color);
+  border-radius: 14px;
+  transition: transform 100ms;
+  transform: translateX(2px);
+  will-change: transform;
+
+  &[data-state="checked"] {
+    transform: translateX(calc(var(--switch-width) - var(--switch-thumb-width) - 2px));
+  }
+}
