@@ -12,6 +12,8 @@ export function FloatingActionButton({
   right = 16,
   actions = [],
   icon,
+  openIcon,
+  closeIcon,
   onClick
 }: FloatingActionButtonProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -40,7 +42,7 @@ export function FloatingActionButton({
           onClick?.();
         }}
       >
-        {icon}
+        {isOpen ? (closeIcon ?? icon) : (openIcon ?? icon)}
       </button>
       <div
         style={{

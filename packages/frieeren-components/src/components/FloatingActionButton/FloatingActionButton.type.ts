@@ -14,5 +14,7 @@ export type FloatingActionButtonProps = {
   right?: React.CSSProperties["right"];
   actions?: FloatingActionButtonAction[];
   icon?: React.ReactNode;
+  openIcon?: React.ReactNode;
+  closeIcon?: React.ReactNode;
   onClick?: () => void;
 };

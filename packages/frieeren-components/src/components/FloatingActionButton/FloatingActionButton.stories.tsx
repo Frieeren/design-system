@@ -10,6 +10,15 @@ const OpenIcon = () => (
   </svg>
 );
 
+const CloseIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+    <path
+      d="M1.20124 0.929623C1.59178 0.539352 2.22501 0.539183 2.61545 0.929623L8.2723 6.58648L13.9298 0.928932C14.3204 0.538682 14.9536 0.538499 15.3441 0.928932C15.7345 1.31937 15.7343 1.9526 15.3441 2.34315L9.68652 8.00069L15.3434 13.6575C15.7338 14.048 15.7336 14.6812 15.3434 15.0718C14.9528 15.4623 14.3197 15.4623 13.9292 15.0718L8.2723 9.4149L2.61614 15.0711C2.22562 15.4616 1.59245 15.4616 1.20193 15.0711C0.811402 14.6805 0.811403 14.0474 1.20193 13.6569L6.85809 8.00069L1.20124 2.34384C0.810712 1.95331 0.810712 1.32015 1.20124 0.929623Z"
+      fill="white"
+    />
+  </svg>
+);
+
 const AddIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
     <path
@@ -36,18 +45,9 @@ const meta = {
   },
   tags: ["autodocs"],
   argTypes: {
-    size: {
-      control: "select",
-      options: ["small", "medium", "large"],
-      description: "floating action button의 크기를 지정"
-    },
     disabled: {
       control: "boolean",
       description: "floating action button의 비활성화 상태를 지정"
-    },
-    backgroundColor: {
-      control: "color",
-      description: "floating action button의 배경색을 지정"
     },
     position: {
       control: "select",
@@ -77,6 +77,14 @@ const meta = {
     icon: {
       control: "object",
       description: "메인 버튼의 아이콘"
+    },
+    openIcon: {
+      control: "object",
+      description: "메인 버튼의 열린 아이콘"
+    },
+    closeIcon: {
+      control: "object",
+      description: "메인 버튼의 닫힌 아이콘"
     }
   }
 } satisfies Meta<typeof FloatingActionButton>;
@@ -86,8 +94,8 @@ type Story = StoryObj<typeof meta>;
 
 export const Base: Story = {
   args: {
-    size: "large",
-    icon: <OpenIcon />,
+    openIcon: <OpenIcon />,
+    closeIcon: <CloseIcon />,
     position: "absolute",
     bottom: 0,
     actions: [
@@ -99,5 +107,5 @@ export const Base: Story = {
       }
     ]
   },
-  render: args => <FloatingActionButton {...args} backgroundColor="#3A8DFF" />
+  render: args => <FloatingActionButton {...args} />
 };
