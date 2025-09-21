@@ -80,7 +80,8 @@
     "classnames": "^2.5.1",
     "radix-ui": "^1.1.3",
     "sass": "^1.80.4",
-    "vaul": "^1.1.1"
+    "vaul": "^1.1.1",
+    "@team-frieeren/icons": "workspace:*"
   },
   "exports": {
     ".": {
@@ -119,9 +120,9 @@
       "import": "./dist/Checkbox.js",
       "types": "./dist/components/Checkbox/index.d.ts"
     },
-    "./toggle": {
-      "import": "./dist/Toggle.js",
-      "types": "./dist/components/Toggle/index.d.ts"
+    "./switch": {
+      "import": "./dist/Switch.js",
+      "types": "./dist/components/Switch/index.d.ts"
     },
     "./select": {
       "import": "./dist/Select.js",
@@ -138,6 +139,10 @@
     "./log": {
       "import": "./dist/Log.js",
       "types": "./dist/components/Log/index.d.ts"
+    },
+    "./floatingActionButton": {
+      "import": "./dist/FloatingActionButton.js",
+      "types": "./dist/components/FloatingActionButton/index.d.ts"
     },
     "./styles.css": "./dist/index.css"
   }

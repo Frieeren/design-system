@@ -5,6 +5,15 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:svgr": "npx @svgr/cli --config-file ./svgr.config.cjs -- asset",

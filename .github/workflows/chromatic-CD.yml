@@ -39,7 +39,10 @@ jobs:
           cache: "pnpm"
 
       - name: Install Dependencies
-        run: pnpm install --filter "./packages/frieeren-components" --no-frozen-lockfile
+        run: pnpm install --frozen-lockfile
+
+      - name: Build Icons Package
+        run: pnpm --filter "@team-frieeren/icons" build
 
       - name: Publish to Chromatic
         id: chromatic

@@ -19,6 +19,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       color,
       backgroundColor,
       borderColor,
+      borderRadius,
       ...rest
     },
     ref
@@ -38,7 +39,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           className
         )}
         disabled={disabled || loading}
-        style={{ color, backgroundColor, borderColor }}
+        style={{ color, backgroundColor, borderColor, borderRadius }}
         {...rest}
       >
         <span className={cx("button--content", { "button--content--hidden": loading })}>

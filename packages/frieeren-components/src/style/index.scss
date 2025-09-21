@@ -1,4 +1,7 @@
 @use "./normalize.css";
+// v1 디자인 토큰
+@use "./design-token/v1/index.scss" as v1;
+// v2 디자인 토큰
 @use "./design-token/index.scss";
 
 @use "../components/Layout/Box/Box.scss";
@@ -10,9 +13,10 @@
 @use "../components/Dialog/Dialog.scss";
 @use "../components/Popover/Popover.scss";
 @use "../components/Select/Select.scss";
-@use "../components/Toggle/Toggle.scss";
+@use "../components/Switch/Switch.scss";
 @use "../components/Input/Input.scss";
 @use "../components/Tabs/Tabs.scss";
+@use "../components/FloatingActionButton/FloatingActionButton.scss";
 
 // client components
 @use "../components/BottomSheet/BottomSheet.scss";
