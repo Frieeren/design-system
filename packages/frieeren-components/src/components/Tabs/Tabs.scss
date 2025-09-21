@@ -1,5 +1,5 @@
-$tabs-height: 48px;
-$tabs-padding: var(--seed-spacing-200);
+$tabs-height: 35px;
+$tabs-padding: 20px;
 $tabs-indicator-height: calc($tabs-height - ($tabs-padding * 2));
 $tabs-transition: all 0.2s ease-in-out;
 
@@ -15,29 +15,12 @@ $tabs-transition: all 0.2s ease-in-out;
   box-sizing: border-box;
 }
 
-.tabs--list-wrapper {
-  position: relative;
-}
-
 .tabs--list {
+  position: relative;
   display: flex;
   height: $tabs-height;
-  padding: $tabs-padding;
-  gap: var(--seed-spacing-200);
-  border-radius: var(--seed-rounding-500);
-  background-color: var(--seed-ui-color-background-chips);
-}
-
-.tabs--indicator {
-  position: absolute;
-  top: $tabs-padding;
-  left: 0;
-  height: $tabs-indicator-height;
-  box-shadow: 4px 4px 20px 0px rgba(0, 0, 0, 0.08);
-  background-color: var(--seed-ui-color-background-white);
-  border-radius: var(--seed-rounding-500);
-  transition: $tabs-transition;
-  z-index: 0;
+  padding: 0 20px;
+  background-color: #fff;
 }
 
 .tabs--trigger {
@@ -46,18 +29,22 @@ $tabs-transition: all 0.2s ease-in-out;
   flex: 1;
   align-items: center;
   justify-content: center;
-  font-size: var(--seed-font-size-s);
-  border-radius: var(--seed-rounding-400);
-  transition: $tabs-transition;
   z-index: 1;
+  padding: 8px;
+
+  div {
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%;
+    letter-spacing: -0.28px;
+  }
 
   &[data-state="inactive"] {
-    color: var(--seed-ui-color-text-lite);
-    font-weight: var(--seed-font-weight-400);
+    color: #b7c2d0;
   }
 
   &[data-state="active"] {
-    color: var(--seed-ui-color-text-black);
-    font-weight: var(--seed-font-weight-700);
+    color: #3a8dff;
   }
 }

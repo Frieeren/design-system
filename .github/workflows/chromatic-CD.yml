@@ -44,6 +44,9 @@ jobs:
       - name: Build Icons Package
         run: pnpm --filter "@team-frieeren/icons" build
 
+      - name: Build Icons Package
+        run: pnpm --filter "@team-frieeren/icons" build
+
       - name: Publish to Chromatic
         id: chromatic
         uses: chromaui/action@latest
