@@ -27,7 +27,6 @@ export const Tabs = (props: TabsProps) => {
           </TabsBase.Trigger>
         ))}
       </TabsBase.List>
-      <div className="tabs--indicator" style={indicatorStyle} />
     </TabsBase.Root>
   );
 };

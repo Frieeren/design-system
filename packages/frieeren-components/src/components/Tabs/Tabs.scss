@@ -48,13 +48,3 @@ $tabs-transition: all 0.2s ease-in-out;
     color: #3a8dff;
   }
 }
-
-.tabs--indicator {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  height: 2px;
-  background-color: #3a8dff;
-  transition: $tabs-transition;
-  z-index: 0;
-}
