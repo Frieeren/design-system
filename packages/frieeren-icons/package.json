@@ -1,6 +1,6 @@
 {
   "name": "@team-frieeren/icons",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Icons Package for frieeren design system",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
