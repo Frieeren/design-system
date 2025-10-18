@@ -1,7 +1,6 @@
 import cx from "classnames";
 import { memo, useState, useMemo, useCallback } from "react";
 import "./MonthCalendar.scss";
-import { motion, AnimatePresence } from "motion/react";
 import { format, isToday, isSameDay, addMonths, subMonths, isWeekend, isAfter } from "date-fns";
 import {
   chunk,
@@ -18,14 +17,13 @@ import type {
   WeekNumbers,
   HeaderTitle,
   MonthCalendarProps,
-  SlideDirection,
   MonthCalendarTileProps,
   MonthCalendarDaysProps,
   MonthCalendarHeaderProps,
   MonthCalendarWeekNumbersProps,
-  MonthCalendarSlideTransitionProps,
   DateRange
 } from "./MonthCalendar.type";
+import { CalendarSlideTransition, type SlideDirection } from "../shared/CalendarSlideTransition";
 import Ripple from "../../Ripple/Ripple";
 import LeftArrowIcon from "../assets/left-arrow.svg";
 import RightArrowIcon from "../assets/right-arrow.svg";
@@ -38,61 +36,6 @@ const WEEK_NUMBERS: WeekNumbers = {
 const HEADER_TITLE: HeaderTitle = {
   kr: "yyyy. MM",
   en: "yyyy. MM"
-};
-
-const CalendarSlideTransition = ({
-  children,
-  transitionKey,
-  slideDirection,
-  activeTransition
-}: MonthCalendarSlideTransitionProps) => {
-  if (!activeTransition) {
-    return <div className="month-calendar--transition-container">{children}</div>;
-  }
-
-  const slideVariants = {
-    enter: (direction: SlideDirection) => ({
-      x: direction === "left" ? "100%" : "-100%",
-      zIndex: 1
-    }),
-    center: {
-      x: 0,
-      zIndex: 1
-    },
-    exit: (direction: SlideDirection) => ({
-      x: direction === "left" ? "-100%" : "100%",
-      zIndex: 0
-    })
-  };
-
-  return (
-    <div className="month-calendar--transition-container">
-      <AnimatePresence custom={slideDirection}>
-        <motion.div
-          key={transitionKey}
-          custom={slideDirection}
-          variants={slideVariants}
-          initial="enter"
-          animate="center"
-          exit="exit"
-          transition={{
-            duration: 0.25,
-            ease: [0.35, 0.8, 0.4, 1]
-          }}
-          className="month-calendar--slide-content"
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            width: "100%"
-          }}
-        >
-          {children}
-        </motion.div>
-      </AnimatePresence>
-    </div>
-  );
 };
 
 const Tile = memo(({ type, conditions, onClick, children }: MonthCalendarTileProps) => {
@@ -364,6 +307,7 @@ export const MonthCalendar = ({
       {showWeekNumbers && <WeakNumbers weekNumbersCountry={weekNumbersCountry} />}
 
       <CalendarSlideTransition
+        calendarVariant="month"
         transitionKey={transitionKey}
         slideDirection={slideDirection}
         activeTransition={activeTransition}

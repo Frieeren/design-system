@@ -1,7 +1,6 @@
 type WeekNumbersCountry = "kr" | "en";
 type WeekNumbers = Record<WeekNumbersCountry, string[]>;
 type HeaderTitle = Record<WeekNumbersCountry, string>;
-type SlideDirection = "left" | "right";
 type DateRange = { start: Date | null; end: Date | null };
 
 type DateConditions = {
@@ -72,13 +71,6 @@ type MonthCalendarWeekNumbersProps = {
   weekNumbersCountry: WeekNumbersCountry;
 };
 
-type MonthCalendarSlideTransitionProps = {
-  children: React.ReactElement;
-  transitionKey: string;
-  slideDirection: SlideDirection;
-  activeTransition: boolean;
-};
-
 export type {
   WeekNumbers,
   HeaderTitle,
@@ -86,11 +78,9 @@ export type {
   DateRange,
   DayState,
   DateConditions,
-  SlideDirection,
   MonthCalendarProps,
   MonthCalendarHeaderProps,
   MonthCalendarWeekNumbersProps,
   MonthCalendarDaysProps,
-  MonthCalendarTileProps,
-  MonthCalendarSlideTransitionProps
+  MonthCalendarTileProps
 };

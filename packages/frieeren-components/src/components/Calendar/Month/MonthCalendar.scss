@@ -1,3 +1,5 @@
+@use "../shared/CalendarSlideTransition/CalendarSlideTransition.scss";
+
 :root {
   --calendar-background: #fff;
 
@@ -32,7 +34,7 @@
 .month-calendar {
   display: flex;
   flex-direction: column;
-  width: 320px;
+  width: 360px;
   background: var(--calendar-background);
   overflow: hidden;
   user-select: none;
@@ -48,11 +50,13 @@
   }
 
   &--slide-content {
-    width: 100%;
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
+    width: 100%;
+    will-change: transform;
+    backface-visibility: hidden;
   }
 
   &--header {
@@ -81,6 +85,7 @@
   }
 
   &--week-numbers {
+    padding: 0 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -88,6 +93,7 @@
   }
 
   &--days-container {
+    padding: 0 20px;
     display: flex;
     flex-direction: column;
     min-height: 240px;

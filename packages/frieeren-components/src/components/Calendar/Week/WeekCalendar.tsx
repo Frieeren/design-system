@@ -1,7 +1,6 @@
 import cx from "classnames";
 import { memo, useState, useMemo, useCallback } from "react";
 import "./WeekCalendar.scss";
-import { motion, AnimatePresence } from "motion/react";
 import { format, isToday, isSameDay, isWeekend, isAfter, subWeeks, addWeeks } from "date-fns";
 import {
   chunk,
@@ -16,14 +15,13 @@ import type {
   WeekNumbers,
   HeaderTitle,
   WeekCalendarProps,
-  SlideDirection,
   WeekCalendarTileProps,
   WeekCalendarDaysProps,
   WeekCalendarHeaderProps,
   WeekCalendarWeekNumbersProps,
-  WeekCalendarSlideTransitionProps,
   TileSlotProps
 } from "./WeekCalendar.type";
+import { CalendarSlideTransition, type SlideDirection } from "../shared/CalendarSlideTransition";
 import Ripple from "../../Ripple/Ripple";
 import LeftArrowIcon from "../assets/left-arrow.svg";
 import RightArrowIcon from "../assets/right-arrow.svg";
@@ -36,61 +34,6 @@ const WEEK_NUMBERS: WeekNumbers = {
 const HEADER_TITLE: HeaderTitle = {
   kr: "yyyy. MM",
   en: "yyyy. MM"
-};
-
-const CalendarSlideTransition = ({
-  children,
-  transitionKey,
-  slideDirection,
-  activeTransition
-}: WeekCalendarSlideTransitionProps) => {
-  if (!activeTransition) {
-    return <div className="week-calendar--transition-container">{children}</div>;
-  }
-
-  const slideVariants = {
-    enter: (direction: SlideDirection) => ({
-      x: direction === "left" ? "100%" : "-100%",
-      zIndex: 1
-    }),
-    center: {
-      x: 0,
-      zIndex: 1
-    },
-    exit: (direction: SlideDirection) => ({
-      x: direction === "left" ? "-100%" : "100%",
-      zIndex: 0
-    })
-  };
-
-  return (
-    <div className="week-calendar--transition-container">
-      <AnimatePresence custom={slideDirection}>
-        <motion.div
-          key={transitionKey}
-          custom={slideDirection}
-          variants={slideVariants}
-          initial="enter"
-          animate="center"
-          exit="exit"
-          transition={{
-            duration: 0.3,
-            ease: [0.35, 0.8, 0.4, 1]
-          }}
-          className="week-calendar--slide-content"
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            width: "100%"
-          }}
-        >
-          {children}
-        </motion.div>
-      </AnimatePresence>
-    </div>
-  );
 };
 
 const Tile = memo(
@@ -302,6 +245,7 @@ export const WeekCalendar = ({
       {showWeekNumbers && <WeakNumbers weekNumbersCountry={weekNumbersCountry} />}
 
       <CalendarSlideTransition
+        calendarVariant="week"
         transitionKey={transitionKey}
         slideDirection={slideDirection}
         activeTransition={activeTransition}

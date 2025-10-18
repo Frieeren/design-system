@@ -64,13 +64,6 @@ type WeekCalendarWeekNumbersProps = {
   weekNumbersCountry: WeekNumbersCountry;
 };
 
-type WeekCalendarSlideTransitionProps = {
-  children: React.ReactElement;
-  transitionKey: string;
-  slideDirection: SlideDirection;
-  activeTransition: boolean;
-};
-
 export type {
   WeekNumbers,
   HeaderTitle,
@@ -83,6 +76,5 @@ export type {
   WeekCalendarWeekNumbersProps,
   WeekCalendarDaysProps,
   WeekCalendarTileProps,
-  WeekCalendarSlideTransitionProps,
   TileSlotProps
 };
