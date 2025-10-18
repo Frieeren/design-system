@@ -44,13 +44,17 @@ type RangeMonthCalendarProps = BaseMonthCalendarProps & {
 
 type SingleMonthCalendarProps = BaseMonthCalendarProps & {
   /** 범위 선택 모드 비활성화 */
-  enableRange?: false;
+  enableRange: false;
   /** 범위 선택 변경 핸들러 (단일 모드에서는 사용 불가) */
   onRangeChange?: never;
   /** 단일 날짜 선택 핸들러 */
   onDateChange?: (date: Date) => void;
 };
 
+/**
+ * 월 캘린더 컴포넌트 타입
+ * @description 범위 선택 모드 또는 단일 날짜 선택 모드 중 하나를 선택할 수 있습니다.
+ */
 type MonthCalendarProps = RangeMonthCalendarProps | SingleMonthCalendarProps;
 
 type MonthCalendarHeaderProps = BaseCalendarHeaderProps;
@@ -69,6 +73,37 @@ type MonthCalendarDaysProps = {
 
 type MonthCalendarWeekNumbersProps = BaseCalendarWeekNumbersProps;
 
+/**
+ * 월 캘린더 훅 타입
+ * @description 월 캘린더 컴포넌트에서 사용하는 훅 타입
+ */
+type UseMonthCalendarProps = {
+  initDate?: Date;
+  onDateChange?: (date: Date) => void;
+  onRangeChange?: (range: DateRange) => void;
+  minDate?: Date;
+  maxDate?: Date;
+  minMonth?: Date;
+  maxMonth?: Date;
+  enableRange: boolean;
+  onlyViewMonthDays: boolean;
+};
+
+/**
+ * 월 캘린더 날짜 상태 생성 타입
+ * @description 월 캘린더 날짜 상태 생성 타입
+ */
+type CreateMonthDateStateProps = {
+  date: Date;
+  currentMonth: Date;
+  selectedDate: Date;
+  selectedRange: DateRange;
+  enableRange: boolean;
+  minDate?: Date;
+  maxDate?: Date;
+  onlyViewMonthDays: boolean;
+};
+
 export type {
   WeekNumbers,
   HeaderTitle,
@@ -80,5 +115,7 @@ export type {
   MonthCalendarHeaderProps,
   MonthCalendarWeekNumbersProps,
   MonthCalendarDaysProps,
-  MonthCalendarTileProps
+  MonthCalendarTileProps,
+  UseMonthCalendarProps,
+  CreateMonthDateStateProps
 };

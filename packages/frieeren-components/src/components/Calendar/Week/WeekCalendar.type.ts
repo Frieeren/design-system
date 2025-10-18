@@ -55,6 +55,30 @@ type WeekCalendarDaysProps = {
 
 type WeekCalendarWeekNumbersProps = BaseCalendarWeekNumbersProps;
 
+/**
+ * 주 캘린더 훅 타입
+ * @description 주 캘린더 컴포넌트에서 사용하는 훅 타입
+ */
+type UseWeekCalendarProps = {
+  initDate?: Date;
+  onDateChange?: (date: Date) => void;
+  minDate?: Date;
+  maxDate?: Date;
+  minMonth?: Date;
+  maxMonth?: Date;
+};
+
+/**
+ * 주 캘린더 날짜 상태 생성 타입
+ * @description 주 캘린더 날짜 상태 생성 타입
+ */
+type CreateWeekDateStateProps = {
+  date: Date;
+  selectedDate: Date;
+  minDate?: Date;
+  maxDate?: Date;
+};
+
 export type {
   WeekNumbers,
   HeaderTitle,
@@ -67,5 +91,7 @@ export type {
   WeekCalendarHeaderProps,
   WeekCalendarWeekNumbersProps,
   WeekCalendarDaysProps,
-  WeekCalendarTileProps
+  WeekCalendarTileProps,
+  UseWeekCalendarProps,
+  CreateWeekDateStateProps
 };

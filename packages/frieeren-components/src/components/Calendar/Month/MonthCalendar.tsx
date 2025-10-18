@@ -1,31 +1,21 @@
 import cx from "classnames";
-import { memo, useState, useMemo, useCallback } from "react";
+import { memo } from "react";
 import "./MonthCalendar.scss";
-import { format, isToday, isSameDay, addMonths, subMonths, isWeekend, isAfter } from "date-fns";
-import {
-  chunk,
-  getDate,
-  isCurrentMonth,
-  getFormattedDate,
-  currentMonthDays,
-  isDisabledDay,
-  isAfterMonth,
-  isBeforeMonth,
-  isDateInRange
-} from "../shared/utils";
+import { format } from "date-fns";
+import { getDate, getFormattedDate } from "../shared/utils";
 import type {
   MonthCalendarProps,
   MonthCalendarTileProps,
   MonthCalendarDaysProps,
   MonthCalendarHeaderProps,
-  MonthCalendarWeekNumbersProps,
-  DateRange
+  MonthCalendarWeekNumbersProps
 } from "./MonthCalendar.type";
-import { CalendarSlideTransition, type SlideDirection } from "../shared/CalendarSlideTransition";
+import { CalendarSlideTransition } from "../shared/CalendarSlideTransition";
 import Ripple from "../../Ripple/Ripple";
 import LeftArrowIcon from "../assets/left-arrow.svg";
 import RightArrowIcon from "../assets/right-arrow.svg";
 import { WEEK_NUMBERS, HEADER_TITLE } from "../shared/constants";
+import useMonthCalendar from "./useMonthCalendar";
 
 const Tile = memo(({ type, conditions, onClick, children }: MonthCalendarTileProps) => {
   return (
@@ -130,157 +120,41 @@ const Header = memo(
 
 Header.displayName = "MonthCalendarHeader";
 
-const createDateState = ({
-  date,
-  currentMonth,
-  selectedDate,
-  selectedRange,
-  enableRange,
-  minDate,
-  maxDate,
-  onlyViewMonthDays
-}: {
-  date: Date;
-  currentMonth: Date;
-  selectedDate: Date;
-  selectedRange: DateRange;
-  enableRange: boolean;
-  minDate?: Date;
-  maxDate?: Date;
-  onlyViewMonthDays: boolean;
-}) => {
-  const baseConditions = {
-    isToday: isToday(date),
-    isWeekend: isWeekend(date),
-    isDisabled: isDisabledDay(date, minDate, maxDate),
-    isOtherMonth: !isCurrentMonth(date, currentMonth),
-    isOnlyViewMonthDays: onlyViewMonthDays
-  };
-
-  if (enableRange) {
-    const rangeConditions = isDateInRange(date, selectedRange);
-    return {
-      date,
-      conditions: {
-        ...baseConditions,
-        ...rangeConditions
-      }
-    };
-  } else {
-    return {
-      date,
-      conditions: {
-        ...baseConditions,
-        isSelected: selectedDate ? isSameDay(date, selectedDate) : false,
-        isRangeStart: false,
-        isRangeEnd: false,
-        isInRange: false
-      }
-    };
-  }
-};
-
-export const MonthCalendar = ({
+const MonthCalendar = ({
   minDate,
   maxDate,
   minMonth,
   maxMonth,
   initDate,
-  enableRange = false,
   onDateChange,
   onRangeChange,
-  activeTransition = true,
+  enableRange = false,
   showWeekNumbers = true,
-  weekNumbersCountry = "kr",
-  onlyViewMonthDays = false
+  activeTransition = true,
+  onlyViewMonthDays = false,
+  weekNumbersCountry = "kr"
 }: MonthCalendarProps) => {
-  const [currentMonth, setCurrentMonth] = useState<Date>(initDate || new Date());
-  const [selectedDate, setSelectedDate] = useState<Date>(initDate || new Date());
-  const [selectedRange, setSelectedRange] = useState<DateRange>({ start: null, end: null });
-  const [slideDirection, setSlideDirection] = useState<SlideDirection>("left");
-
-  const days = useMemo(() => currentMonthDays(currentMonth), [currentMonth]);
-
-  const daysState = useMemo(() => {
-    const state = days.map(day =>
-      createDateState({
-        date: day,
-        currentMonth,
-        selectedDate,
-        selectedRange,
-        enableRange,
-        minDate,
-        maxDate,
-        onlyViewMonthDays
-      })
-    );
-    return chunk(state, 7);
-  }, [
-    days,
+  const {
+    currentMonth,
+    slideDirection,
+    daysState,
+    transitionKey,
+    isDisabledPrevMonth,
+    isDisabledNextMonth,
+    handleDayClick,
+    handlePrevMonth,
+    handleNextMonth
+  } = useMonthCalendar({
     minDate,
     maxDate,
-    currentMonth,
-    selectedDate,
-    selectedRange,
-    onlyViewMonthDays,
-    enableRange
-  ]);
-
-  const transitionKey = useMemo(() => format(currentMonth, "yyyy-MM"), [currentMonth]);
-  const isDisabledPrevMonth = useMemo(
-    () => minMonth && isBeforeMonth(currentMonth, minMonth),
-    [minMonth, currentMonth]
-  );
-  const isDisabledNextMonth = useMemo(
-    () => maxMonth && isAfterMonth(currentMonth, maxMonth),
-    [maxMonth, currentMonth]
-  );
-
-  const handleRangeSelection = useCallback(
-    (date: Date) => {
-      const { start, end } = selectedRange;
-
-      if (!start || (start && end)) {
-        const newRange = { start: date, end: null };
-        setSelectedRange(newRange);
-        onRangeChange?.(newRange);
-        return;
-      }
-
-      if (start && !end) {
-        const newRange =
-          isAfter(date, start) || isSameDay(date, start)
-            ? { start, end: date }
-            : { start: date, end: null };
-
-        setSelectedRange(newRange);
-        onRangeChange?.(newRange);
-      }
-    },
-    [selectedRange, onRangeChange]
-  );
-
-  const handleDayClick = useCallback(
-    (date: Date) => {
-      if (enableRange) {
-        handleRangeSelection(date);
-      } else {
-        setSelectedDate(date);
-        onDateChange?.(date);
-      }
-    },
-    [enableRange, handleRangeSelection, onDateChange]
-  );
-
-  const handlePrevMonth = useCallback(() => {
-    setSlideDirection("right");
-    setCurrentMonth(prev => subMonths(prev, 1));
-  }, []);
-
-  const handleNextMonth = useCallback(() => {
-    setSlideDirection("left");
-    setCurrentMonth(prev => addMonths(prev, 1));
-  }, []);
+    minMonth,
+    maxMonth,
+    initDate,
+    enableRange,
+    onDateChange,
+    onRangeChange,
+    onlyViewMonthDays
+  });
 
   return (
     <div className="month-calendar">
@@ -306,3 +180,7 @@ export const MonthCalendar = ({
     </div>
   );
 };
+
+MonthCalendar.displayName = "MonthCalendar";
+
+export { MonthCalendar };

@@ -1,29 +1,21 @@
 import cx from "classnames";
-import { memo, useState, useMemo, useCallback } from "react";
+import { memo } from "react";
 import "./WeekCalendar.scss";
-import { format, isToday, isSameDay, isWeekend, subWeeks, addWeeks } from "date-fns";
-import {
-  chunk,
-  getDate,
-  getFormattedDate,
-  isDisabledDay,
-  currentWeekDays,
-  isAfterWeek,
-  isBeforeWeek
-} from "../shared/utils";
+import { format } from "date-fns";
+import { getDate, getFormattedDate } from "../shared/utils";
 import type {
   WeekCalendarProps,
   WeekCalendarTileProps,
   WeekCalendarDaysProps,
   WeekCalendarHeaderProps,
-  WeekCalendarWeekNumbersProps,
-  TileSlotProps
+  WeekCalendarWeekNumbersProps
 } from "./WeekCalendar.type";
-import { CalendarSlideTransition, type SlideDirection } from "../shared/CalendarSlideTransition";
+import { CalendarSlideTransition } from "../shared/CalendarSlideTransition";
 import Ripple from "../../Ripple/Ripple";
 import LeftArrowIcon from "../assets/left-arrow.svg";
 import RightArrowIcon from "../assets/right-arrow.svg";
 import { WEEK_NUMBERS, HEADER_TITLE } from "../shared/constants";
+import useWeekCalendar from "./useWeekCalendar";
 
 const Tile = memo(
   ({ type, conditions, onClick, children, date, tileSlot }: WeekCalendarTileProps) => {
@@ -55,7 +47,7 @@ const Tile = memo(
   }
 );
 
-Tile.displayName = "Tile";
+Tile.displayName = "WeekCalendarTile";
 
 const Days = memo(({ days, onDayClick, tileSlot }: WeekCalendarDaysProps) => {
   return (
@@ -84,7 +76,7 @@ const Days = memo(({ days, onDayClick, tileSlot }: WeekCalendarDaysProps) => {
   );
 });
 
-Days.displayName = "Days";
+Days.displayName = "WeekCalendarDays";
 
 const WeakNumbers = memo(({ weekNumbersCountry }: WeekCalendarWeekNumbersProps) => {
   return (
@@ -98,7 +90,7 @@ const WeakNumbers = memo(({ weekNumbersCountry }: WeekCalendarWeekNumbersProps) 
   );
 });
 
-WeakNumbers.displayName = "WeakNumbers";
+WeakNumbers.displayName = "WeekCalendarWeekNumbers";
 
 const Header = memo(
   ({
@@ -133,36 +125,9 @@ const Header = memo(
   }
 );
 
-Header.displayName = "Header";
+Header.displayName = "WeekCalendarHeader";
 
-const createDateState = ({
-  date,
-  selectedDate,
-  minDate,
-  maxDate
-}: {
-  date: Date;
-  selectedDate: Date;
-  minDate?: Date;
-  maxDate?: Date;
-}) => {
-  const baseConditions = {
-    isToday: isToday(date),
-    isWeekend: isWeekend(date),
-    isDisabled: isDisabledDay(date, minDate, maxDate),
-    isOtherMonth: false
-  };
-
-  return {
-    date,
-    conditions: {
-      ...baseConditions,
-      isSelected: selectedDate ? isSameDay(date, selectedDate) : false
-    }
-  };
-};
-
-export const WeekCalendar = ({
+const WeekCalendar = ({
   minDate,
   maxDate,
   minMonth,
@@ -174,51 +139,24 @@ export const WeekCalendar = ({
   weekNumbersCountry = "kr",
   tileSlot
 }: WeekCalendarProps) => {
-  const [currentWeek, setCurrentWeek] = useState<Date>(initDate || new Date());
-  const [selectedDate, setSelectedDate] = useState<Date>(initDate || new Date());
-  const [slideDirection, setSlideDirection] = useState<SlideDirection>("left");
-
-  const days = useMemo(() => currentWeekDays(currentWeek), [currentWeek]);
-
-  const daysState = useMemo(() => {
-    const state = days.map(day =>
-      createDateState({
-        date: day,
-        selectedDate,
-        minDate,
-        maxDate
-      })
-    );
-    return chunk(state, 7);
-  }, [days, minDate, maxDate, selectedDate]);
-
-  const transitionKey = useMemo(() => format(currentWeek, "yyyy-MM-dd"), [currentWeek]);
-  const isDisabledPrevMonth = useMemo(
-    () => minMonth && isBeforeWeek(currentWeek, minMonth),
-    [minMonth, currentWeek]
-  );
-  const isDisabledNextMonth = useMemo(
-    () => maxMonth && isAfterWeek(currentWeek, maxMonth),
-    [maxMonth, currentWeek]
-  );
-
-  const handleDayClick = useCallback(
-    (date: Date) => {
-      setSelectedDate(date);
-      onDateChange?.(date);
-    },
-    [setSelectedDate, onDateChange]
-  );
-
-  const handlePrevMonth = useCallback(() => {
-    setSlideDirection("right");
-    setCurrentWeek(prev => subWeeks(prev, 1));
-  }, []);
-
-  const handleNextMonth = useCallback(() => {
-    setSlideDirection("left");
-    setCurrentWeek(prev => addWeeks(prev, 1));
-  }, []);
+  const {
+    currentWeek,
+    slideDirection,
+    daysState,
+    transitionKey,
+    isDisabledPrevMonth,
+    isDisabledNextMonth,
+    handleDayClick,
+    handlePrevMonth,
+    handleNextMonth
+  } = useWeekCalendar({
+    initDate,
+    onDateChange,
+    minDate,
+    maxDate,
+    minMonth,
+    maxMonth
+  });
 
   return (
     <div className="week-calendar">
@@ -244,3 +182,7 @@ export const WeekCalendar = ({
     </div>
   );
 };
+
+WeekCalendar.displayName = "WeekCalendar";
+
+export { WeekCalendar };
