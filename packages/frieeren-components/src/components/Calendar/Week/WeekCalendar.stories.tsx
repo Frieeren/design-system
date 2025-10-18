@@ -39,103 +39,6 @@ export const Default: Story = {
   }
 };
 
-export const EnglishVersion: Story = {
-  args: {
-    weekNumbersCountry: "en",
-    activeTransition: true,
-    showWeekNumbers: true,
-    onDateChange: date => {
-      console.log("Date changed:", date);
-    }
-  }
-};
-
-export const WithoutWeekNumbers: Story = {
-  args: {
-    activeTransition: true,
-    showWeekNumbers: false,
-    weekNumbersCountry: "kr",
-    onDateChange: date => {
-      console.log("Date changed:", date);
-    }
-  }
-};
-
-export const WithoutTransition: Story = {
-  args: {
-    activeTransition: false,
-    showWeekNumbers: true,
-    weekNumbersCountry: "kr",
-    onDateChange: date => {
-      console.log("Date changed:", date);
-    }
-  }
-};
-
-export const WithCustomTile: Story = {
-  args: {
-    weekNumbersCountry: "kr",
-    activeTransition: true,
-    showWeekNumbers: true,
-    onDateChange: date => {
-      console.log("Date changed:", date);
-    },
-    tileSlot: ({ date, type, conditions, defaultContent }) => {
-      if (type === "day" && conditions?.isToday) {
-        return (
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              gap: "2px"
-            }}
-          >
-            <span
-              style={{
-                fontSize: "10px",
-                color: "#ff6b6b",
-                fontWeight: "bold"
-              }}
-            >
-              오늘
-            </span>
-            {defaultContent}
-          </div>
-        );
-      }
-
-      if (type === "day" && conditions?.isWeekend) {
-        return (
-          <div
-            style={{
-              position: "relative",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center"
-            }}
-          >
-            {defaultContent}
-            <span
-              style={{
-                position: "absolute",
-                top: "2px",
-                right: "2px",
-                width: "6px",
-                height: "6px",
-                backgroundColor: "#ffd93d",
-                borderRadius: "50%"
-              }}
-            />
-          </div>
-        );
-      }
-
-      return defaultContent;
-    }
-  }
-};
-
 export const WithEvents: Story = {
   args: {
     weekNumbersCountry: "kr",
@@ -144,10 +47,7 @@ export const WithEvents: Story = {
     onDateChange: date => {
       console.log("Date changed:", date);
     },
-    tileSlot: ({ date, type, conditions, defaultContent }) => {
-      if (type !== "day") return defaultContent;
-
-      // 예시 이벤트 데이터
+    tileSlot: ({ date, defaultContent }) => {
       const hasEvent = date && [15, 20, 25].includes(date.getDate());
       const hasMultipleEvents = date && date.getDate() === 20;
 
@@ -206,19 +106,6 @@ export const WithEvents: Story = {
           )}
         </div>
       );
-    }
-  }
-};
-
-export const WithDateLimits: Story = {
-  args: {
-    activeTransition: true,
-    showWeekNumbers: true,
-    weekNumbersCountry: "kr",
-    minDate: new Date(2024, 0, 15), // 2024년 1월 15일
-    maxDate: new Date(2024, 11, 15), // 2024년 12월 15일
-    onDateChange: date => {
-      console.log("Date changed:", date);
     }
   }
 };

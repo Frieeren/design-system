@@ -28,14 +28,25 @@ type MonthDayState = {
   conditions: MonthDateConditions;
 };
 
+type TileSlotProps = {
+  /** 날짜 객체 */
+  date?: Date;
+  /** 날짜 조건들 */
+  conditions?: MonthDateConditions;
+  /** 기본 타일 내용 */
+  defaultContent: React.ReactNode;
+};
+
 type BaseMonthCalendarProps = BaseCalendarProps & {
   /** 현재 월의 날짜만 표시할지 여부 */
   onlyViewMonthDays?: boolean;
+  /** 커스텀 타일 렌더링 함수 */
+  tileSlot?: (props: TileSlotProps) => React.ReactNode;
 };
 
 type RangeMonthCalendarProps = BaseMonthCalendarProps & {
   /** 범위 선택 모드 활성화 */
-  enableRange: true;
+  enableRange?: true;
   /** 범위 선택 변경 핸들러 */
   onRangeChange?: (range: DateRange) => void;
   /** 단일 날짜 선택 핸들러 (범위 모드에서는 사용 불가) */
@@ -44,11 +55,13 @@ type RangeMonthCalendarProps = BaseMonthCalendarProps & {
 
 type SingleMonthCalendarProps = BaseMonthCalendarProps & {
   /** 범위 선택 모드 비활성화 */
-  enableRange: false;
+  enableRange?: false;
   /** 범위 선택 변경 핸들러 (단일 모드에서는 사용 불가) */
   onRangeChange?: never;
   /** 단일 날짜 선택 핸들러 */
   onDateChange?: (date: Date) => void;
+  /** 커스텀 타일 렌더링 함수 */
+  tileSlot?: (props: TileSlotProps) => React.ReactNode;
 };
 
 /**
@@ -62,6 +75,10 @@ type MonthCalendarHeaderProps = BaseCalendarHeaderProps;
 type MonthCalendarTileProps = BaseCalendarTileProps & {
   /** 날짜 조건들 (Range 기능 포함) */
   conditions?: MonthDateConditions;
+  /** 날짜 객체 (tileSlot에서 사용) */
+  date?: Date;
+  /** 커스텀 타일 렌더링 함수 */
+  tileSlot?: (props: TileSlotProps) => React.ReactNode;
 };
 
 type MonthCalendarDaysProps = {
@@ -69,6 +86,8 @@ type MonthCalendarDaysProps = {
   days: MonthDayState[][];
   /** 날짜 클릭 핸들러 */
   onDayClick: (date: Date) => void;
+  /** 커스텀 타일 렌더링 함수 */
+  tileSlot?: (props: TileSlotProps) => React.ReactNode;
 };
 
 type MonthCalendarWeekNumbersProps = BaseCalendarWeekNumbersProps;

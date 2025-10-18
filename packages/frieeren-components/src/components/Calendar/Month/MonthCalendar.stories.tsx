@@ -59,60 +59,70 @@ export const WithRange: Story = {
   }
 };
 
-export const EnglishVersion: Story = {
-  args: {
-    weekNumbersCountry: "en",
-    activeTransition: true,
-    showWeekNumbers: true,
-    onDateChange: date => {
-      console.log("Date changed:", date);
-    }
-  }
-};
-
-export const OnlyCurrentMonth: Story = {
+export const WithEvents: Story = {
   args: {
     activeTransition: true,
     showWeekNumbers: true,
     weekNumbersCountry: "kr",
-    onlyViewMonthDays: true,
-    onDateChange: date => {
-      console.log("Date changed:", date);
-    }
-  }
-};
+    tileSlot: ({ date, defaultContent }) => {
+      const hasEvent = date && [15, 20, 25].includes(date.getDate());
+      const hasMultipleEvents = date && date.getDate() === 20;
 
-export const WithoutWeekNumbers: Story = {
-  args: {
-    activeTransition: true,
-    showWeekNumbers: false,
-    weekNumbersCountry: "kr",
-    onDateChange: date => {
-      console.log("Date changed:", date);
-    }
-  }
-};
-
-export const WithoutTransition: Story = {
-  args: {
-    activeTransition: false,
-    showWeekNumbers: true,
-    weekNumbersCountry: "kr",
-    onDateChange: date => {
-      console.log("Date changed:", date);
-    }
-  }
-};
-
-export const WithDateLimits: Story = {
-  args: {
-    activeTransition: true,
-    showWeekNumbers: true,
-    weekNumbersCountry: "kr",
-    minDate: new Date(2024, 0, 15), // 2024년 1월 15일
-    maxDate: new Date(2024, 11, 15), // 2024년 12월 15일
-    onDateChange: date => {
-      console.log("Date changed:", date);
+      return (
+        <div
+          style={{
+            position: "relative",
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center"
+          }}
+        >
+          {defaultContent}
+          {hasEvent && (
+            <div
+              style={{
+                position: "absolute",
+                bottom: "4px",
+                left: "50%",
+                transform: "translateX(-50%)",
+                display: "flex",
+                gap: "2px"
+              }}
+            >
+              <span
+                style={{
+                  width: "4px",
+                  height: "4px",
+                  backgroundColor: "#4dabf7",
+                  borderRadius: "50%"
+                }}
+              />
+              {hasMultipleEvents && (
+                <>
+                  <span
+                    style={{
+                      width: "4px",
+                      height: "4px",
+                      backgroundColor: "#51cf66",
+                      borderRadius: "50%"
+                    }}
+                  />
+                  <span
+                    style={{
+                      width: "4px",
+                      height: "4px",
+                      backgroundColor: "#ff8787",
+                      borderRadius: "50%"
+                    }}
+                  />
+                </>
+              )}
+            </div>
+          )}
+        </div>
+      );
     }
   }
 };

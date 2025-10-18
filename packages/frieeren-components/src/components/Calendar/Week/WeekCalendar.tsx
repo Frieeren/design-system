@@ -21,7 +21,6 @@ const Tile = memo(
   ({ type, conditions, onClick, children, date, tileSlot }: WeekCalendarTileProps) => {
     const slotContent = tileSlot?.({
       date,
-      type,
       conditions,
       defaultContent: children
     });
@@ -133,11 +132,11 @@ const WeekCalendar = ({
   minMonth,
   maxMonth,
   initDate,
+  tileSlot,
   onDateChange,
   activeTransition = true,
   showWeekNumbers = true,
-  weekNumbersCountry = "kr",
-  tileSlot
+  weekNumbersCountry = "kr"
 }: WeekCalendarProps) => {
   const {
     currentWeek,

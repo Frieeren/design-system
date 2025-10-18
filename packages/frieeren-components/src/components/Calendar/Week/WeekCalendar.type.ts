@@ -16,10 +16,8 @@ type WeekDateConditions = BaseDateConditions;
 type WeekDayState = BaseDayState;
 
 type TileSlotProps = {
-  /** 날짜 객체 (day 타입일 때만 제공) */
+  /** 날짜 객체 */
   date?: Date;
-  /** 타일 유형 */
-  type: "day" | "week-number";
   /** 날짜 조건들 */
   conditions?: WeekDateConditions;
   /** 기본 타일 내용 */
@@ -86,7 +84,6 @@ export type {
   SlideDirection,
   WeekDateConditions,
   WeekDayState,
-  TileSlotProps,
   WeekCalendarProps,
   WeekCalendarHeaderProps,
   WeekCalendarWeekNumbersProps,
