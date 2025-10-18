@@ -1,10 +1,5 @@
 import React, { useState, useLayoutEffect } from "react";
-import "./Ripple.scss";
-import type {
-  RippleProps,
-  RippleState,
-  DebounceRippleProps
-} from "./Ripple.type";
+import type { RippleProps, RippleState, DebounceRippleProps } from "./Ripple.type";
 
 const useDebouncedRippleCleanUp = ({
   duration,
@@ -70,8 +65,10 @@ export const Ripple = ({
       y = (rippleContainer.height - size) / 2;
     } else {
       // Calculate position from click/touch point
-      const clientX = "clientX" in event ? event.clientX : (event.touches && event.touches[0]?.clientX) || 0;
-      const clientY = "clientY" in event ? event.clientY : (event.touches && event.touches[0]?.clientY) || 0;
+      const clientX =
+        "clientX" in event ? event.clientX : (event.touches && event.touches[0]?.clientX) || 0;
+      const clientY =
+        "clientY" in event ? event.clientY : (event.touches && event.touches[0]?.clientY) || 0;
 
       x = clientX - rippleContainer.x - size / 2;
       y = clientY - rippleContainer.y - size / 2;
