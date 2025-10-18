@@ -77,7 +77,7 @@ const Days = memo(({ days, onDayClick, tileSlot }: WeekCalendarDaysProps) => {
 
 Days.displayName = "WeekCalendarDays";
 
-const WeakNumbers = memo(({ weekNumbersCountry }: WeekCalendarWeekNumbersProps) => {
+const WeekNumbers = memo(({ weekNumbersCountry }: WeekCalendarWeekNumbersProps) => {
   return (
     <div className="week-calendar--week-numbers">
       {WEEK_NUMBERS[weekNumbersCountry].map((number, index) => (
@@ -89,7 +89,7 @@ const WeakNumbers = memo(({ weekNumbersCountry }: WeekCalendarWeekNumbersProps) 
   );
 });
 
-WeakNumbers.displayName = "WeekCalendarWeekNumbers";
+WeekNumbers.displayName = "WeekCalendarWeekNumbers";
 
 const Header = memo(
   ({
@@ -168,7 +168,7 @@ const WeekCalendar = ({
         weekNumbersCountry={weekNumbersCountry}
       />
 
-      {showWeekNumbers && <WeakNumbers weekNumbersCountry={weekNumbersCountry} />}
+      {showWeekNumbers && <WeekNumbers weekNumbersCountry={weekNumbersCountry} />}
 
       <CalendarSlideTransition
         calendarVariant="week"
