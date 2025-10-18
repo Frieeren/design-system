@@ -1,7 +1,7 @@
 import cx from "classnames";
 import { memo, useState, useMemo, useCallback } from "react";
 import "./WeekCalendar.scss";
-import { format, isToday, isSameDay, isWeekend, isAfter, subWeeks, addWeeks } from "date-fns";
+import { format, isToday, isSameDay, isWeekend, subWeeks, addWeeks } from "date-fns";
 import {
   chunk,
   getDate,
@@ -10,10 +10,8 @@ import {
   currentWeekDays,
   isAfterWeek,
   isBeforeWeek
-} from "../utils";
+} from "../shared/utils";
 import type {
-  WeekNumbers,
-  HeaderTitle,
   WeekCalendarProps,
   WeekCalendarTileProps,
   WeekCalendarDaysProps,
@@ -25,16 +23,7 @@ import { CalendarSlideTransition, type SlideDirection } from "../shared/Calendar
 import Ripple from "../../Ripple/Ripple";
 import LeftArrowIcon from "../assets/left-arrow.svg";
 import RightArrowIcon from "../assets/right-arrow.svg";
-
-const WEEK_NUMBERS: WeekNumbers = {
-  kr: ["월", "화", "수", "목", "금", "토", "일"],
-  en: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
-};
-
-const HEADER_TITLE: HeaderTitle = {
-  kr: "yyyy. MM",
-  en: "yyyy. MM"
-};
+import { WEEK_NUMBERS, HEADER_TITLE } from "../shared/constants";
 
 const Tile = memo(
   ({ type, conditions, onClick, children, date, tileSlot }: WeekCalendarTileProps) => {

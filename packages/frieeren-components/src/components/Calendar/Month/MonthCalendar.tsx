@@ -12,10 +12,8 @@ import {
   isAfterMonth,
   isBeforeMonth,
   isDateInRange
-} from "../utils";
+} from "../shared/utils";
 import type {
-  WeekNumbers,
-  HeaderTitle,
   MonthCalendarProps,
   MonthCalendarTileProps,
   MonthCalendarDaysProps,
@@ -27,16 +25,7 @@ import { CalendarSlideTransition, type SlideDirection } from "../shared/Calendar
 import Ripple from "../../Ripple/Ripple";
 import LeftArrowIcon from "../assets/left-arrow.svg";
 import RightArrowIcon from "../assets/right-arrow.svg";
-
-const WEEK_NUMBERS: WeekNumbers = {
-  kr: ["일", "월", "화", "수", "목", "금", "토"],
-  en: ["S", "M", "T", "W", "T", "F", "S"]
-};
-
-const HEADER_TITLE: HeaderTitle = {
-  kr: "yyyy. MM",
-  en: "yyyy. MM"
-};
+import { WEEK_NUMBERS, HEADER_TITLE } from "../shared/constants";
 
 const Tile = memo(({ type, conditions, onClick, children }: MonthCalendarTileProps) => {
   return (
@@ -63,7 +52,7 @@ const Tile = memo(({ type, conditions, onClick, children }: MonthCalendarTilePro
   );
 });
 
-Tile.displayName = "Tile";
+Tile.displayName = "MonthCalendarTile";
 
 const Days = memo(({ days, onDayClick }: MonthCalendarDaysProps) => {
   return (
@@ -90,7 +79,7 @@ const Days = memo(({ days, onDayClick }: MonthCalendarDaysProps) => {
   );
 });
 
-Days.displayName = "Days";
+Days.displayName = "MonthCalendarDays";
 
 const WeakNumbers = memo(({ weekNumbersCountry }: MonthCalendarWeekNumbersProps) => {
   return (
@@ -104,7 +93,7 @@ const WeakNumbers = memo(({ weekNumbersCountry }: MonthCalendarWeekNumbersProps)
   );
 });
 
-WeakNumbers.displayName = "WeakNumbers";
+WeakNumbers.displayName = "MonthCalendarWeekNumbers";
 
 const Header = memo(
   ({
@@ -139,7 +128,7 @@ const Header = memo(
   }
 );
 
-Header.displayName = "Header";
+Header.displayName = "MonthCalendarHeader";
 
 const createDateState = ({
   date,

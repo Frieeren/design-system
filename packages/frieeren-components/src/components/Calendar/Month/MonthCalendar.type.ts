@@ -1,83 +1,81 @@
-type WeekNumbersCountry = "kr" | "en";
-type WeekNumbers = Record<WeekNumbersCountry, string[]>;
-type HeaderTitle = Record<WeekNumbersCountry, string>;
-type DateRange = { start: Date | null; end: Date | null };
+import type {
+  WeekNumbers,
+  HeaderTitle,
+  WeekNumbersCountry,
+  DateRange,
+  BaseDateConditions,
+  BaseCalendarProps,
+  BaseCalendarHeaderProps,
+  BaseCalendarTileProps,
+  BaseCalendarWeekNumbersProps
+} from "../shared/types";
 
-type DateConditions = {
-  isToday: boolean;
-  isWeekend: boolean;
-  isDisabled: boolean;
-  isSelected: boolean;
-  isOtherMonth: boolean;
+type MonthDateConditions = BaseDateConditions & {
+  /** 범위 선택 시작 날짜 여부 */
   isRangeStart: boolean;
+  /** 범위 선택 종료 날짜 여부 */
   isRangeEnd: boolean;
+  /** 범위 선택 중간 날짜 여부 */
   isInRange: boolean;
+  /** 현재 월의 날짜만 표시 모드 여부 */
   isOnlyViewMonthDays: boolean;
 };
 
-type DayState = {
+type MonthDayState = {
+  /** 날짜 객체 */
   date: Date;
-  conditions: DateConditions;
+  /** 해당 날짜의 상태 조건들 (Range 기능 포함) */
+  conditions: MonthDateConditions;
 };
 
-type BaseMonthCalendarProps = {
-  minDate?: Date;
-  maxDate?: Date;
-  minMonth?: Date;
-  maxMonth?: Date;
-  initDate?: Date;
-  activeTransition?: boolean;
-  showWeekNumbers?: boolean;
+type BaseMonthCalendarProps = BaseCalendarProps & {
+  /** 현재 월의 날짜만 표시할지 여부 */
   onlyViewMonthDays?: boolean;
-  weekNumbersCountry?: WeekNumbersCountry;
 };
 
 type RangeMonthCalendarProps = BaseMonthCalendarProps & {
+  /** 범위 선택 모드 활성화 */
   enableRange: true;
+  /** 범위 선택 변경 핸들러 */
   onRangeChange?: (range: DateRange) => void;
+  /** 단일 날짜 선택 핸들러 (범위 모드에서는 사용 불가) */
   onDateChange?: never;
 };
 
 type SingleMonthCalendarProps = BaseMonthCalendarProps & {
+  /** 범위 선택 모드 비활성화 */
   enableRange?: false;
+  /** 범위 선택 변경 핸들러 (단일 모드에서는 사용 불가) */
   onRangeChange?: never;
+  /** 단일 날짜 선택 핸들러 */
   onDateChange?: (date: Date) => void;
 };
 
 type MonthCalendarProps = RangeMonthCalendarProps | SingleMonthCalendarProps;
 
-type MonthCalendarHeaderProps = {
-  selectedDate: Date;
-  onPrevMonth: () => void;
-  onNextMonth: () => void;
-  disabledPrevMonth?: boolean;
-  disabledNextMonth?: boolean;
-  weekNumbersCountry: WeekNumbersCountry;
-};
+type MonthCalendarHeaderProps = BaseCalendarHeaderProps;
 
-type MonthCalendarTileProps = {
-  type: "day" | "week-number";
-  conditions?: DateConditions;
-  onClick?: () => void;
-  children: React.ReactNode;
+type MonthCalendarTileProps = BaseCalendarTileProps & {
+  /** 날짜 조건들 (Range 기능 포함) */
+  conditions?: MonthDateConditions;
 };
 
 type MonthCalendarDaysProps = {
-  days: DayState[][];
+  /** 월 캘린더의 날짜 상태 배열 (주별로 그룹화) */
+  days: MonthDayState[][];
+  /** 날짜 클릭 핸들러 */
   onDayClick: (date: Date) => void;
 };
 
-type MonthCalendarWeekNumbersProps = {
-  weekNumbersCountry: WeekNumbersCountry;
-};
+type MonthCalendarWeekNumbersProps = BaseCalendarWeekNumbersProps;
 
 export type {
   WeekNumbers,
   HeaderTitle,
   WeekNumbersCountry,
   DateRange,
-  DayState,
-  DateConditions,
+  MonthDateConditions,
+  MonthDayState,
   MonthCalendarProps,
   MonthCalendarHeaderProps,
   MonthCalendarWeekNumbersProps,
