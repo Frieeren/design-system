@@ -1,6 +1,5 @@
 import * as RadioGroupBase from "@radix-ui/react-radio-group";
 import { RadioProps } from "./Radio.type";
-import "./Radio.scss";
 
 export function Radio({ options, defaultValue, onChange, disabled = false }: RadioProps) {
   return (

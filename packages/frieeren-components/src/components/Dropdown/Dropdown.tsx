@@ -5,7 +5,6 @@ import cx from "classnames";
 import { DropdownMenu } from "radix-ui";
 import { Arrow1Icon } from "@team-frieeren/icons";
 import { DropdownProps } from "./Dropdown.type";
-import "./Dropdown.scss";
 
 export const Dropdown = ({ label, items, onOpenChange, onClick }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
