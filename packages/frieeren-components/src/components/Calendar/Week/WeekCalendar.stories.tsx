@@ -1,15 +1,29 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Calendar } from "./Calendar";
 import { WeekCalendar } from "./WeekCalendar";
 
 const meta = {
-  title: "Calendar",
-  component: Calendar,
+  title: "Components/WeekCalendar",
+  component: WeekCalendar,
   parameters: {
     layout: "centered"
   },
-  tags: ["autodocs"]
-} satisfies Meta<typeof Calendar>;
+  tags: ["autodocs"],
+  argTypes: {
+    activeTransition: {
+      control: "boolean",
+      description: "슬라이드 전환 애니메이션 활성화"
+    },
+    showWeekNumbers: {
+      control: "boolean",
+      description: "요일 표시"
+    },
+    weekNumbersCountry: {
+      control: "select",
+      options: ["kr", "en"],
+      description: "언어 설정"
+    }
+  }
+} satisfies Meta<typeof WeekCalendar>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -17,19 +31,10 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     activeTransition: true,
+    showWeekNumbers: true,
+    weekNumbersCountry: "kr",
     onDateChange: date => {
       console.log("Date changed:", date);
-    }
-  }
-};
-
-export const WithRange: Story = {
-  args: {
-    enableRange: true,
-    activeTransition: true,
-    showWeekNumbers: false,
-    onRangeChange: range => {
-      console.log("Range changed:", range);
     }
   }
 };
@@ -38,24 +43,43 @@ export const EnglishVersion: Story = {
   args: {
     weekNumbersCountry: "en",
     activeTransition: true,
-    showWeekNumbers: true
+    showWeekNumbers: true,
+    onDateChange: date => {
+      console.log("Date changed:", date);
+    }
   }
 };
 
-export const WeekCalendarStory: Story = {
+export const WithoutWeekNumbers: Story = {
   args: {
-    weekNumbersCountry: "en",
     activeTransition: true,
-    showWeekNumbers: true
-  },
-  render: args => <WeekCalendar {...args} />
+    showWeekNumbers: false,
+    weekNumbersCountry: "kr",
+    onDateChange: date => {
+      console.log("Date changed:", date);
+    }
+  }
 };
 
-export const WeekCalendarWithCustomTile: Story = {
+export const WithoutTransition: Story = {
+  args: {
+    activeTransition: false,
+    showWeekNumbers: true,
+    weekNumbersCountry: "kr",
+    onDateChange: date => {
+      console.log("Date changed:", date);
+    }
+  }
+};
+
+export const WithCustomTile: Story = {
   args: {
     weekNumbersCountry: "kr",
     activeTransition: true,
     showWeekNumbers: true,
+    onDateChange: date => {
+      console.log("Date changed:", date);
+    },
     tileSlot: ({ date, type, conditions, defaultContent }) => {
       if (type === "day" && conditions?.isToday) {
         return (
@@ -109,15 +133,17 @@ export const WeekCalendarWithCustomTile: Story = {
 
       return defaultContent;
     }
-  },
-  render: args => <WeekCalendar {...args} />
+  }
 };
 
-export const WeekCalendarWithEvents: Story = {
+export const WithEvents: Story = {
   args: {
     weekNumbersCountry: "kr",
     activeTransition: true,
     showWeekNumbers: true,
+    onDateChange: date => {
+      console.log("Date changed:", date);
+    },
     tileSlot: ({ date, type, conditions, defaultContent }) => {
       if (type !== "day") return defaultContent;
 
@@ -181,6 +207,18 @@ export const WeekCalendarWithEvents: Story = {
         </div>
       );
     }
-  },
-  render: args => <WeekCalendar {...args} />
+  }
+};
+
+export const WithDateLimits: Story = {
+  args: {
+    activeTransition: true,
+    showWeekNumbers: true,
+    weekNumbersCountry: "kr",
+    minDate: new Date(2024, 0, 15), // 2024년 1월 15일
+    maxDate: new Date(2024, 11, 15), // 2024년 12월 15일
+    onDateChange: date => {
+      console.log("Date changed:", date);
+    }
+  }
 };

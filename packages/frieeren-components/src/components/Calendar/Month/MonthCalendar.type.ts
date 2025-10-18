@@ -2,11 +2,7 @@ type WeekNumbersCountry = "kr" | "en";
 type WeekNumbers = Record<WeekNumbersCountry, string[]>;
 type HeaderTitle = Record<WeekNumbersCountry, string>;
 type SlideDirection = "left" | "right";
-
-type DateRange = {
-  start: Date | null;
-  end: Date | null;
-};
+type DateRange = { start: Date | null; end: Date | null };
 
 type DateConditions = {
   isToday: boolean;
@@ -25,7 +21,7 @@ type DayState = {
   conditions: DateConditions;
 };
 
-type BaseCalendarProps = {
+type BaseMonthCalendarProps = {
   minDate?: Date;
   maxDate?: Date;
   minMonth?: Date;
@@ -35,24 +31,23 @@ type BaseCalendarProps = {
   showWeekNumbers?: boolean;
   onlyViewMonthDays?: boolean;
   weekNumbersCountry?: WeekNumbersCountry;
-  tileSlot?: (props: TileSlotProps) => React.ReactNode;
 };
 
-type RangeCalendarProps = BaseCalendarProps & {
+type RangeMonthCalendarProps = BaseMonthCalendarProps & {
   enableRange: true;
   onRangeChange?: (range: DateRange) => void;
   onDateChange?: never;
 };
 
-type SingleCalendarProps = BaseCalendarProps & {
+type SingleMonthCalendarProps = BaseMonthCalendarProps & {
   enableRange?: false;
   onRangeChange?: never;
   onDateChange?: (date: Date) => void;
 };
 
-type CalendarProps = RangeCalendarProps | SingleCalendarProps;
+type MonthCalendarProps = RangeMonthCalendarProps | SingleMonthCalendarProps;
 
-type CalendarHeaderProps = {
+type MonthCalendarHeaderProps = {
   selectedDate: Date;
   onPrevMonth: () => void;
   onNextMonth: () => void;
@@ -61,33 +56,23 @@ type CalendarHeaderProps = {
   weekNumbersCountry: WeekNumbersCountry;
 };
 
-type TileSlotProps = {
-  date?: Date;
-  type: "day" | "week-number";
-  conditions?: DateConditions;
-  defaultContent: React.ReactNode;
-};
-
-type CalendarTileProps = {
+type MonthCalendarTileProps = {
   type: "day" | "week-number";
   conditions?: DateConditions;
   onClick?: () => void;
   children: React.ReactNode;
-  date?: Date;
-  tileSlot?: (props: TileSlotProps) => React.ReactNode;
 };
 
-type CalendarDaysProps = {
+type MonthCalendarDaysProps = {
   days: DayState[][];
   onDayClick: (date: Date) => void;
-  tileSlot?: (props: TileSlotProps) => React.ReactNode;
 };
 
-type CalendarWeekNumbersProps = {
+type MonthCalendarWeekNumbersProps = {
   weekNumbersCountry: WeekNumbersCountry;
 };
 
-type CalendarSlideTransitionProps = {
+type MonthCalendarSlideTransitionProps = {
   children: React.ReactElement;
   transitionKey: string;
   slideDirection: SlideDirection;
@@ -102,11 +87,10 @@ export type {
   DayState,
   DateConditions,
   SlideDirection,
-  CalendarProps,
-  CalendarHeaderProps,
-  CalendarWeekNumbersProps,
-  CalendarDaysProps,
-  CalendarTileProps,
-  CalendarSlideTransitionProps,
-  TileSlotProps
+  MonthCalendarProps,
+  MonthCalendarHeaderProps,
+  MonthCalendarWeekNumbersProps,
+  MonthCalendarDaysProps,
+  MonthCalendarTileProps,
+  MonthCalendarSlideTransitionProps
 };

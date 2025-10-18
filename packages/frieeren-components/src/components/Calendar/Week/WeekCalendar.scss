@@ -19,17 +19,9 @@
   --tile-week-number-size: 40px;
   --tile-week-number-color: #64748b;
   --tile-week-number-background: #fff;
-
-  // Range colors
-  --tile-range-background: #ebf4ff;
-  --tile-range-start-background: #3a8dff;
-  --tile-range-end-background: #3a8dff;
-  --tile-range-start-color: #fff;
-  --tile-range-end-color: #fff;
-  --tile-range-hover-background: #bbdefb;
 }
 
-.calendar {
+.week-calendar {
   display: flex;
   flex-direction: column;
   width: 320px;
@@ -44,7 +36,7 @@
   &--transition-container {
     position: relative;
     overflow: hidden;
-    min-height: 240px;
+    min-height: 80px; // Week Calendar has smaller height
   }
 
   &--slide-content {
@@ -90,7 +82,7 @@
   &--days-container {
     display: flex;
     flex-direction: column;
-    min-height: 240px;
+    min-height: 80px; // Week Calendar has smaller height
     gap: 8px;
   }
 
@@ -123,7 +115,7 @@
     }
 
     &--day {
-      .calendar--tile-day-background {
+      .week-calendar--tile-day-background {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -136,7 +128,7 @@
       }
 
       &:hover {
-        .calendar--tile-day-background {
+        .week-calendar--tile-day-background {
           background-color: var(--tile-day-hover-background);
         }
       }
@@ -150,7 +142,7 @@
     &--today {
       color: var(--tile-day-today-color);
 
-      .calendar--tile--selected {
+      &.week-calendar--tile--selected {
         color: var(--tile-day-today-selected-color) !important;
       }
     }
@@ -158,65 +150,20 @@
     &--selected {
       color: var(--tile-day-selected-color);
 
-      .calendar--tile-day-background {
+      .week-calendar--tile-day-background {
         background: var(--tile-day-selected-background);
       }
 
       &:hover {
-        .calendar--tile-day-background {
+        .week-calendar--tile-day-background {
           background-color: var(--tile-day-selected-hover-background);
         }
       }
     }
 
-    &--other-month {
-      pointer-events: none !important;
-      color: #b7c2d0 !important;
-
-      .calendar--tile--only-view-month-days {
-        visibility: hidden;
-      }
-    }
-
-    &--in-range {
-      background-color: var(--tile-range-background);
-      border-radius: 0;
-      position: relative;
-
-      &:hover {
-        background-color: var(--tile-range-hover-background);
-      }
-
-      &::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: var(--tile-range-background);
-        z-index: -1;
-      }
-    }
-
-    &--range-start {
-      background-color: var(--tile-range-start-background);
-      color: var(--tile-range-start-color);
-      border-radius: 50% 0 0 50%;
-
-      &::before {
-        display: none;
-      }
-    }
-
-    &--range-end {
-      background-color: var(--tile-range-end-background);
-      color: var(--tile-range-end-color);
-      border-radius: 0 50% 50% 0;
-
-      &::before {
-        display: none;
-      }
+    &--weekend {
+      // Week Calendar specific: Weekend styling can be customized here
+      // Currently inherits default styles
     }
   }
 }
