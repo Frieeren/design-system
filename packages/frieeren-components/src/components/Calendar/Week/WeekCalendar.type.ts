@@ -24,11 +24,22 @@ type TileSlotProps = {
   defaultContent: React.ReactNode;
 };
 
+/**
+ * 하단 타일 렌더링 함수 타입
+ * @description 하단 타일 렌더링 함수 타입
+ */
+type BelowTileSlotProps = {
+  /** 날짜 객체 */
+  date?: Date;
+};
+
 type WeekCalendarProps = BaseCalendarProps & {
   /** 날짜 선택 변경 핸들러 */
   onDateChange?: (date: Date) => void;
   /** 커스텀 타일 렌더링 함수 */
   tileSlot?: (props: TileSlotProps) => React.ReactNode;
+  /** 하단 타일 렌더링 함수 */
+  belowTileSlot?: (props: BelowTileSlotProps) => React.ReactNode;
 };
 
 type WeekCalendarHeaderProps = BaseCalendarHeaderProps;
@@ -40,6 +51,8 @@ type WeekCalendarTileProps = BaseCalendarTileProps & {
   date?: Date;
   /** 커스텀 타일 렌더링 함수 */
   tileSlot?: (props: TileSlotProps) => React.ReactNode;
+  /** 하단 타일 렌더링 함수 */
+  belowTileSlot?: (props: BelowTileSlotProps) => React.ReactNode;
 };
 
 type WeekCalendarDaysProps = {
@@ -49,6 +62,8 @@ type WeekCalendarDaysProps = {
   onDayClick: (date: Date) => void;
   /** 커스텀 타일 렌더링 함수 */
   tileSlot?: (props: TileSlotProps) => React.ReactNode;
+  /** 하단 타일 렌더링 함수 */
+  belowTileSlot?: (props: BelowTileSlotProps) => React.ReactNode;
 };
 
 type WeekCalendarWeekNumbersProps = BaseCalendarWeekNumbersProps;

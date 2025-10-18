@@ -80,6 +80,13 @@
     justify-content: space-between;
   }
 
+  &--below-tile-slot {
+    margin-top: 6cm;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   &--tile {
     position: relative;
     display: flex;

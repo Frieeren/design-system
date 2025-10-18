@@ -1,5 +1,5 @@
 import cx from "classnames";
-import { memo } from "react";
+import { Fragment, memo } from "react";
 import "./WeekCalendar.scss";
 import { format } from "date-fns";
 import { getDate, getFormattedDate } from "../shared/utils";
@@ -48,7 +48,7 @@ const Tile = memo(
 
 Tile.displayName = "WeekCalendarTile";
 
-const Days = memo(({ days, onDayClick, tileSlot }: WeekCalendarDaysProps) => {
+const Days = memo(({ days, onDayClick, tileSlot, belowTileSlot }: WeekCalendarDaysProps) => {
   return (
     <div className="week-calendar--days-container">
       {days.map(week => (
@@ -57,16 +57,18 @@ const Days = memo(({ days, onDayClick, tileSlot }: WeekCalendarDaysProps) => {
             const date = state.date;
             const conditions = state.conditions;
             return (
-              <Tile
-                key={getFormattedDate(date)}
-                type="day"
-                onClick={() => onDayClick(date)}
-                conditions={conditions}
-                date={date}
-                tileSlot={tileSlot}
-              >
-                {getDate(date)}
-              </Tile>
+              <div key={getFormattedDate(date)}>
+                <Tile
+                  type="day"
+                  onClick={() => onDayClick(date)}
+                  conditions={conditions}
+                  date={date}
+                  tileSlot={tileSlot}
+                >
+                  {getDate(date)}
+                </Tile>
+                <div className="week-calendar--below-tile-slot">{belowTileSlot?.({ date })}</div>
+              </div>
             );
           })}
         </div>
@@ -133,6 +135,7 @@ const WeekCalendar = ({
   maxMonth,
   initDate,
   tileSlot,
+  belowTileSlot,
   onDateChange,
   activeTransition = true,
   showWeekNumbers = true,
@@ -176,7 +179,12 @@ const WeekCalendar = ({
         slideDirection={slideDirection}
         activeTransition={activeTransition}
       >
-        <Days days={daysState} onDayClick={handleDayClick} tileSlot={tileSlot} />
+        <Days
+          days={daysState}
+          onDayClick={handleDayClick}
+          tileSlot={tileSlot}
+          belowTileSlot={belowTileSlot}
+        />
       </CalendarSlideTransition>
     </div>
   );

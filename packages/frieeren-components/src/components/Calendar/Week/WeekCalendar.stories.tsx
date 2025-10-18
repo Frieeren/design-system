@@ -1,5 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { WeekCalendar } from "./WeekCalendar";
+import EmptyIcon from "../assets/empty.svg";
+import HalfFilledIcon from "../assets/half-filled.svg";
+import FullFilledIcon from "../assets/full-filled.svg";
 
 const meta = {
   title: "Components/WeekCalendar",
@@ -106,6 +109,26 @@ export const WithEvents: Story = {
           )}
         </div>
       );
+    }
+  }
+};
+
+export const WithBelowTileSlot: Story = {
+  args: {
+    weekNumbersCountry: "kr",
+    activeTransition: true,
+    showWeekNumbers: true,
+    belowTileSlot: ({ date }) => {
+      // 조건 : 일,월,화,수 이면 FullFilledIcon 렌더링
+      // 조건 : 목,금 이면 HalfFilledIcon 렌더링
+      // 조건 : 토 이면 EmptyIcon 렌더링
+      if (date && [1, 2, 3, 4].includes(date.getDay())) {
+        return <FullFilledIcon />;
+      } else if (date && [5, 6].includes(date.getDay())) {
+        return <HalfFilledIcon />;
+      } else {
+        return <EmptyIcon />;
+      }
     }
   }
 };
