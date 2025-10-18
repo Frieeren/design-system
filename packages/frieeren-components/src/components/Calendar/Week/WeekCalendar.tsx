@@ -14,7 +14,7 @@ import { CalendarSlideTransition } from "../shared/CalendarSlideTransition";
 import Ripple from "../../Ripple/Ripple";
 import LeftArrowIcon from "../assets/left-arrow.svg";
 import RightArrowIcon from "../assets/right-arrow.svg";
-import { WEEK_NUMBERS, HEADER_TITLE } from "../shared/constants";
+import { HEADER_TITLE, WEEK_WEEK_NUMBERS } from "../shared/constants";
 import useWeekCalendar from "./useWeekCalendar";
 
 const Tile = memo(
@@ -82,7 +82,7 @@ Days.displayName = "WeekCalendarDays";
 const WeekNumbers = memo(({ weekNumbersCountry }: WeekCalendarWeekNumbersProps) => {
   return (
     <div className="week-calendar--week-numbers">
-      {WEEK_NUMBERS[weekNumbersCountry].map((number, index) => (
+      {WEEK_WEEK_NUMBERS[weekNumbersCountry].map((number, index) => (
         <Tile key={`week-calendar-week-number-${index}`} type="week-number">
           {number}
         </Tile>

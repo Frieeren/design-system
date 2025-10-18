@@ -13,7 +13,7 @@ import {
   isWithinInterval,
   startOfWeek
 } from "date-fns";
-import type { DateRange } from "./Calendar.type";
+import type { DateRange } from "../shared/types";
 
 const chunk = <T>(array: T[], size: number): T[][] => {
   return Array.from({ length: Math.ceil(array.length / size) }, (_, i) =>
