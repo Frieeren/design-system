@@ -26,12 +26,22 @@ export const Inputs: Story = {
     >
       <Input type="text" display="box" />
       <Input type="text" display="box" value="텍스트 입력 완료" />
-      <Input type="text" display="box" error value="텍스트 오류" />
+      <Input
+        type="text"
+        display="box"
+        value="텍스트 오류"
+        validate={value => (value.length < 7 ? "7글자 이상 입력해주세요" : null)}
+      />
       <Input type="text" display="box" disabled />
       <Input type="file" display="box" />
       <Input type="text" display="line" />
       <Input type="text" display="line" value="텍스트 입력 완료" />
-      <Input type="text" display="line" error value="텍스트 오류" />
+      <Input
+        type="text"
+        display="line"
+        value="텍스트 오류"
+        validate={value => (value.length < 7 ? "7글자 이상 입력해주세요" : null)}
+      />
       <Input type="text" display="line" disabled />
       <Input type="file" display="line" />
     </div>

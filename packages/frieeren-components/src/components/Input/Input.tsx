@@ -11,7 +11,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       accept,
       display = "box",
       disabled = false,
-      error = false,
+      validate,
       onClear,
       className,
       value,
@@ -33,6 +33,19 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       }
     };
 
+    const getErrorMessage = (): string => {
+      if (validate && value !== undefined) {
+        const validationError = validate(String(value));
+        if (validationError !== null) {
+          return validationError;
+        }
+      }
+      return "";
+    };
+
+    const errorMessage = getErrorMessage();
+    const hasError = !!errorMessage;
+
     return (
       <div
         className={cx(
@@ -40,31 +53,35 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           {
             [`input--display-${display}`]: display,
             "input--disabled": disabled,
-            "input--error": error
+            "input--error": hasError
           },
           className
         )}
       >
-        <input
-          placeholder={placeholder}
-          ref={ref}
-          type={type}
-          disabled={disabled}
-          className={cx("input", { "has-file": hasFile })}
-          data-frieeren-component="Input"
-          onChange={handleChange}
-          {...rest}
-        />
-        {type === "file" && (
-          <button className="input--action input--action-link" disabled={disabled}>
-            <LinkIcon />
-          </button>
-        )}
-        {value && onClear && (
-          <button onClick={onClear} className="input--close" disabled={disabled}>
-            <CloseIcon />
-          </button>
-        )}
+        <div className="input-container">
+          <input
+            placeholder={placeholder}
+            ref={ref}
+            type={type}
+            disabled={disabled}
+            className={cx("input", { "has-file": hasFile })}
+            data-frieeren-component="Input"
+            onChange={handleChange}
+            value={value}
+            {...rest}
+          />
+          {type === "file" && (
+            <button className="input--action input--action-link" disabled={disabled}>
+              <LinkIcon />
+            </button>
+          )}
+          {value && onClear && (
+            <button onClick={onClear} className="input--close" disabled={disabled}>
+              <CloseIcon />
+            </button>
+          )}
+        </div>
+        {errorMessage && <span className="input--error-message">{errorMessage}</span>}
       </div>
     );
   }

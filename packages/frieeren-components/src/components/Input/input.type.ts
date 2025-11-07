@@ -5,7 +5,7 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
   type?: InputTypes;
   display?: InputDisplay;
   disabled?: boolean;
-  error?: boolean;
+  validate?: (value: string) => string | null;
   onClear?: () => void;
   className?: string;
 }

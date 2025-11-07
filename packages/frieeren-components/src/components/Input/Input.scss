@@ -6,11 +6,12 @@
   position: relative;
   width: 100%;
   display: flex;
-  align-items: center;
+  flex-direction: column;
 
   &.input--display-line {
     .input {
-      border: 1px solid var(--seed-ui-color-line-medium);
+      border: 1px solid transparent;
+      border-bottom: 1px solid var(--seed-ui-color-line-medium);
       border-radius: 0;
 
       &:focus {
@@ -19,6 +20,26 @@
 
       &:hover:not(:disabled) {
         border-bottom-color: var(--seed-brand-color-primary);
+      }
+    }
+
+    &.input--error {
+      .input {
+        border-bottom-color: var(--seed-brand-color-point2);
+
+        &:focus {
+          border-bottom-color: var(--seed-brand-color-point2);
+        }
+      }
+    }
+
+    &.input--disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+
+      .input {
+        border-bottom-color: var(--seed-ui-color-line-medium);
+        color: var(--seed-ui-color-text-disabled);
       }
     }
   }
@@ -36,27 +57,34 @@
         border-color: var(--seed-brand-color-primary);
       }
     }
-  }
 
-  &.input--error {
-    .input {
-      border-color: var(--seed-brand-color-point2);
-
-      &:focus {
+    &.input--error {
+      .input {
         border-color: var(--seed-brand-color-point2);
+
+        &:focus {
+          border-color: var(--seed-brand-color-point2);
+        }
+      }
+    }
+
+    &.input--disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+
+      .input {
+        border-color: var(--seed-ui-color-line-medium);
+        color: var(--seed-ui-color-text-disabled);
       }
     }
   }
+}
 
-  &.input--disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-
-    .input {
-      border: 1px solid var(--seed-ui-color-line-medium);
-      color: var(--seed-ui-color-text-disabled);
-    }
-  }
+.input-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .input {
@@ -121,4 +149,14 @@
   &.input--close {
     height: 16px;
   }
+}
+
+.input--error-message {
+  display: block;
+  margin-top: 4px;
+  color: var(--seed-brand-color-point2);
+  font-size: var(--seed-font-size-xs);
+  font-weight: 500;
+  line-height: 140%;
+  letter-spacing: -0.24px;
 }
