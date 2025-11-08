@@ -20,5 +20,6 @@ export { Switch } from "./components/Switch";
 export { Select } from "./components/Select";
 export { Input } from "./components/Input";
 export { Tabs } from "./components/Tabs";
+export { TimePicker } from "./components/TimePicker";
 export { LogProvider, LogScreen } from "./components/Log";
 export { FloatingActionButton } from "./components/FloatingActionButton";
