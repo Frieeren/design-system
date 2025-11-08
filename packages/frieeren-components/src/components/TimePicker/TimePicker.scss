@@ -1,0 +1,136 @@
+.time-picker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--color-background-primary);
+  border-radius: 12px;
+  padding: 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  touch-action: none;
+
+  &--disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  &__center-section {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 40px;
+    border-top: 0.5px solid #8b8b8b;
+    border-bottom: 0.5px solid #8b8b8b;
+  }
+
+  &__center-separator {
+    position: absolute;
+    top: 50%;
+    left: 36.5%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    font-weight: 400;
+    color: #4e4e4e;
+  }
+
+  &__wheels {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+  }
+
+  &__wheel-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+}
+
+.wheel-picker {
+  position: relative;
+  width: 80px;
+  height: 120px;
+  overflow: hidden;
+  background-color: transparent;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-overflow-scrolling: touch;
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+
+  &--disabled {
+    cursor: not-allowed;
+    touch-action: none;
+  }
+
+  &--dragging {
+    cursor: grabbing;
+    touch-action: none;
+  }
+
+  &__items {
+    position: relative;
+    z-index: 1;
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #4e4e4e;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    line-height: 1;
+    will-change: transform, opacity;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    -webkit-tap-highlight-color: transparent;
+
+    &--selected {
+      font-weight: 600;
+      color: #111;
+    }
+  }
+}
+
+.time-picker--12hour {
+  .time-picker__ampm-wheel {
+    width: 60px;
+
+    .wheel-picker__item {
+      font-size: 16px;
+    }
+  }
+}
+
+.time-picker--24hour {
+  .time-picker__hour-wheel {
+    width: 80px;
+  }
+}
+
+.wheel-picker {
+  &:focus-within {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+}
